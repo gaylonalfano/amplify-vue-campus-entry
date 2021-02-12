@@ -6,7 +6,7 @@ import { ModelInit, MutableModel, PersistentModelConstructor } from "@aws-amplif
 
 export declare class Submission {
   readonly id: string;
-  readonly submittedAt: number;
+  readonly submittedAt: string;
   readonly temperature: number;
   readonly meetsCriteria: boolean;
   readonly hasCertified: boolean;
@@ -27,7 +27,7 @@ export declare class Person {
   readonly categoryID: string;
   readonly familyID: string;
   readonly submissions?: (Submission | null)[];
-  readonly createdAt: number;
+  readonly createdAt: string;
   constructor(init: ModelInit<Person>);
   static copyOf(source: Person, mutator: (draft: MutableModel<Person>) => MutableModel<Person> | void): Person;
 }
@@ -35,7 +35,7 @@ export declare class Person {
 export declare class Family {
   readonly id: string;
   readonly people?: (Person | null)[];
-  readonly createdAt: number;
+  readonly createdAt: string;
   constructor(init: ModelInit<Family>);
   static copyOf(source: Family, mutator: (draft: MutableModel<Family>) => MutableModel<Family> | void): Family;
 }

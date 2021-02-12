@@ -1,6 +1,9 @@
-type Submission @model @auth(rules: [{allow: public}]) @key(name: "byPerson", fields: ["personID"]) {
+type Submission
+  @model
+  @auth(rules: [{ allow: public }])
+  @key(name: "byPerson", fields: ["personID"]) {
   id: ID!
-  submittedAt: AWSTimestamp!
+  submittedAt: AWSDateTime!
   temperature: Float!
   meetsCriteria: Boolean!
   hasCertified: Boolean!
@@ -9,13 +12,18 @@ type Submission @model @auth(rules: [{allow: public}]) @key(name: "byPerson", fi
   personID: ID!
 }
 
-type Family @model @auth(rules: [{allow: public}]) {
+type Family @model @auth(rules: [{ allow: public }]) {
   id: ID!
   people: [Person] @connection(keyName: "byFamily", fields: ["id"])
-  createdAt: AWSTimestamp!
+  createdAt: AWSDateTime!
 }
 
-type Person @model @auth(rules: [{allow: public}]) @key(name: "byDivision", fields: ["divisionID"]) @key(name: "byCategory", fields: ["categoryID"]) @key(name: "byFamily", fields: ["familyID"]) {
+type Person
+  @model
+  @auth(rules: [{ allow: public }])
+  @key(name: "byDivision", fields: ["divisionID"])
+  @key(name: "byCategory", fields: ["categoryID"])
+  @key(name: "byFamily", fields: ["familyID"]) {
   id: ID!
   firstName: String!
   lastName: String!
@@ -25,18 +33,18 @@ type Person @model @auth(rules: [{allow: public}]) @key(name: "byDivision", fiel
   categoryID: ID!
   familyID: ID!
   submissions: [Submission] @connection(keyName: "byPerson", fields: ["id"])
-  createdAt: AWSTimestamp!
+  createdAt: AWSDateTime!
 }
 
-type Division @model @auth(rules: [{allow: public}]) {
+type Division @model @auth(rules: [{ allow: public }]) {
   id: ID!
   name: String!
   people: [Person] @connection(keyName: "byDivision", fields: ["id"])
 }
 
-type Category @model @auth(rules: [{allow: public}]) {
+type Category @model @auth(rules: [{ allow: public }]) {
   id: ID!
   name: String!
   people: [Person] @connection(keyName: "byCategory", fields: ["id"])
 }
- 
+

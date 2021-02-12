@@ -39,12 +39,13 @@ export default defineComponent({
         new Person({
           firstName: "Lorem ipsum dolor sit amet",
           lastName: "Lorem ipsum dolor sit amet",
-          categoryID: "a3f4095e-39de-43d2-baf4-f8c16f0f6f4d",
-          divisionID: "a3f4095e-39de-43d2-baf4-f8c16f0f6f4d",
-          familyID: "a3f4095e-39de-43d2-baf4-f8c16f0f6f4d",
+          phone: "Lorem ipsum dolor sit amet",
           studentID: "Lorem ipsum dolor sit amet",
+          divisionID: "a3f4095e-39de-43d2-baf4-f8c16f0f6f4d",
+          categoryID: "a3f4095e-39de-43d2-baf4-f8c16f0f6f4d",
+          familyID: "a3f4095e-39de-43d2-baf4-f8c16f0f6f4d",
           submissions: [],
-          phone: "Lorem ipsum dolor sit amet"
+          createdAt: "1970-01-01T12:30:23.999ZM"
         })
       );
     }

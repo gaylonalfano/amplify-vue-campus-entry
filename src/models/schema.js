@@ -13,7 +13,7 @@ export const schema = {
                 "submittedAt": {
                     "name": "submittedAt",
                     "isArray": false,
-                    "type": "AWSTimestamp",
+                    "type": "AWSDateTime",
                     "isRequired": true,
                     "attributes": []
                 },
@@ -182,7 +182,7 @@ export const schema = {
                 "createdAt": {
                     "name": "createdAt",
                     "isArray": false,
-                    "type": "AWSTimestamp",
+                    "type": "AWSDateTime",
                     "isRequired": true,
                     "attributes": []
                 }
@@ -266,7 +266,7 @@ export const schema = {
                 "createdAt": {
                     "name": "createdAt",
                     "isArray": false,
-                    "type": "AWSTimestamp",
+                    "type": "AWSDateTime",
                     "isRequired": true,
                     "attributes": []
                 }
@@ -413,5 +413,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "c0da05fb8214d1db6e035b7a44f99efb"
+    "version": "0674378d263a19cfdcf32ee1ec1ed9be"
 };
