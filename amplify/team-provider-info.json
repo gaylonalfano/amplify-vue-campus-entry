@@ -10,6 +10,11 @@
       "StackName": "amplify-amplifyvuecampusentr-staging-72118",
       "StackId": "arn:aws:cloudformation:ap-southeast-1:661403915417:stack/amplify-amplifyvuecampusentr-staging-72118/e6c31980-6d02-11eb-88ec-02e7c9cae2dc",
       "AmplifyAppId": "dmf842mvqtlez"
+    },
+    "categories": {
+      "auth": {
+        "amplifyvuecampusentry": {}
+      }
     }
   }
 }
