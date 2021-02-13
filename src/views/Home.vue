@@ -1,16 +1,15 @@
 <template>
   <div class="home">
     <h3>Campus Entry Home</h3>
-    <button @click="createPerson">Create Person</button>
-    <button @click="queryPerson">Query Person</button>
-    <!-- <button @click="createDivision">Create Division</button> -->
-    <!-- <button @click="createCategory">Create Category</button> -->
-    <div v-if="people">
-      <div v-for="person in people" :key="person.id">
-        <h4>{{ person.firstName }}</h4>
-        <p>{{ person.categoryID }}</p>
+    <main>
+      <div class="role-select">
+        <div class="student">Student Entrance</div>
+        <div class="employee">Employee Entrance</div>
+        <div class="consultant">Consultant Entrance</div>
+        <div class="visitor">Visitor Entrance</div>
+        <div class="qrcode">Re Get QR Code</div>
       </div>
-    </div>
+    </main>
   </div>
 </template>
 
@@ -39,15 +38,15 @@ export default defineComponent({
     async function createPerson() {
       person.value = await DataStore.save(
         new Person({
-          firstName: "Lorem ipsum dolor sit amet",
-          lastName: "Lorem ipsum dolor sit amet",
-          phone: "Lorem ipsum dolor sit amet",
+          firstName: "Mario",
+          lastName: "Luigi",
+          phone: "1234567",
           studentID: "Lorem ipsum dolor sit amet",
           divisionID: "a3f4095e-39de-43d2-baf4-f8c16f0f6f4d",
           categoryID: "a3f4095e-39de-43d2-baf4-f8c16f0f6f4d",
           familyID: "a3f4095e-39de-43d2-baf4-f8c16f0f6f4d",
           submissions: [],
-          createdAt: "Lorem ipsum dolor sit amet"
+          createdAt: "2021/02/13"
         })
       );
     }
