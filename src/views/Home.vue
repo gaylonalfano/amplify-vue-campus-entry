@@ -2,12 +2,14 @@
   <div class="home">
     <h3>Campus Entry Home</h3>
     <button @click="createPerson">Create Person</button>
+    <button @click="queryPerson">Query Person</button>
     <!-- <button @click="createDivision">Create Division</button> -->
     <!-- <button @click="createCategory">Create Category</button> -->
-    <div v-if="people"></div>
-    <div v-for="person in people" :key="person.id">
-      <h4>{{ person.firstName }}</h4>
-      <p>{{ person.categoryID }}</p>
+    <div v-if="people">
+      <div v-for="person in people" :key="person.id">
+        <h4>{{ person.firstName }}</h4>
+        <p>{{ person.categoryID }}</p>
+      </div>
     </div>
   </div>
 </template>
@@ -45,7 +47,7 @@ export default defineComponent({
           categoryID: "a3f4095e-39de-43d2-baf4-f8c16f0f6f4d",
           familyID: "a3f4095e-39de-43d2-baf4-f8c16f0f6f4d",
           submissions: [],
-          createdAt: "1970-01-01T12:30:23.999ZM"
+          createdAt: "Lorem ipsum dolor sit amet"
         })
       );
     }

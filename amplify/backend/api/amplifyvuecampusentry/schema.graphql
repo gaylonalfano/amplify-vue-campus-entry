@@ -1,6 +1,6 @@
 type Submission @model @key(name: "byPerson", fields: ["personID"]) @auth(rules: [{allow: public}]) {
   id: ID!
-  submittedAt: AWSDateTime!
+  submittedAt: String!
   temperature: Float!
   meetsCriteria: Boolean!
   hasCertified: Boolean!
@@ -12,7 +12,7 @@ type Submission @model @key(name: "byPerson", fields: ["personID"]) @auth(rules:
 type Family @model @auth(rules: [{allow: public}]) {
   id: ID!
   people: [Person] @connection(keyName: "byFamily", fields: ["id"])
-  createdAt: AWSDateTime!
+  createdAt: String!
 }
 
 type Person @model @auth(rules: [{allow: public}]) @key(name: "byDivision", fields: ["divisionID"]) @key(name: "byCategory", fields: ["categoryID"]) @key(name: "byFamily", fields: ["familyID"]) {
@@ -25,7 +25,7 @@ type Person @model @auth(rules: [{allow: public}]) @key(name: "byDivision", fiel
   categoryID: ID!
   familyID: ID!
   submissions: [Submission] @connection(keyName: "byPerson", fields: ["id"])
-  createdAt: AWSDateTime!
+  createdAt: String!
 }
 
 type Division @model @auth(rules: [{allow: public}]) {
