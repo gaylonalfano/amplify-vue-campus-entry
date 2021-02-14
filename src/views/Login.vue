@@ -74,14 +74,12 @@
       </form>
       <div class="text-sm py-4 text-center">
         <p>
-          No account yet?
           <span
             class="font-medium text-blue-600 hover:text-blue-500 cursor-pointer"
             @click="showLogin = false"
           >
-            Sign up</span
+            Forgot password?</span
           >
-          instead.
         </p>
       </div>
     </div>
