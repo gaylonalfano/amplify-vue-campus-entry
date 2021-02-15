@@ -87,21 +87,35 @@
 </template>
 <script lang="ts">
 import { defineComponent, ref } from "vue";
+import { useRouter } from "vue-router";
 // import { auth } from "@/firebase/config";
-// import useLogin from "@/composables/useLogin";
+import useLogin from "@/composables/useLogin";
 
 export default defineComponent({
   name: "Login",
   setup() {
+    // Get our composables
+    const { login, error, isPending } = useLogin();
     // Create Refs for our input data properties
+    // NOTE For testing: mario@email.com Te$t1234
     const email = ref<string>("");
     const password = ref<string>("");
 
-    function handleSubmit() {
+    const router = useRouter();
+
+    async function handleLogin() {
       console.log("Form submitted!");
+      const response = await login(email.value, password.value);
+
+      if (!error.value) {
+        console.log("Login:!error.value::SUCCESS");
+        console.log("response: ", response);
+        console.log("REROUTING to /entrance");
+        router.push({ name: "Entrance" });
+      }
     }
 
-    return { email, password, handleSubmit };
+    return { email, password, handleLogin, isPending };
   }
 });
 </script>

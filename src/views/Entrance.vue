@@ -1,5 +1,7 @@
 <template>
   <Navbar />
+  <button @click="getCurrentUserInfo">Get User</button>
+  <div v-if="user">{{ user }}</div>
   <div
     class="min-h-screen flex items-center justify-center bg-gray-50 py-4 px-4 sm:px-6 lg:px-8"
   >
@@ -45,12 +47,28 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, ref } from "vue";
+import { Auth } from "aws-amplify";
 import Navbar from "@/components/Navbar.vue";
 
 export default defineComponent({
   name: "Entrance",
-  components: { Navbar }
+  components: { Navbar },
+  setup() {
+    const user = ref(null);
+
+    async function getCurrentUserInfo() {
+      try {
+        user.value = await Auth.currentUserInfo();
+        console.log("getCurrentUserInfo:user: ", user.value);
+        return user.value;
+      } catch (error) {
+        console.log(error.message);
+      }
+    }
+
+    return { getCurrentUserInfo, user };
+  }
 });
 </script>
 

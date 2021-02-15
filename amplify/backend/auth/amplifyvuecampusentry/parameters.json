@@ -1,7 +1,7 @@
 {
     "identityPoolName": "testAuthIdentityPool",
     "allowUnauthenticatedIdentities": false,
-    "resourceNameTruncated": "amplif32d2c0d6",
+    "resourceNameTruncated": "amplif79c2eabb",
     "userPoolName": "amplifyvuecampusentry",
     "autoVerifiedAttributes": [
         "phone_number"
@@ -11,7 +11,7 @@
         "SMS Text Message"
     ],
     "smsAuthenticationMessage": "Your authentication code is {####}",
-    "smsVerificationMessage": "Forgot password code: {####}",
+    "smsVerificationMessage": "Body {####}",
     "emailVerificationSubject": "Your verification code",
     "emailVerificationMessage": "Your verification code is {####}",
     "defaultPasswordPolicy": false,
@@ -23,15 +23,16 @@
         "Requires Uppercase"
     ],
     "requiredAttributes": [
+        "phone_number",
         "email"
     ],
     "userpoolClientGenerateSecret": false,
     "userpoolClientRefreshTokenValidity": 30,
     "userpoolClientWriteAttributes": [],
     "userpoolClientReadAttributes": [],
-    "userpoolClientLambdaRole": "amplif32d2c0d6_userpoolclient_lambda_role",
+    "userpoolClientLambdaRole": "amplif79c2eabb_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
-    "sharedId": "32d2c0d6",
+    "sharedId": "79c2eabb",
     "resourceName": "amplifyvuecampusentry",
     "authSelections": "identityPoolAndUserPool",
     "authRoleArn": {
@@ -48,7 +49,8 @@
     },
     "serviceName": "Cognito",
     "usernameAttributes": [
-        "email"
+        "email",
+        "phone_number"
     ],
     "useDefault": "manual",
     "userPoolGroups": false,
