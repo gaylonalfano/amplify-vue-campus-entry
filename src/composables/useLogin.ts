@@ -11,8 +11,8 @@ async function login(email: string, password: string) {
 
   try {
     const response = await Auth.signIn(email, password);
-    console.log("useLogin:login::SUCCESS");
-    console.log(response);
+    // console.log("useLogin:login::SUCCESS");
+    // console.log(response);
     isPending.value = false;
     return response;
   } catch (error) {
@@ -21,6 +21,16 @@ async function login(email: string, password: string) {
     isPending.value = false;
   }
 }
+
+// For Multi-factor Auth: https://docs.amplify.aws/lib/auth/emailpassword/q/platform/js#sign-up
+// async function resendConfirmationCode() {
+//   try {
+//     await Auth.resendSignUp(username);
+//     console.log("code resent successfully");
+//   } catch (err) {
+//     console.log("error resending code: ", err);
+//   }
+// }
 
 function useLogin() {
   return { error, login, isPending };

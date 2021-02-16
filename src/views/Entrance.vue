@@ -1,7 +1,8 @@
 <template>
   <Navbar />
-  <button @click="getCurrentUserInfo">Get User</button>
-  <div v-if="user">{{ user }}</div>
+  <!-- <button @click="getCurrentUserInfo">Get User</button> -->
+  <div v-if="user">Welcome user: {{ user }}</div>
+  <!-- <div v-if="error">{{ error }}</div> -->
   <div
     class="min-h-screen flex items-center justify-center bg-gray-50 py-4 px-4 sm:px-6 lg:px-8"
   >
@@ -47,27 +48,34 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { defineComponent, ref, watchEffect } from "vue";
 import { Auth } from "aws-amplify";
+import getUser from "@/composables/getUser";
 import Navbar from "@/components/Navbar.vue";
 
 export default defineComponent({
   name: "Entrance",
   components: { Navbar },
   setup() {
+    // Let's use our composable to verify current auth user
+    // const { user, error, getCurrentAuthenticatedUser } = getUser();
     const user = ref(null);
 
-    async function getCurrentUserInfo() {
-      try {
-        user.value = await Auth.currentUserInfo();
-        console.log("getCurrentUserInfo:user: ", user.value);
-        return user.value;
-      } catch (error) {
-        console.log(error.message);
-      }
-    }
+    // async function getCurrentUserInfo() {
+    //   try {
+    //     user.value = await Auth.currentUserInfo();
+    //     console.log("getCurrentUserInfo:user: ", user.value);
+    //     return user.value;
+    //   } catch (error) {
+    //     console.log(error.message);
+    //   }
+    // }
 
-    return { getCurrentUserInfo, user };
+    watchEffect(async () => {
+      user.value = await Auth.currentAuthenticatedUser();
+    });
+
+    return { user };
   }
 });
 </script>
