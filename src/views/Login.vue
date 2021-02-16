@@ -87,36 +87,90 @@
 </template>
 <script lang="ts">
 import { defineComponent, ref } from "vue";
-import { useRouter } from "vue-router";
+// import { useRouter } from "vue-router";
+import { useStore } from "vuex";
 // import { auth } from "@/firebase/config";
-import useLogin from "@/composables/useLogin";
 
 export default defineComponent({
   name: "Login",
   setup() {
-    // Get our composables
-    const { login, error, isPending } = useLogin();
+    // Let's get our Vuex Store for Composition API
+    // https://next.vuex.vuejs.org/guide/composition-api.html#composition-api
+    const store = useStore();
+
     // Create Refs for our input data properties
     // NOTE For testing: mario@email.com Te$t1234
+    const username = ref<string>("");
     const email = ref<string>("");
     const password = ref<string>("");
+    const error = ref<string>("");
 
-    const router = useRouter();
+    // Router
+    // const router = useRouter();
+
+    // Use computed() to access state or getters
+    // Use regular functions for actions and mutations
+    // NOTE Need to access our auth module in Vuex
+    function loginVue() {
+      store.dispatch("auth/login", {
+        email: email.value,
+        password: password.value
+      });
+    }
+    // OR...
+    // const loginVue = () => state.dispatch("auth/login")
 
     async function handleLogin() {
-      console.log("Form submitted!");
-      const response = await login(email.value, password.value);
-
-      if (!error.value) {
-        console.log("Login:!error.value::SUCCESS");
-        console.log("response: ", response);
-        console.log("REROUTING to /entrance");
-        router.push({ name: "Entrance" });
+      try {
+        await loginVue();
+      } catch (error) {
+        error.value = error;
       }
     }
 
-    return { email, password, handleLogin, isPending };
+    // Using COMPOSABLE
+    // async function handleLogin() {
+    //   console.log("Form submitted!");
+    //   const response = await login(email.value, password.value);
+
+    //   if (!error.value) {
+    //     console.log("Login:!error.value::SUCCESS");
+    //     console.log("response: ", response);
+    //     console.log("REROUTING to /entrance");
+    //     router.push({ name: "Entrance" });
+    //   }
+    // }
+
+    return {
+      username,
+      email,
+      password,
+      error,
+      loginVue,
+      handleLogin
+    };
   }
+  // data: () => ({
+  //   username: "",
+  //   password: "",
+  //   email: "",
+  //   error: ""
+  // }),
+  // methods: {
+  //   ...mapActions({
+  //     loginVue: "auth/login"
+  //   }),
+  //   async login() {
+  //     try {
+  //       await this.loginVue({
+  //         username: this.username,
+  //         password: this.password
+  //       });
+  //     } catch (error) {
+  //       this.error = error;
+  //     }
+  //   }
+  // }
 });
 </script>
 

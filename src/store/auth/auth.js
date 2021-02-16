@@ -4,7 +4,7 @@ import { Auth } from "aws-amplify";
 // A: Nope! Only need that for the main Store.
 // These modules we simply register inside it.
 export const auth = {
-  namespace: true,
+  namespaced: true,
   state: { user: null },
   mutations: {
     setUser(state, payload) {
@@ -27,12 +27,16 @@ export const auth = {
       // Then return the Amplify Auth.signOut();
       return await Auth.signOut();
     },
-    async login({ commit }, { username, password }) {
+    async login({ commit }, { email, password }) {
       try {
         await Auth.signIn({
           // Q: What about email?
-          username,
-          password
+          // username,
+          email,
+          password,
+          attributes: {
+            email
+          }
         });
         // If signIn() doesn't fail, we want to get the user info as well
         const userInfo = await Auth.currentUserInfo();
