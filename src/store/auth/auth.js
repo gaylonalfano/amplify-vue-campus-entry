@@ -27,16 +27,14 @@ export const auth = {
       // Then return the Amplify Auth.signOut();
       return await Auth.signOut();
     },
-    async login({ commit }, { email, password }) {
+    // Use username or email. Need to be consistent!
+    async login({ commit }, { username, password }) {
       try {
         await Auth.signIn({
           // Q: What about email?
-          // username,
-          email,
-          password,
-          attributes: {
-            email
-          }
+          username,
+          // email,
+          password
         });
         // If signIn() doesn't fail, we want to get the user info as well
         const userInfo = await Auth.currentUserInfo();

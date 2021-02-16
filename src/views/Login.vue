@@ -23,13 +23,26 @@
               v-model="email"
               id="email-address"
               name="email"
-              type="email"
+              type="text"
               autocomplete="email"
               required
               class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
               placeholder="Email address"
             />
           </div>
+          <!-- <div> -->
+          <!--   <label for="phone-number" class="sr-only">Phone number</label> -->
+          <!--   <input -->
+          <!--     v-model="phone" -->
+          <!--     id="phone-number" -->
+          <!--     name="phone" -->
+          <!--     type="string" -->
+          <!--     autocomplete="phone" -->
+          <!--     required -->
+          <!--     class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm" -->
+          <!--     placeholder="Phone number" -->
+          <!--   /> -->
+          <!-- </div> -->
           <div>
             <label for="password" class="sr-only">Password</label>
             <input
@@ -87,90 +100,98 @@
 </template>
 <script lang="ts">
 import { defineComponent, ref } from "vue";
-// import { useRouter } from "vue-router";
-import { useStore } from "vuex";
-// import { auth } from "@/firebase/config";
+import { useRouter } from "vue-router";
+// import { useStore } from "vuex";
+//import { Auth } from "aws-amplify";
+import useLogin from "@/composables/useLogin";
 
 export default defineComponent({
   name: "Login",
   setup() {
-    // Let's get our Vuex Store for Composition API
-    // https://next.vuex.vuejs.org/guide/composition-api.html#composition-api
-    const store = useStore();
+    // Composables
+    const { error, login } = useLogin();
 
     // Create Refs for our input data properties
     // NOTE For testing: mario@email.com Te$t1234
-    const username = ref<string>("");
+    // const username = ref<string>("");
     const email = ref<string>("");
     const password = ref<string>("");
-    const error = ref<string>("");
+    const phone = ref<string>("");
+    // const error = ref<string>("");
+    // const user = ref(null);
 
     // Router
-    // const router = useRouter();
+    const router = useRouter();
 
-    // Use computed() to access state or getters
-    // Use regular functions for actions and mutations
-    // NOTE Need to access our auth module in Vuex
-    function loginVue() {
-      store.dispatch("auth/login", {
-        email: email.value,
-        password: password.value
-      });
-    }
-    // OR...
-    // const loginVue = () => state.dispatch("auth/login")
-
+    // === Using COMPOSABLE
     async function handleLogin() {
-      try {
-        await loginVue();
-      } catch (error) {
-        error.value = error;
+      console.log("Form submitted!");
+      const response = await login(email.value, password.value);
+
+      if (!error.value) {
+        console.log("Login:!error.value::SUCCESS");
+        console.log(
+          "response: ",
+          response?.challengeParam.userAttributes.email
+        ); // mario@email.com
+        console.log("REROUTING to /entrance");
+        router.push({ name: "Entrance" });
       }
     }
 
-    // Using COMPOSABLE
+    // === Using AWS Auth Directly
+    // https://docs.amplify.aws/lib/auth/emailpassword/q/platform/js#sign-in
     // async function handleLogin() {
-    //   console.log("Form submitted!");
-    //   const response = await login(email.value, password.value);
+    //   try {
+    //     user.value = await Auth.signIn(email.value, password.value);
+    //     console.log(user.value); // Proxy {username, pool, ...}
+    //   } catch (e) {
+    //     console.log("error signing in", error);
+    //     error.value = e;
+    //   }
 
     //   if (!error.value) {
-    //     console.log("Login:!error.value::SUCCESS");
-    //     console.log("response: ", response);
     //     console.log("REROUTING to /entrance");
     //     router.push({ name: "Entrance" });
     //   }
     // }
 
+    // // === Using VUEX
+    // // Let's get our Vuex Store for Composition API
+    // // https://next.vuex.vuejs.org/guide/composition-api.html#composition-api
+    // const store = useStore();
+
+    // // Use computed() to access state or getters
+    // // Use regular functions for actions and mutations
+    // // NOTE Need to access our auth module in Vuex
+    // function loginVue() {
+    //   store.dispatch("auth/login", {
+    //     email: email.value,
+    //     password: password.value
+    //   });
+    // }
+    // // OR...
+    // // const loginVue = () => state.dispatch("auth/login")
+
+    // // Using VUEX
+    // async function handleLogin() {
+    //   try {
+    //     await loginVue();
+    //   } catch (error) {
+    //     error.value = error;
+    //   }
+    // }
+
     return {
-      username,
+      // username,
       email,
+      phone,
       password,
       error,
-      loginVue,
+      // loginVue,
       handleLogin
     };
   }
-  // data: () => ({
-  //   username: "",
-  //   password: "",
-  //   email: "",
-  //   error: ""
-  // }),
-  // methods: {
-  //   ...mapActions({
-  //     loginVue: "auth/login"
-  //   }),
-  //   async login() {
-  //     try {
-  //       await this.loginVue({
-  //         username: this.username,
-  //         password: this.password
-  //       });
-  //     } catch (error) {
-  //       this.error = error;
-  //     }
-  //   }
-  // }
 });
 </script>
 

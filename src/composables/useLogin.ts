@@ -5,6 +5,7 @@ const error = ref<string | null>(null);
 // Add Ref for whenever making a request
 const isPending = ref<boolean>(false);
 
+//async function login(email: string, password: string) {
 async function login(email: string, password: string) {
   error.value = null;
   isPending.value = true;
@@ -12,12 +13,12 @@ async function login(email: string, password: string) {
   try {
     const response = await Auth.signIn(email, password);
     // console.log("useLogin:login::SUCCESS");
-    // console.log(response);
+    console.log(response); // CognitoUser {username:..., pool:...}
     isPending.value = false;
     return response;
-  } catch (error) {
-    console.log(error.message);
-    error.value = error.message;
+  } catch (e) {
+    console.log(e.message);
+    error.value = e.message;
     isPending.value = false;
   }
 }
