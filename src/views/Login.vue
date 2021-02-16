@@ -1,19 +1,19 @@
 <template>
   <div
-    class="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8"
+    class="flex items-center justify-center min-h-screen px-4 py-12 bg-gray-50 sm:px-6 lg:px-8"
   >
-    <div class="max-w-md w-full">
+    <div class="w-full max-w-md">
       <div>
         <img
-          class="mx-auto h-40 w-auto"
+          class="w-auto h-40 mx-auto"
           src="../assets/images/concordia-logo.png"
           alt="Concordia Logo"
         />
-        <!-- <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900"> -->
+        <!-- <h2 class="mt-6 text-3xl font-extrabold text-center text-gray-900"> -->
         <!--   Balance Tracker -->
         <!-- </h2> -->
       </div>
-      <!-- <h3 class="mt-6 text-center text-xl font-bold text-gray-900">Log in</h3> -->
+      <!-- <h3 class="mt-6 text-xl font-bold text-center text-gray-900">Log in</h3> -->
       <form @submit.prevent="handleLogin" class="mt-2 space-y-2">
         <input type="hidden" name="remember" value="true" />
         <div class="rounded-md shadow-sm -space-y-px">
@@ -23,10 +23,10 @@
               v-model="email"
               id="email-address"
               name="email"
-              type="text"
+              type="email"
               autocomplete="email"
               required
-              class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
+              class="relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
               placeholder="Email address"
             />
           </div>
@@ -39,7 +39,7 @@
           <!--     type="string" -->
           <!--     autocomplete="phone" -->
           <!--     required -->
-          <!--     class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm" -->
+          <!--     class="relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm" -->
           <!--     placeholder="Phone number" -->
           <!--   /> -->
           <!-- </div> -->
@@ -52,7 +52,7 @@
               type="password"
               autocomplete="current-password"
               required
-              class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
+              class="relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-b-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
               placeholder="Password"
             />
           </div>
@@ -63,12 +63,12 @@
         <div>
           <button
             type="submit"
-            class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+            class="relative flex justify-center w-full px-4 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent group rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
           >
-            <!-- <span class="absolute left-0 inset-y-0 flex items-center pl-3"> -->
+            <!-- <span class="absolute inset-y-0 left-0 flex items-center pl-3"> -->
             <!--   <!-1- Heroicon name: lock-closed -1-> -->
             <!--   <svg -->
-            <!--     class="h-5 w-5 text-blue-500 group-hover:text-blue-400" -->
+            <!--     class="w-5 h-5 text-blue-500 group-hover:text-blue-400" -->
             <!--     xmlns="http://www.w3.org/2000/svg" -->
             <!--     viewBox="0 0 20 20" -->
             <!--     fill="currentColor" -->
@@ -85,10 +85,10 @@
           </button>
         </div>
       </form>
-      <div class="text-sm py-4 text-center">
+      <div class="py-4 text-sm text-center">
         <p>
           <span
-            class="font-medium text-blue-600 hover:text-blue-500 cursor-pointer"
+            class="font-medium text-blue-600 cursor-pointer hover:text-blue-500"
             @click="showLogin = false"
           >
             Forgot password?</span
@@ -102,7 +102,7 @@
 import { defineComponent, ref } from "vue";
 import { useRouter } from "vue-router";
 // import { useStore } from "vuex";
-//import { Auth } from "aws-amplify";
+// import { Auth } from "aws-amplify";
 import useLogin from "@/composables/useLogin";
 
 export default defineComponent({
@@ -166,19 +166,24 @@ export default defineComponent({
     // // NOTE Need to access our auth module in Vuex
     // function loginVue() {
     //   store.dispatch("auth/login", {
-    //     email: email.value,
+    //     // NOTE Depending on approach may need 'email' or 'username'
+    //     username: email.value,
     //     password: password.value
     //   });
     // }
     // // OR...
     // // const loginVue = () => state.dispatch("auth/login")
 
-    // // Using VUEX
+    // // Using VUEX - BROKEN
     // async function handleLogin() {
     //   try {
     //     await loginVue();
-    //   } catch (error) {
-    //     error.value = error;
+    //     console.log("loginVue:SUCCESS");
+    //     const userInfo = await Auth.currentUserInfo();
+    //     console.log("userInfo: ", userInfo); // null
+    //   } catch (e) {
+    //     console.log(e);
+    //     error.value = e;
     //   }
     // }
 
@@ -188,7 +193,7 @@ export default defineComponent({
       phone,
       password,
       error,
-      // loginVue,
+      //loginVue,
       handleLogin
     };
   }
