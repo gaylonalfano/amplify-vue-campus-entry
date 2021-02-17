@@ -118,7 +118,7 @@ export default defineComponent({
     const password = ref<string>("");
     const phone = ref<string>("");
     // const error = ref<string>("");
-    // const user = ref(null);
+    const user = ref(null);
 
     // Router
     const router = useRouter();
@@ -126,14 +126,18 @@ export default defineComponent({
     // === Using COMPOSABLE
     async function handleLogin() {
       console.log("Form submitted!");
-      const response = await login(email.value, password.value);
+      // WITHOUT trying to pass user along
+      // const response = await login(email.value, password.value);
+      // WITH trying to pass user along
+      user.value = await login(email.value, password.value);
 
       if (!error.value) {
         console.log("Login:!error.value::SUCCESS");
-        console.log(
-          "response: ",
-          response?.challengeParam.userAttributes.email
-        ); // mario@email.com
+        // console.log(
+        //   "response: ",
+        //   response?.challengeParam.userAttributes.email
+        // ); // mario@email.com
+        console.log("Login:handleLogin:user.value: ", user.value);
         console.log("REROUTING to /entrance");
         router.push({ name: "Entrance" });
       }

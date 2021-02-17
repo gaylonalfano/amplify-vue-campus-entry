@@ -48,32 +48,35 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, watchEffect } from "vue";
+import { defineComponent, ref, watchEffect, inject } from "vue";
 import { Auth } from "aws-amplify";
-import getUser from "@/composables/getUser";
+// import getUser from "@/composables/getUser";
 import Navbar from "@/components/Navbar.vue";
 
 export default defineComponent({
   name: "Entrance",
   components: { Navbar },
   setup() {
-    // Let's use our composable to verify current auth user
-    // const { user, error, getCurrentAuthenticatedUser } = getUser();
-    const user = ref(null);
+    // Trying Inject getGlobalCurrentUserInfo that I provided inside main.ts
+    const user = inject("getGlobalCurrentUserInfo", "default value for user");
 
-    // async function getCurrentUserInfo() {
-    //   try {
-    //     user.value = await Auth.currentUserInfo();
-    //     console.log("getCurrentUserInfo:user: ", user.value);
-    //     return user.value;
-    //   } catch (error) {
-    //     console.log(error.message);
-    //   }
-    // }
+    // // Let's use our composable to verify current auth user
+    // // const { user, error, getCurrentAuthenticatedUser } = getUser();
+    // const user = ref(null);
 
-    watchEffect(async () => {
-      user.value = await Auth.currentAuthenticatedUser();
-    });
+    // // async function getCurrentUserInfo() {
+    // //   try {
+    // //     user.value = await Auth.currentUserInfo();
+    // //     console.log("getCurrentUserInfo:user: ", user.value);
+    // //     return user.value;
+    // //   } catch (error) {
+    // //     console.log(error.message);
+    // //   }
+    // // }
+
+    // watchEffect(async () => {
+    //   user.value = await Auth.currentAuthenticatedUser();
+    // });
 
     return { user };
   }
