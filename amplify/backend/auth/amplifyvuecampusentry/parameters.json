@@ -1,7 +1,7 @@
 {
     "identityPoolName": "testAuthIdentityPool",
     "allowUnauthenticatedIdentities": false,
-    "resourceNameTruncated": "amplif79c2eabb",
+    "resourceNameTruncated": "amplif6997dd48",
     "userPoolName": "amplifyvuecampusentry",
     "autoVerifiedAttributes": [
         "phone_number"
@@ -23,16 +23,16 @@
         "Requires Uppercase"
     ],
     "requiredAttributes": [
-        "phone_number",
-        "email"
+        "preferred_username",
+        "phone_number"
     ],
     "userpoolClientGenerateSecret": false,
     "userpoolClientRefreshTokenValidity": 30,
     "userpoolClientWriteAttributes": [],
     "userpoolClientReadAttributes": [],
-    "userpoolClientLambdaRole": "amplif79c2eabb_userpoolclient_lambda_role",
+    "userpoolClientLambdaRole": "amplif6997dd48_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
-    "sharedId": "79c2eabb",
+    "sharedId": "6997dd48",
     "resourceName": "amplifyvuecampusentry",
     "authSelections": "identityPoolAndUserPool",
     "authRoleArn": {
@@ -48,10 +48,6 @@
         ]
     },
     "serviceName": "Cognito",
-    "usernameAttributes": [
-        "email",
-        "phone_number"
-    ],
     "useDefault": "manual",
     "userPoolGroups": false,
     "userPoolGroupList": [],
