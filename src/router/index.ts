@@ -95,6 +95,7 @@ import {
 } from "vue-router";
 import { Auth } from "aws-amplify";
 import Login from "@/views/Login.vue";
+import Store from "@/views/Store.vue";
 import Entrance from "@/views/Entrance.vue";
 import StudentForm from "@/views/StudentForm.vue";
 import EmployeeForm from "@/views/EmployeeForm.vue";
@@ -154,10 +155,16 @@ const routes: Array<RouteRecordRaw> = [
     // beforeEnter: requireNoAuth
   },
   {
+    path: "/store",
+    name: "Store",
+    component: Store
+    // beforeEnter: requireNoAuth
+  },
+  {
     path: "/entrance",
     name: "Entrance",
-    component: Entrance,
-    beforeEnter: requireAuth
+    component: Entrance
+    // beforeEnter: requireAuth
   },
   {
     path: "/student",

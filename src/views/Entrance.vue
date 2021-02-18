@@ -1,7 +1,7 @@
 <template>
   <Navbar />
   <!-- <button @click="getCurrentUserInfo">Get User</button> -->
-  <div v-if="user">Welcome user: {{ user }}</div>
+  <div v-if="user">Welcome store.state.user: {{ store.state.user }}</div>
   <!-- <div v-if="error">{{ error }}</div> -->
   <div
     class="min-h-screen flex items-center justify-center bg-gray-50 py-4 px-4 sm:px-6 lg:px-8"
@@ -50,6 +50,7 @@
 <script lang="ts">
 import { defineComponent, ref, watchEffect, inject } from "vue";
 import { Auth } from "aws-amplify";
+
 // import getUser from "@/composables/getUser";
 import Navbar from "@/components/Navbar.vue";
 
@@ -57,6 +58,9 @@ export default defineComponent({
   name: "Entrance",
   components: { Navbar },
   setup() {
+    // Testing the inject('store') approach...
+    const store = inject("store") as Record<string, any>;
+
     // Trying Inject getGlobalCurrentUserInfo that I provided inside main.ts
     const user = inject("getGlobalCurrentUserInfo", "default value for user");
 
@@ -78,7 +82,7 @@ export default defineComponent({
     //   user.value = await Auth.currentAuthenticatedUser();
     // });
 
-    return { user };
+    return { store, user };
   }
 });
 </script>
