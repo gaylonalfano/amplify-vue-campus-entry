@@ -95,7 +95,7 @@ export default defineComponent({
         const user = await Auth.signIn(email.value, password.value); // works! CognitoUser {}
         console.log("Successfully logged in");
         // See if I can set the state.user value
-        const userInfo = await Auth.currentUserInfo(); // null
+        const userInfo = await Auth.currentUserInfo(); // null. Never seems to work...
         console.log("user: ", user); // works! CognitoUser {}
         console.log("userInfo: ", userInfo); // null
         store.methods.setUser(user); // works!
