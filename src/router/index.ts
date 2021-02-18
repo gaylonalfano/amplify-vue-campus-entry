@@ -135,7 +135,6 @@ async function requireAuth(
   // NOTE We don't use our getUser composable because we don't need to
   // listen to AuthState changes, etc.
   const user = await Auth.currentUserInfo();
-  // console.log(`RouterGuard:requireAuth:user: ${user}`); // [Object object]
   console.log("RouterGuard:requireAuth:user: ", user); // null. Expected behavior?
 
   if (!user) {
@@ -163,8 +162,8 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: "/entrance",
     name: "Entrance",
-    component: Entrance
-    // beforeEnter: requireAuth
+    component: Entrance,
+    beforeEnter: requireAuth
   },
   {
     path: "/student",

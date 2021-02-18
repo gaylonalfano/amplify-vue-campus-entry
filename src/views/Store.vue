@@ -2,7 +2,8 @@
   <div class="container">
     <form @submit.prevent="login">
       <h2>Login</h2>
-      <input type="email" v-model="email" placeholder="Email address..." />
+      <!-- <input type="text" v-model="email" placeholder="Email address..." /> -->
+      <input type="text" v-model="username" placeholder="username..." />
       <input type="password" v-model="password" placeholder="password..." />
       <button class="bg-gray-200 w-10">Login</button>
     </form>
@@ -65,6 +66,7 @@ export default defineComponent({
     const store = inject("store") as Record<string, any>;
 
     // For Login user form
+    const username = ref<string>("");
     const email = ref<string>("");
     const password = ref<string>("");
     const router = useRouter();
@@ -92,13 +94,17 @@ export default defineComponent({
     // Let's login a user
     async function login() {
       try {
-        const user = await Auth.signIn(email.value, password.value); // works! CognitoUser {}
+        const user = await Auth.signIn(username.value, password.value); // works! CognitoUser {}
         console.log("Successfully logged in");
         // See if I can set the state.user value
-        const userInfo = await Auth.currentUserInfo(); // null. Never seems to work...
-        console.log("user: ", user); // works! CognitoUser {}
-        console.log("userInfo: ", userInfo); // null
         store.methods.setUser(user); // works!
+        // const userInfo = await Auth.currentUserInfo(); // null. Never seems to work...
+        // const authUser = await Auth.currentAuthenticatedUser();
+        // const currentSession = await Auth.currentSession();
+        console.log("user: ", user); // works! CognitoUser {}
+        // console.log("userInfo: ", userInfo); // null
+        // console.log("authUser: ", authUser); //
+        // console.log("currentSession: ", currentSession); //
         console.log("store.state.user: ", store.state.user); // works! Proxy {username,pool}
         // Try rerouting to /entrance to see if state persists...
         // NOTE If I manually type in /entrance then it resets my state.user again
@@ -129,7 +135,15 @@ export default defineComponent({
     //   user.value = user.value.toLowerCase();
     // }
 
-    return { store, counterColor, login, email, password, getCurrentUserInfo };
+    return {
+      store,
+      counterColor,
+      login,
+      username,
+      email,
+      password,
+      getCurrentUserInfo
+    };
   }
 });
 </script>
