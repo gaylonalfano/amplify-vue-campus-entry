@@ -7,6 +7,13 @@ import awsconfig from "./aws-exports";
 import "@/assets/styles/index.css";
 
 Amplify.configure(awsconfig);
+// Add Logger for debugging
+Amplify.Logger.LOG_LEVEL = "DEBUG";
+// const logger = new Amplify.Logger("main");
+
+// Amplify.Auth.currentAuthenticatedUser()
+//   .then(user => logger.debug(user))
+//   .catch(err => logger.debug(err));
 
 createApp(App)
   // .use(store)
