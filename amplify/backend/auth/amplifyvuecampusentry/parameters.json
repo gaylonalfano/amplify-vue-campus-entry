@@ -1,7 +1,7 @@
 {
     "identityPoolName": "testAuthIdentityPool",
     "allowUnauthenticatedIdentities": false,
-    "resourceNameTruncated": "amplif6997dd48",
+    "resourceNameTruncated": "amplif090dc04b",
     "userPoolName": "amplifyvuecampusentry",
     "autoVerifiedAttributes": [
         "phone_number"
@@ -24,15 +24,15 @@
     ],
     "requiredAttributes": [
         "preferred_username",
-        "phone_number"
+        "email"
     ],
     "userpoolClientGenerateSecret": false,
     "userpoolClientRefreshTokenValidity": 30,
     "userpoolClientWriteAttributes": [],
     "userpoolClientReadAttributes": [],
-    "userpoolClientLambdaRole": "amplif6997dd48_userpoolclient_lambda_role",
+    "userpoolClientLambdaRole": "amplif090dc04b_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
-    "sharedId": "6997dd48",
+    "sharedId": "090dc04b",
     "resourceName": "amplifyvuecampusentry",
     "authSelections": "identityPoolAndUserPool",
     "authRoleArn": {
