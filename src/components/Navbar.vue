@@ -78,8 +78,8 @@
             </router-link>
           </div>
           <div class="flex-shrink-0">
-            <router-link
-              to="/"
+            <button
+              @click="logout"
               class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-900 border border-transparent shadow-sm rounded-md hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-blue-800"
             >
               <svg
@@ -96,7 +96,7 @@
                   d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
                 ></path>
               </svg>
-            </router-link>
+            </button>
           </div>
         </div>
       </div>
@@ -106,6 +106,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import { useStore } from "vuex";
 import { useRouter } from "vue-router";
 // import useLogout from "@/composables/useLogout";
 // import getUser from "@/composables/getUser";
@@ -113,14 +114,23 @@ import { useRouter } from "vue-router";
 export default defineComponent({
   name: "Navbar",
   setup() {
-    // Use composables
+    // Use store
+    const store = useStore();
 
     const router = useRouter();
 
-    function handleLogout() {
-      console.log("handleLogout clicked");
+    async function logout() {
+      console.log(
+        "Logging out: store.state.auth.user: ",
+        store.state.auth.user
+      ); // Works! Proxy {id, username}
+      await store.dispatch("auth/logout");
+      // Reroute back to /login
+      // Q: Reroute back to /login or will Route Guard do this?
+      // A: Need to reroute. Logout will leave user on Home page
+      router.push({ name: "Login" });
     }
-    return { handleLogout };
+    return { logout };
   }
 });
 </script>

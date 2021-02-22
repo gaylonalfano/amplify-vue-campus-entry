@@ -1,93 +1,68 @@
 <template>
-  <div class="home">
-    <h3>Campus Entry Home</h3>
-    <main>
-      <div class="role-select">
-        <div class="student">Student Entrance</div>
-        <div class="employee">Employee Entrance</div>
-        <div class="consultant">Consultant Entrance</div>
-        <div class="visitor">Visitor Entrance</div>
-        <div class="qrcode">Re Get QR Code</div>
-      </div>
-    </main>
+  <Navbar />
+  <div v-if="user">Hello, {{ user.username }}</div>
+  <div
+    class="min-h-screen flex items-center justify-center bg-gray-50 py-4 px-4 sm:px-6 lg:px-8"
+  >
+    <!-- This example requires Tailwind CSS v2.0+ -->
+    <ul class="space-y-5">
+      <router-link :to="{ name: 'Student' }">
+        <li
+          class="cursor-pointer text-center text-blue-900 bg-blue-50 border border-blue-900 shadow overflow-hidden rounded-md px-6 py-4"
+        >
+          Student Entrance
+        </li>
+      </router-link>
+      <router-link :to="{ name: 'Employee' }">
+        <li
+          class="px-6 py-4 overflow-hidden text-center text-blue-900 border border-blue-900 shadow cursor-pointer bg-blue-50 rounded-md"
+        >
+          Employee Entrance
+        </li>
+      </router-link>
+      <router-link :to="{ name: 'Consultant' }">
+        <li
+          class="px-6 py-4 overflow-hidden text-center text-blue-900 border border-blue-900 shadow cursor-pointer bg-blue-50 rounded-md"
+        >
+          Consultant Entrance
+        </li>
+      </router-link>
+      <router-link :to="{ name: 'Visitor' }">
+        <li
+          class="px-6 py-4 overflow-hidden text-center text-blue-900 border border-blue-900 shadow cursor-pointer bg-blue-50 rounded-md"
+        >
+          Visitor Entrance
+        </li>
+      </router-link>
+      <router-link :to="{ name: 'QrCode' }">
+        <li
+          class="px-6 py-4 overflow-hidden text-center text-blue-900 border border-blue-900 shadow cursor-pointer bg-blue-50 rounded-md"
+        >
+          Re Get QR Code
+        </li>
+      </router-link>
+    </ul>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, watchEffect } from "vue";
-import { DataStore } from "@aws-amplify/datastore";
-import { Person } from "@/models";
-// import { Family } from "@/models";
-// import { Division } from "@/models";
-// import { Category } from "@/models";
+import { defineComponent, computed } from "vue";
+import { useStore } from "vuex";
+import { Auth } from "aws-amplify";
+
+// import getUser from "@/composables/getUser";
+import Navbar from "@/components/Navbar.vue";
 
 export default defineComponent({
   name: "Home",
+  components: { Navbar },
   setup() {
-    const person = ref<Person | null>(null);
-    const people = ref<Person[] | null>(null);
-    // const family = ref<Family | null>(null);
-    // const division = ref<Division | null>(null);
-    // const category = ref<Category | null>(null);
+    const store = useStore();
+    const user = computed(() => store.state.auth.user);
 
-    async function queryPerson() {
-      people.value = await DataStore.query(Person);
-      console.log(people.value);
-    }
-
-    async function createPerson() {
-      person.value = await DataStore.save(
-        new Person({
-          firstName: "Mario",
-          lastName: "Luigi",
-          phone: "1234567",
-          studentID: "Lorem ipsum dolor sit amet",
-          divisionID: "a3f4095e-39de-43d2-baf4-f8c16f0f6f4d",
-          categoryID: "a3f4095e-39de-43d2-baf4-f8c16f0f6f4d",
-          familyID: "a3f4095e-39de-43d2-baf4-f8c16f0f6f4d",
-          submissions: [],
-          createdAt: "2021/02/13"
-        })
-      );
-    }
-
-    // async function queryFamily() {
-    //   family.value = await DataStore.save(
-    //     new Family({
-    //       people: []
-    //     })
-    //   );
-    // }
-
-    // async function createDivision() {
-    //   division.value = await DataStore.save(
-    //     new Division({
-    //       name: window.prompt("Division name: ") as string,
-    //       people: []
-    //     })
-    //   );
-    // }
-
-    // async function createCategory() {
-    //   category.value = await DataStore.save(
-    //     new Category({
-    //       name: window.prompt("Category name: ") as string,
-    //       people: []
-    //     })
-    //   );
-    // }
-
-    watchEffect(async () => {
-      await queryPerson();
-    });
-
-    return {
-      createPerson,
-      queryPerson,
-      // createDivision,
-      // createCategory,
-      people
-    };
+    return { user };
   }
 });
 </script>
+
+<style></style>

@@ -1,0 +1,159 @@
+<template>
+  <div
+    class="flex items-center justify-center min-h-screen px-4 py-12 bg-gray-50 sm:px-6 lg:px-8"
+  >
+    <div class="w-full max-w-md">
+      <div>
+        <img
+          class="w-auto h-40 mx-auto"
+          src="../assets/images/concordia-logo.png"
+          alt="Concordia Logo"
+        />
+        <!-- <h2 class="mt-6 text-3xl font-extrabold text-center text-gray-900"> -->
+        <!--   Balance Tracker -->
+        <!-- </h2> -->
+      </div>
+      <!-- <h3 class="mt-6 text-xl font-bold text-center text-gray-900">Log in</h3> -->
+      <form @submit.prevent="handleLogin" class="mt-2 space-y-2">
+        <input type="hidden" name="remember" value="true" />
+        <div class="rounded-md shadow-sm -space-y-px">
+          <div>
+            <label for="username" class="sr-only">Username</label>
+            <input
+              v-model="username"
+              id="username"
+              name="username"
+              type="text"
+              autocomplete="username"
+              required
+              class="relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
+              placeholder="Username goes here"
+            />
+          </div>
+          <div>
+            <label for="email-address" class="sr-only">Email address</label>
+            <input
+              v-model="email"
+              id="email-address"
+              name="email"
+              type="email"
+              autocomplete="email"
+              required
+              class="relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
+              placeholder="Email address"
+            />
+          </div>
+          <!-- <div> -->
+          <!--   <label for="phone-number" class="sr-only">Phone number</label> -->
+          <!--   <input -->
+          <!--     v-model="phone" -->
+          <!--     id="phone-number" -->
+          <!--     name="phone" -->
+          <!--     type="string" -->
+          <!--     autocomplete="phone" -->
+          <!--     required -->
+          <!--     class="relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm" -->
+          <!--     placeholder="Phone number" -->
+          <!--   /> -->
+          <!-- </div> -->
+          <div>
+            <label for="password" class="sr-only">Password</label>
+            <input
+              v-model="password"
+              id="password"
+              name="password"
+              type="password"
+              autocomplete="current-password"
+              required
+              class="relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-b-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
+              placeholder="Password"
+            />
+          </div>
+        </div>
+        <!-- <div v-if="error"> -->
+        <!--   <h3 class="text-sm font-medium text-red-800">{{ error }}</h3> -->
+        <!-- </div> -->
+        <div>
+          <button
+            type="submit"
+            class="relative flex justify-center w-full px-4 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent group rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+          >
+            <!-- <span class="absolute inset-y-0 left-0 flex items-center pl-3"> -->
+            <!--   <!-1- Heroicon name: lock-closed -1-> -->
+            <!--   <svg -->
+            <!--     class="w-5 h-5 text-blue-500 group-hover:text-blue-400" -->
+            <!--     xmlns="http://www.w3.org/2000/svg" -->
+            <!--     viewBox="0 0 20 20" -->
+            <!--     fill="currentColor" -->
+            <!--     aria-hidden="true" -->
+            <!--   > -->
+            <!--     <path -->
+            <!--       fill-rule="evenodd" -->
+            <!--       d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" -->
+            <!--       clip-rule="evenodd" -->
+            <!--     /> -->
+            <!--   </svg> -->
+            <!-- </span> -->
+            Sign up
+          </button>
+        </div>
+      </form>
+      <!-- <div class="py-4 text-sm text-center"> -->
+      <!--   <p> -->
+      <!--     <span -->
+      <!--       class="font-medium text-blue-600 cursor-pointer hover:text-blue-500" -->
+      <!--       @click="showLogin = false" -->
+      <!--     > -->
+      <!--       Forgot password?</span -->
+      <!--     > -->
+      <!--   </p> -->
+      <!-- </div> -->
+    </div>
+  </div>
+</template>
+<script lang="ts">
+import { defineComponent, ref } from "vue";
+// import { useRouter } from "vue-router";
+// import { useStore } from "vuex";
+// import { Auth } from "aws-amplify";
+// import useLogin from "@/composables/useLogin";
+
+export default defineComponent({
+  name: "Signup",
+  setup() {
+    // Composables
+    // const { error, login } = useLogin();
+
+    // Create Refs for our input data properties
+    // NOTE For testing: mario@email.com Te$t1234
+    const username = ref<string>("");
+    const email = ref<string>("");
+    const password = ref<string>("");
+    // jconst phone = ref<string>("");
+    const error = ref<string>("");
+    // const user = ref(null);
+
+    // Router
+    // const router = useRouter();
+
+    // === Using VUEX
+    // Let's get our Vuex Store for Composition API
+    // https://next.vuex.vuejs.org/guide/composition-api.html#composition-api
+    // const store = useStore();
+
+    // Use computed() to access state or getters
+    // Use regular functions for actions and mutations
+    // NOTE Need to access our auth module in Vuex
+    return {
+      username,
+      email,
+      // phone,
+      password,
+      error
+      //loginVue,
+    };
+  }
+});
+</script>
+
+<style></style>

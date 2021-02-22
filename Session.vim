@@ -8,54 +8,18 @@ if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
 endif
 set shortmess=aoO
 badd +1 ~/Code/amplify-vue-campus-entry
-badd +51 src/store/index.ts
-badd +11 src/main.ts
-badd +0 package.json
-badd +0 src/store/auth/auth.ts
-badd +51 src/store/auth/auth.js
-badd +188 src/views/Login.vue
-badd +1 src/composables/useLogin.ts
-badd +117 src/router/index.ts
-badd +230 amplify/backend/auth/amplifyvuecampusentry/amplifyvuecampusentry-cloudformation-template.yml
-badd +3 src/views/Entrance.vue
-badd +1 src/App.vue
-badd +2 src/composables/useGlobal.ts
-badd +5 src/composables/useState.ts
-badd +7 src/views/Home.vue
-badd +105 src/views/Store.vue
-badd +0 term://.//81386:npm\ run\ serve
-badd +0 src/aws-exports.js
+badd +0 src/views/Welcome.vue
+badd +0 src/views/Entrance.vue
+badd +162 src/views/Login.vue
+badd +16 src/views/Home.vue
+badd +0 src/components/Navbar.vue
+badd +0 src/router/index.ts
+badd +11 src/aws-exports.js
 argglobal
 %argdel
 $argadd ~/Code/amplify-vue-campus-entry
 set stal=2
-edit src/composables/useLogin.ts
-set splitbelow splitright
-set nosplitbelow
-set nosplitright
-wincmd t
-set winminheight=0
-set winheight=1
-set winminwidth=0
-set winwidth=1
-argglobal
-setlocal fdm=manual
-setlocal fde=0
-setlocal fmr={{{,}}}
-setlocal fdi=#
-setlocal fdl=0
-setlocal fml=1
-setlocal fdn=20
-setlocal fen
-silent! normal! zE
-let s:l = 15 - ((14 * winheight(0) + 38) / 76)
-if s:l < 1 | let s:l = 1 | endif
-exe s:l
-normal! zt
-15
-normal! 0
-lcd ~/Code/amplify-vue-campus-entry
-tabedit ~/Code/amplify-vue-campus-entry/src/App.vue
+edit NetrwTreeListing
 set splitbelow splitright
 set nosplitbelow
 set nosplitright
@@ -79,14 +43,88 @@ if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
 1
+normal! 0
+lcd ~/Code/amplify-vue-campus-entry
+tabedit ~/Code/amplify-vue-campus-entry/src/components/Navbar.vue
+set splitbelow splitright
+set nosplitbelow
+set nosplitright
+wincmd t
+set winminheight=0
+set winheight=1
+set winminwidth=0
+set winwidth=1
+argglobal
+setlocal fdm=manual
+setlocal fde=0
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=0
+setlocal fml=1
+setlocal fdn=20
+setlocal fen
+silent! normal! zE
+let s:l = 1 - ((0 * winheight(0) + 38) / 76)
+if s:l < 1 | let s:l = 1 | endif
+exe s:l
+normal! zt
+1
+normal! 0
+lcd ~/Code/amplify-vue-campus-entry
+tabedit ~/Code/amplify-vue-campus-entry/src/views/Login.vue
+set splitbelow splitright
+set nosplitbelow
+set nosplitright
+wincmd t
+set winminheight=0
+set winheight=1
+set winminwidth=0
+set winwidth=1
+argglobal
+setlocal fdm=manual
+setlocal fde=0
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=0
+setlocal fml=1
+setlocal fdn=20
+setlocal fen
+silent! normal! zE
+let s:l = 162 - ((47 * winheight(0) + 38) / 76)
+if s:l < 1 | let s:l = 1 | endif
+exe s:l
+normal! zt
+162
+normal! 0
+lcd ~/Code/amplify-vue-campus-entry
+tabedit ~/Code/amplify-vue-campus-entry/NetrwTreeListing
+set splitbelow splitright
+set nosplitbelow
+set nosplitright
+wincmd t
+set winminheight=0
+set winheight=1
+set winminwidth=0
+set winwidth=1
+argglobal
+setlocal fdm=manual
+setlocal fde=0
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=0
+setlocal fml=1
+setlocal fdn=20
+setlocal fen
+silent! normal! zE
+let s:l = 36 - ((35 * winheight(0) + 38) / 76)
+if s:l < 1 | let s:l = 1 | endif
+exe s:l
+normal! zt
+36
 normal! 0
 lcd ~/Code/amplify-vue-campus-entry
 tabedit ~/Code/amplify-vue-campus-entry/src/views/Entrance.vue
 set splitbelow splitright
-wincmd _ | wincmd |
-vsplit
-1wincmd h
-wincmd w
 set nosplitbelow
 set nosplitright
 wincmd t
@@ -94,136 +132,7 @@ set winminheight=0
 set winheight=1
 set winminwidth=0
 set winwidth=1
-exe 'vert 1resize ' . ((&columns * 97 + 97) / 194)
-exe 'vert 2resize ' . ((&columns * 96 + 97) / 194)
 argglobal
-setlocal fdm=manual
-setlocal fde=0
-setlocal fmr={{{,}}}
-setlocal fdi=#
-setlocal fdl=0
-setlocal fml=1
-setlocal fdn=20
-setlocal fen
-silent! normal! zE
-let s:l = 3 - ((2 * winheight(0) + 38) / 76)
-if s:l < 1 | let s:l = 1 | endif
-exe s:l
-normal! zt
-3
-normal! 0
-lcd ~/Code/amplify-vue-campus-entry
-wincmd w
-argglobal
-if bufexists("~/Code/amplify-vue-campus-entry/src/views/Login.vue") | buffer ~/Code/amplify-vue-campus-entry/src/views/Login.vue | else | edit ~/Code/amplify-vue-campus-entry/src/views/Login.vue | endif
-setlocal fdm=manual
-setlocal fde=0
-setlocal fmr={{{,}}}
-setlocal fdi=#
-setlocal fdl=0
-setlocal fml=1
-setlocal fdn=20
-setlocal fen
-silent! normal! zE
-let s:l = 151 - ((65 * winheight(0) + 38) / 76)
-if s:l < 1 | let s:l = 1 | endif
-exe s:l
-normal! zt
-151
-normal! 05|
-lcd ~/Code/amplify-vue-campus-entry
-wincmd w
-exe 'vert 1resize ' . ((&columns * 97 + 97) / 194)
-exe 'vert 2resize ' . ((&columns * 96 + 97) / 194)
-tabedit ~/Code/amplify-vue-campus-entry/src/router/index.ts
-set splitbelow splitright
-wincmd _ | wincmd |
-vsplit
-1wincmd h
-wincmd w
-set nosplitbelow
-set nosplitright
-wincmd t
-set winminheight=0
-set winheight=1
-set winminwidth=0
-set winwidth=1
-exe 'vert 1resize ' . ((&columns * 97 + 97) / 194)
-exe 'vert 2resize ' . ((&columns * 96 + 97) / 194)
-argglobal
-setlocal fdm=manual
-setlocal fde=0
-setlocal fmr={{{,}}}
-setlocal fdi=#
-setlocal fdl=0
-setlocal fml=1
-setlocal fdn=20
-setlocal fen
-silent! normal! zE
-let s:l = 167 - ((49 * winheight(0) + 38) / 76)
-if s:l < 1 | let s:l = 1 | endif
-exe s:l
-normal! zt
-167
-normal! 07|
-lcd ~/Code/amplify-vue-campus-entry
-wincmd w
-argglobal
-if bufexists("~/Code/amplify-vue-campus-entry/src/store/auth/auth.js") | buffer ~/Code/amplify-vue-campus-entry/src/store/auth/auth.js | else | edit ~/Code/amplify-vue-campus-entry/src/store/auth/auth.js | endif
-setlocal fdm=manual
-setlocal fde=0
-setlocal fmr={{{,}}}
-setlocal fdi=#
-setlocal fdl=0
-setlocal fml=1
-setlocal fdn=20
-setlocal fen
-silent! normal! zE
-let s:l = 51 - ((50 * winheight(0) + 38) / 76)
-if s:l < 1 | let s:l = 1 | endif
-exe s:l
-normal! zt
-51
-normal! 09|
-lcd ~/Code/amplify-vue-campus-entry
-wincmd w
-exe 'vert 1resize ' . ((&columns * 97 + 97) / 194)
-exe 'vert 2resize ' . ((&columns * 96 + 97) / 194)
-tabedit ~/Code/amplify-vue-campus-entry/src/views/Store.vue
-set splitbelow splitright
-wincmd _ | wincmd |
-vsplit
-1wincmd h
-wincmd w
-set nosplitbelow
-set nosplitright
-wincmd t
-set winminheight=0
-set winheight=1
-set winminwidth=0
-set winwidth=1
-exe 'vert 1resize ' . ((&columns * 96 + 97) / 194)
-exe 'vert 2resize ' . ((&columns * 97 + 97) / 194)
-argglobal
-setlocal fdm=manual
-setlocal fde=0
-setlocal fmr={{{,}}}
-setlocal fdi=#
-setlocal fdl=0
-setlocal fml=1
-setlocal fdn=20
-setlocal fen
-silent! normal! zE
-let s:l = 4 - ((3 * winheight(0) + 38) / 76)
-if s:l < 1 | let s:l = 1 | endif
-exe s:l
-normal! zt
-4
-normal! 0
-lcd ~/Code/amplify-vue-campus-entry
-wincmd w
-argglobal
-if bufexists("~/Code/amplify-vue-campus-entry/src/store/index.ts") | buffer ~/Code/amplify-vue-campus-entry/src/store/index.ts | else | edit ~/Code/amplify-vue-campus-entry/src/store/index.ts | endif
 setlocal fdm=manual
 setlocal fde=0
 setlocal fmr={{{,}}}
@@ -240,10 +149,7 @@ normal! zt
 1
 normal! 0
 lcd ~/Code/amplify-vue-campus-entry
-wincmd w
-exe 'vert 1resize ' . ((&columns * 96 + 97) / 194)
-exe 'vert 2resize ' . ((&columns * 97 + 97) / 194)
-tabnew
+tabedit ~/Code/amplify-vue-campus-entry/src/views/Welcome.vue
 set splitbelow splitright
 set nosplitbelow
 set nosplitright
@@ -253,7 +159,6 @@ set winheight=1
 set winminwidth=0
 set winwidth=1
 argglobal
-if bufexists("term://.//81386:npm\ run\ serve") | buffer term://.//81386:npm\ run\ serve | else | edit term://.//81386:npm\ run\ serve | endif
 setlocal fdm=manual
 setlocal fde=0
 setlocal fmr={{{,}}}
@@ -262,14 +167,41 @@ setlocal fdl=0
 setlocal fml=1
 setlocal fdn=20
 setlocal fen
-let s:l = 6895 - ((75 * winheight(0) + 38) / 76)
+silent! normal! zE
+let s:l = 5 - ((4 * winheight(0) + 38) / 76)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-6895
+5
 normal! 0
 lcd ~/Code/amplify-vue-campus-entry
-tabnext 5
+tabedit ~/Code/amplify-vue-campus-entry/src/router/index.ts
+set splitbelow splitright
+set nosplitbelow
+set nosplitright
+wincmd t
+set winminheight=0
+set winheight=1
+set winminwidth=0
+set winwidth=1
+argglobal
+setlocal fdm=manual
+setlocal fde=0
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=0
+setlocal fml=1
+setlocal fdn=20
+setlocal fen
+silent! normal! zE
+let s:l = 89 - ((27 * winheight(0) + 38) / 76)
+if s:l < 1 | let s:l = 1 | endif
+exe s:l
+normal! zt
+89
+normal! 0
+lcd ~/Code/amplify-vue-campus-entry
+tabnext 4
 set stal=1
 if exists('s:wipebuf') && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf

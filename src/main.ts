@@ -1,7 +1,7 @@
 import { createApp } from "vue";
 import App from "./App.vue";
 import router from "./router";
-// import store from "./store";
+import store from "./store";
 import Amplify from "aws-amplify";
 import awsconfig from "./aws-exports";
 import "@/assets/styles/index.css";
@@ -16,7 +16,7 @@ Amplify.Logger.LOG_LEVEL = "DEBUG";
 //   .catch(err => logger.debug(err));
 
 createApp(App)
-  // .use(store)
+  .use(store)
   .use(router)
   .mount("#app");
 
