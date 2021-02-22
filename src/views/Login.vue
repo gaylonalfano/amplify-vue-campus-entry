@@ -100,12 +100,20 @@
       </form>
       <div class="py-4 text-sm text-center">
         <p>
-          <span
+          <router-link
             class="font-medium text-blue-600 cursor-pointer hover:text-blue-500"
-            @click="showLogin = false"
+            :to="{ name: 'Signup' }"
           >
-            Forgot password?</span
+            Forgot password?</router-link
           >
+          No account?
+          <router-link
+            class="font-medium text-blue-600 cursor-pointer hover:text-blue-500"
+            :to="{ name: 'Signup' }"
+          >
+            Sign up
+          </router-link>
+          instead.
         </p>
       </div>
     </div>

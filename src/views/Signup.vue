@@ -99,16 +99,17 @@
           </button>
         </div>
       </form>
-      <!-- <div class="py-4 text-sm text-center"> -->
-      <!--   <p> -->
-      <!--     <span -->
-      <!--       class="font-medium text-blue-600 cursor-pointer hover:text-blue-500" -->
-      <!--       @click="showLogin = false" -->
-      <!--     > -->
-      <!--       Forgot password?</span -->
-      <!--     > -->
-      <!--   </p> -->
-      <!-- </div> -->
+      <div class="py-4 text-sm text-center">
+        <p>
+          Already have an account?
+          <router-link
+            class="font-medium text-blue-600 cursor-pointer hover:text-blue-500"
+            :to="{ name: 'Login' }"
+          >
+            Log in here.</router-link
+          >
+        </p>
+      </div>
     </div>
   </div>
   <div
@@ -173,16 +174,17 @@
           </button>
         </div>
       </form>
-      <!-- <div class="py-4 text-sm text-center"> -->
-      <!--   <p> -->
-      <!--     <span -->
-      <!--       class="font-medium text-blue-600 cursor-pointer hover:text-blue-500" -->
-      <!--       @click="showLogin = false" -->
-      <!--     > -->
-      <!--       Forgot password?</span -->
-      <!--     > -->
-      <!--   </p> -->
-      <!-- </div> -->
+      <div class="py-4 text-sm text-center">
+        <p>
+          Didn't receive an email?
+          <router-link
+            class="font-medium text-blue-600 cursor-pointer hover:text-blue-500"
+            :to="{ name: 'Login' }"
+          >
+            Resend code.</router-link
+          >
+        </p>
+      </div>
     </div>
   </div>
 </template>
@@ -233,7 +235,7 @@ export default defineComponent({
           // eslint-disable-next-line
           // phone_number: +8615618200321, // Error: NUMBER_VALUE cannot be converted to String
           // eslint-disable-next-line
-          phone_number: "+8615618200321", // Works!
+          // phone_number: "+8615618200321", // Works!
         });
 
         // Toggle confirmPassword to true so we can display

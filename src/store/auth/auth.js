@@ -57,7 +57,7 @@ export const auth = {
     async signUp(
       _,
       // eslint-disable-next-line
-      { username, password, email, preferred_username, phone_number }
+      { username, password, email, preferred_username }
     ) {
       try {
         // Use AWS Auth.signUp() and pass in attributes property
@@ -69,7 +69,7 @@ export const auth = {
             // eslint-disable-next-line
             preferred_username,
             // eslint-disable-next-line
-            phone_number, // E.164 number convention (+8615....)
+            // phone_number, // E.164 number convention (+8615....)
           }
         });
         // If it's successful return a Promise
