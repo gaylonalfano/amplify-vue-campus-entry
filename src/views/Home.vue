@@ -1,6 +1,6 @@
 <template>
   <Navbar />
-  <div v-if="user">Hello, {{ user.username }}</div>
+  <!-- <div v-if="user">Hello, {{ user.username }}</div> -->
   <div
     class="min-h-screen flex items-center justify-center bg-gray-50 py-4 px-4 sm:px-6 lg:px-8"
   >
@@ -8,35 +8,35 @@
     <ul class="space-y-5">
       <router-link :to="{ name: 'Student' }">
         <li
-          class="cursor-pointer text-center text-blue-900 bg-blue-50 border border-blue-900 shadow overflow-hidden rounded-md px-6 py-4"
+          class="my-6 px-6 py-4 text-center text-blue-900 bg-blue-50 border border-blue-900 shadow overflow-hidden rounded-md"
         >
           Student Entrance
         </li>
       </router-link>
       <router-link :to="{ name: 'Employee' }">
         <li
-          class="px-6 py-4 overflow-hidden text-center text-blue-900 border border-blue-900 shadow cursor-pointer bg-blue-50 rounded-md"
+          class="my-6 px-6 py-4 overflow-hidden text-center text-blue-900 border border-blue-900 shadow bg-blue-50 rounded-md"
         >
           Employee Entrance
         </li>
       </router-link>
       <router-link :to="{ name: 'Consultant' }">
         <li
-          class="px-6 py-4 overflow-hidden text-center text-blue-900 border border-blue-900 shadow cursor-pointer bg-blue-50 rounded-md"
+          class="my-6 px-6 py-4 overflow-hidden text-center text-blue-900 border border-blue-900 shadow bg-blue-50 rounded-md"
         >
           Consultant Entrance
         </li>
       </router-link>
       <router-link :to="{ name: 'Visitor' }">
         <li
-          class="px-6 py-4 overflow-hidden text-center text-blue-900 border border-blue-900 shadow cursor-pointer bg-blue-50 rounded-md"
+          class="my-6 px-6 py-4 overflow-hidden text-center text-blue-900 border border-blue-900 shadow bg-blue-50 rounded-md"
         >
           Visitor Entrance
         </li>
       </router-link>
       <router-link :to="{ name: 'QrCode' }">
         <li
-          class="px-6 py-4 overflow-hidden text-center text-blue-900 border border-blue-900 shadow cursor-pointer bg-blue-50 rounded-md"
+          class="my-6 px-6 py-4 overflow-hidden text-center text-blue-900 border border-blue-900 shadow bg-blue-50 rounded-md"
         >
           Re Get QR Code
         </li>
@@ -58,7 +58,7 @@ export default defineComponent({
   components: { Navbar },
   setup() {
     const store = useStore();
-    const user = computed(() => store.state.auth.user);
+    const user = computed(() => store.state.auth.user); // Works!
 
     return { user };
   }

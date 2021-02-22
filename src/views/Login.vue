@@ -70,9 +70,9 @@
             />
           </div>
         </div>
-        <!-- <div v-if="error"> -->
-        <!--   <h3 class="text-sm font-medium text-red-800">{{ error }}</h3> -->
-        <!-- </div> -->
+        <div v-if="error">
+          <h3 class="text-sm font-medium text-red-800">{{ error }}</h3>
+        </div>
         <div>
           <button
             type="submit"
@@ -210,6 +210,7 @@ export default defineComponent({
       } catch (err) {
         console.log(err);
         error.value = err;
+        // error.value = "Incorrect log in credentials. Please try again.";
       }
     }
 

@@ -12,12 +12,16 @@
             />
           </router-link>
         </div>
-        <!-- <div class="hidden md:ml-6 md:flex md:items-center md:space-x-4"> -->
-        <!--   <!-1- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -1-> -->
-        <!--   <h1 class="text-white px-3 py-2 rounded-md text-2xl font-medium"> -->
-        <!--     <router-link to="/"> Balance Tracker</router-link> -->
-        <!--   </h1> -->
-        <!-- </div> -->
+        <div
+          v-if="user"
+          class="hidden md:ml-6 md:flex md:items-center md:space-x-4"
+        >
+          <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+          <h1 class="text-blue-900 px-3 py-2 rounded-md text-2xl font-medium">
+            {{ user.username }}
+            <!-- <router-link to="/"> Balance Tracker</router-link> -->
+          </h1>
+        </div>
         <div class="flex items-center space-x-4">
           <div class="flex-shrink-0">
             <router-link
@@ -60,7 +64,6 @@
               to="/"
               class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-900 border border-transparent shadow-sm rounded-md hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-blue-800"
             >
-              <!-- Heroicon name: plus -->
               <svg
                 class="w-5 h-5"
                 fill="none"
@@ -105,7 +108,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, computed } from "vue";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
 // import useLogout from "@/composables/useLogout";
@@ -116,6 +119,7 @@ export default defineComponent({
   setup() {
     // Use store
     const store = useStore();
+    const user = computed(() => store.state.auth.user);
 
     const router = useRouter();
 
@@ -130,7 +134,7 @@ export default defineComponent({
       // A: Need to reroute. Logout will leave user on Home page
       router.push({ name: "Login" });
     }
-    return { logout };
+    return { logout, user };
   }
 });
 </script>

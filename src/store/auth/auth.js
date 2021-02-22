@@ -49,24 +49,35 @@ export const auth = {
       } catch (error) {
         console.log(error);
         // Likes to return a Promise to let other components run .then()
-        return Promise.reject("actions:login:FAILED");
+        // return Promise.reject("actions:login:FAILED");
+        return Promise.reject(error.message);
       }
     },
-    async signUp(_, { username, password, email }) {
+    // eslint-disable-next-line
+    async signUp(
+      _,
+      // eslint-disable-next-line
+      { username, password, email, preferred_username, phone_number }
+    ) {
       try {
         // Use AWS Auth.signUp() and pass in attributes property
         await Auth.signUp({
           username,
           password,
           attributes: {
-            email
+            email,
+            // eslint-disable-next-line
+            preferred_username,
+            // eslint-disable-next-line
+            phone_number, // E.164 number convention (+8615....)
           }
         });
         // If it's successful return a Promise
         return Promise.resolve("actions:signUp:SUCCESS");
       } catch (error) {
         console.log(error);
-        return Promise.reject("actions:signUp:FAILED");
+        // return Promise.reject("actions:signUp:FAILED");
+        return Promise.reject(error.message); // Better UX message
       }
     },
     async confirmSignUp(_, { username, code }) {
@@ -77,7 +88,8 @@ export const auth = {
         return Promise.resolve("actions:confirmSignup:SUCCESS");
       } catch (error) {
         console.log(error);
-        return Promise.reject("actions:confirmSignup:FAILED");
+        // return Promise.reject("actions:confirmSignup:FAILED");
+        return Promise.reject(error.message);
       }
     }
   },
