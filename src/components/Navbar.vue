@@ -24,8 +24,8 @@
         </div>
         <div class="flex items-center space-x-4">
           <div class="flex-shrink-0">
-            <router-link
-              to="/"
+            <button
+              @click="toggleLanguage"
               class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-900 border border-transparent shadow-sm rounded-md hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-blue-800"
             >
               <svg
@@ -42,22 +42,7 @@
                   d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"
                 ></path>
               </svg>
-              <!-- Heroicon name: plus -->
-              <!-- <svg -->
-              <!--   class="w-6 h-6" -->
-              <!--   fill="none" -->
-              <!--   stroke="currentColor" -->
-              <!--   viewBox="0 0 24 24" -->
-              <!--   xmlns="http://www.w3.org/2000/svg" -->
-              <!-- > -->
-              <!--   <path -->
-              <!--     stroke-linecap="round" -->
-              <!--     stroke-linejoin="round" -->
-              <!--     stroke-width="2" -->
-              <!--     d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" -->
-              <!--   ></path> -->
-              <!-- </svg> -->
-            </router-link>
+            </button>
           </div>
           <div class="flex-shrink-0">
             <router-link
@@ -108,7 +93,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed } from "vue";
+import { defineComponent, computed, ref } from "vue";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
 // import useLogout from "@/composables/useLogout";
@@ -116,7 +101,18 @@ import { useRouter } from "vue-router";
 
 export default defineComponent({
   name: "Navbar",
-  setup() {
+  // Q: How to validate a boolean payload (showChinese)?
+  // NOTE: The below code throws Vue warnings: event validation failed for event "language"
+  // emits: {
+  //   language(payload) {
+  //     if (payload) {
+  //       return true;
+  //     } else {
+  //       return false;
+  //     }
+  //   }
+  // },
+  setup(props, context) {
     // Use store
     const store = useStore();
     const user = computed(() => store.state.auth.user);
@@ -134,7 +130,17 @@ export default defineComponent({
       // A: Need to reroute. Logout will leave user on Home page
       router.push({ name: "Login" });
     }
-    return { logout, user };
+
+    // Handle Chinese toggle
+    const showChinese = ref<boolean>(false);
+    function toggleLanguage() {
+      // Q: Should I context.emit('language', showChinese) back to parent Home?
+      showChinese.value = !showChinese.value;
+      console.log("toggleLanguage:showChinese: ", showChinese.value);
+      context.emit("language", showChinese.value);
+    }
+
+    return { logout, user, showChinese, toggleLanguage };
   }
 });
 </script>

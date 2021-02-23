@@ -235,7 +235,7 @@ export default defineComponent({
           // eslint-disable-next-line
           // phone_number: +8615618200321, // Error: NUMBER_VALUE cannot be converted to String
           // eslint-disable-next-line
-          // phone_number: "+8615618200321", // Works!
+          phone_number: "+8615618200321", // Works!
         });
 
         // Toggle confirmPassword to true so we can display
