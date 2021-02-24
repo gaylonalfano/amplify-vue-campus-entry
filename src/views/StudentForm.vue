@@ -1,15 +1,221 @@
 <template>
   <Navbar />
-  <h1>StudentForm</h1>
+  <div class="md:flex md:justify-start p-6 mx-auto">
+    <HealthFormBaseLayout>
+      <template v-slot:temperature>
+        <div>
+          <label
+            for="temperature"
+            class="block text-sm font-medium text-lg text-gray-700"
+            >1. Student's temperature at home this morning
+            <span class="text-red-500">*</span></label
+          >
+          <div class="mt-1 w-1/2">
+            <input
+              type="text"
+              name="temperature"
+              id="temperature"
+              class="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
+              placeholder=""
+            />
+          </div>
+        </div>
+      </template>
+
+      <template v-slot:conditions>
+        <fieldset>
+          <div class="mb-2">
+            <label
+              for="conditions"
+              class="block text-sm font-medium text-lg text-gray-700"
+              >2. Are all of the following true?
+              <span class="text-red-500">*</span></label
+            >
+            <ul>
+              <li class="mt-1 text-sm text-gray-500">
+                a) Student has not travelled out of Shanghai, and cohabitants
+                have not travelled to or through medium or high-risk areas in
+                the last 14 days
+              </li>
+              <li class="mt-1 text-sm text-gray-500">
+                b) No family member (including student) in the same house has
+                had contact with someone returning from a Medium/High Risk area
+                within 14 days <span class="text-red-500">*</span>Find the
+                current list of Medium/High Risk areas on the
+                <a
+                  href="https://www.concordiashanghai.org/posts/~board/mobile-app/post/current-mediumhigh-risk-areas-in-china"
+                  class="font-medium text-blue-500"
+                  >Concordia website COVID-19 page
+                </a>
+              </li>
+              <li class="mt-1 text-sm text-gray-500">
+                c) Student and cohabitants have not had contact with inbound
+                international passengers
+              </li>
+              <li class="mt-1 text-sm text-gray-500">
+                d) No student or cohabitant is diagnosed as a confirmed case of
+                COVID-19, suspected case, or has had close contact in the last
+                30 days
+              </li>
+              <li class="mt-1 text-sm text-gray-500">
+                e) Student is healthy and has no COVID-19 related symptoms, such
+                as fever, cough, vomiting, fatigue, chills, chest tightness,
+                shortness of breath, diarrhea, runny nose, expectoration,
+                conjunctival congestion etc.
+              </li>
+              <li class="mt-1 text-sm text-gray-500">
+                f) Student and cohabitants have
+                <span class="text-green-600 font-medium">GREEN</span> Shanghai
+                Health Code for today - Sui Shen Ma
+              </li>
+            </ul>
+          </div>
+          <div class="flex flex-row">
+            <div class="flex mr-4">
+              <input
+                id="conditions_met"
+                name="conditions_met"
+                type="radio"
+                class="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300"
+              />
+              <label
+                for="conditions_met"
+                class="ml-3 block text-sm font-medium text-gray-700"
+              >
+                Yes
+              </label>
+            </div>
+            <div class="flex">
+              <input
+                id="conditions_not_met"
+                name="conditions_not_met"
+                type="radio"
+                class="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300"
+              />
+              <label
+                for="conditions_not_met"
+                class="ml-3 block text-sm font-medium text-gray-700"
+              >
+                No
+              </label>
+            </div>
+          </div>
+        </fieldset>
+      </template>
+
+      <template v-slot:student>
+        <div>
+          <label
+            for="student"
+            class="block text-sm font-medium text-lg text-gray-700"
+            >3. Please select your student
+            <span class="text-red-500">*</span></label
+          >
+          <select
+            id="student"
+            name="student"
+            class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+          >
+            <option>Adrian Alfano</option>
+            <option selected>12345 - Aaron Alfano</option>
+            <option>FirstName LastName StudentNumber</option>
+          </select>
+        </div>
+      </template>
+
+      <template v-slot:parent_name>
+        <div>
+          <label
+            for="parent_name"
+            class="block text-sm font-medium text-lg text-gray-700"
+            >4. Parent Name <span class="text-red-500">*</span></label
+          >
+          <div class="mt-1 w-1/2">
+            <input
+              type="text"
+              name="parent_name"
+              id="parent_name"
+              class="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
+              placeholder=""
+            />
+          </div>
+        </div>
+      </template>
+
+      <template v-slot:parent_phone>
+        <div>
+          <label
+            for="parent_phone"
+            class="block text-sm font-medium text-lg text-gray-700"
+            >5. Parent Phone Number <span class="text-red-500">*</span></label
+          >
+          <div class="mt-1 w-1/2">
+            <input
+              type="text"
+              name="parent_phone"
+              id="parent_phone"
+              class="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
+              placeholder=""
+            />
+          </div>
+        </div>
+      </template>
+
+      <template v-slot:kindly_reminder>
+        <div>
+          <label
+            for="kindly_reminder"
+            class="block text-sm font-medium text-lg text-gray-700"
+            >6. Kindly Reminder <span class="text-red-500">*</span></label
+          >
+          <p class="mt-1 text-sm text-gray-500">
+            For the health of your child and other children, please have your
+            child’s temperature checked every morning before going to school.
+            Complete the form truthfully and submit online (including weekends).
+            If your child has a phone, please send them the Concordia Health QR
+            Code you will receive to your child. If your child does not have a
+            phone, print a hard copy for your child to submit upon arrival at
+            the school gate/getting on the school bus in the morning. If the
+            morning temperature reading is higher than or equal to 37.3℃, or
+            with symptoms such as fever, dry cough, diarrhea etc., please stay
+            at home, go to hospital if necessary, and immediately inform the
+            school.
+            <br />
+            <br />
+            Please ensure your child wears a face mask on the way to and from
+            school. Keep a proper social distance from others. Pay attention to
+            traffic safety. Thank you for your cooperation.
+            <br />
+            <br />
+            I hereby certify that all the above information is true and correct.
+            I take all responsibility in the case of any false statements.
+          </p>
+          <!-- Add signature box -->
+          <div class="mt-2">
+            <label
+              for="cover_photo"
+              class="block text-sm font-medium text-gray-700"
+            >
+              Parent Signature
+            </label>
+            <div
+              class="mt-1 h-20 border-2 border-gray-300 border-dashed rounded-md"
+            ></div>
+          </div>
+        </div>
+      </template>
+    </HealthFormBaseLayout>
+  </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
 import Navbar from "@/components/Navbar.vue";
+import HealthFormBaseLayout from "@/components/HealthFormBaseLayout.vue";
 
 export default defineComponent({
   name: "StudentForm",
-  components: { Navbar }
+  components: { Navbar, HealthFormBaseLayout }
 });
 </script>
 

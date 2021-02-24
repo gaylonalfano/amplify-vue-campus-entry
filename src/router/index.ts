@@ -82,20 +82,20 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: "/student",
     name: "Student",
-    component: StudentForm
-    // beforeEnter: requireAuth
+    component: StudentForm,
+    beforeEnter: requireAuth
   },
   {
     path: "/employee",
     name: "Employee",
-    component: EmployeeForm
-    // beforeEnter: requireAuth
+    component: EmployeeForm,
+    beforeEnter: requireAuth
   },
   {
     path: "/consultant",
     name: "Consultant",
-    component: ConsultantForm
-    // beforeEnter: requireAuth
+    component: ConsultantForm,
+    beforeEnter: requireAuth
   },
   {
     path: "/visitor",
