@@ -246,11 +246,6 @@ export default defineComponent({
     const parentName = ref<string>("");
     const parentPhone = ref<string>(""); // In AWS this is string but E.164 format I believe
 
-    // TESTING out a single Submission Model instead of multiple Models
-    interface Submission {
-      date: Date;
-    }
-
     return {
       temperature,
       conditionsMet,

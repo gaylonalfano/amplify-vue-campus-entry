@@ -1,0 +1,370 @@
+enum Group {
+  STUDENT
+  PARENT
+  EMPLOYEE
+  VISITOR
+  CONSULTANT
+}
+
+type Group @model {
+  id: ID!
+  name: String!
+}
+
+enum Division {
+  EC
+  ES
+  MS
+  HS
+  ALLSCHOOL
+}
+
+type Family @model {
+  id: ID!
+  parents: [Parent] @connection
+  children: [Student] @connection
+  createdAt: String!
+  updatedAt: String!
+  submissions: [Submission] @connection # Needed? Technically there are no Family form submissions...
+}
+
+type Student @model {
+  id: ID!
+  firstName: String!
+  lastName: String!
+  phone: String
+  email: String
+  group: Group!
+  division: Division!
+  familyId: ID!
+  parents: [Parent] @connection
+  siblings: [Student] @connection
+  fatherPhone: String
+  motherPhone: String
+  fatherEmail: String
+  motherEmail: String
+  createdAt: String
+  updatedAt: String
+  submissions: [Submission] @connection
+}
+
+type Parent @model {
+  id: ID!
+  firstName: String!
+  lastName: String!
+  phone: String!
+  email: String!
+  group: Group!
+  division: Division # Optional. Not all parents work here.
+  familyId: ID!
+  chidren: [Student] @connection
+  createdAt: Date
+  updatedAt: Date
+  submissions: [Submission] @connection # Needed? Technically there are no Parent Submissions...
+}
+
+type Employee @model {
+  id: ID!
+  firstName: String!
+  lastName: String!
+  phone: String
+  email: String
+  group: Group!
+  division: Division!
+  familyId: ID!
+  createdAt: Date
+  updatedAt: Date
+  submissions: [Submission] @connection
+}
+
+type Visitor @model {
+  id: ID!
+  firstName: String!
+  lastName: String!
+  phone: String
+  email: String
+  governmentId: String
+  group: Group!
+  familyId: ID
+  createdAt: Date
+  updatedAt: Date
+  submissions: [Submission] @connection
+}
+
+enum ConsultantType {
+  CONTRACTOR
+  SCHOOL
+  BUS
+  DRIVER
+  SCHOOL
+  BUS
+  MONITOR
+  SUBSTITUTE
+  TEACHER
+  CONSULTANT
+  CCA
+  INSTRUCTOR
+}
+
+type Consultant @model {
+  id: ID!
+  firstName: String!
+  lastName: String!
+  type: ConsultantType!
+  phone: String!
+  email: String!
+  group: Group!
+  createdAt: Date
+  updatedAt: Date
+  submissions: [Submission] @connection
+}
+
+type Submission @model {
+  id: ID!
+  submissionDate: String!
+  submittedById: ID! # This would be current Auth user
+  submittedForId: ID! # If an Employee, Visitor, Consultant then would match submittedById
+}
+
+query {
+  StudentSubmission {
+    id
+    submittedAt
+    studentId
+    studentName
+    division
+    temperature
+    conditionsMet
+    parentName
+    parentPhone
+    signature
+  }
+}
+
+query {
+  StudentSubmission {
+    id
+    submittedAt
+    questions {
+      temperature
+      conditionsMet
+      studentId
+      studentName
+      division
+      parentName
+      parentPhone
+      signature
+    }
+  }
+}
+
+query {
+  Student {
+    id
+    name
+    division
+    createdAt
+    updatedAt
+    submissions {
+      id
+      submittedAt
+      temperature
+      conditionsMet
+      studentId
+      studentName
+      parentName
+      parentPhone
+      signature
+    }
+  }
+}
+
+type Person @model {
+  id: ID!
+  firstName: String!
+  lastName: String!
+  phone: String
+  email: String
+  group: Group!
+  division: Division!
+  familyId: ID!
+  parents: [Parent] @connection
+  siblings: [Student] @connection
+  fatherPhone: String
+  motherPhone: String
+  fatherEmail: String
+  motherEmail: String
+  createdAt: String
+  updatedAt: String
+  submissions: [Submission] @connection
+}
+
+type Submission @model {
+  id: ID!
+  submittedAt: String!
+  submittedById: ID! # This would be current Auth user
+  submittedForId: ID! # If an Employee, Visitor, Consultant then would match submittedById
+}
+
+# What about just making the FormSubmissions as their own models?
+enum Division {
+  EC
+  ES
+  MS
+  HS
+  ALLSCHOOL
+}
+type StudentSubmission @model {
+  id: ID!
+  submittedAt: String!
+  temperature: Int!
+  conditionsMet: Boolean!
+  studentId: String!
+  studentName: String!
+  division: Division! # Not on the form but would need this if I don't have separate Student model
+  parentName: String!
+  parentPhone: String!
+  signature: Boolean!
+}
+
+type EmployeeSubmission @model {
+  id: ID!
+  submittedAt: String!
+  temperature: Int!
+  conditionsMet: Boolean!
+  employeeId: ID!
+  employeeName: String!
+  division: Division!
+  employeePhone: String!
+  signature: Boolean!
+}
+
+type VisitorSubmission @model {
+  id: ID!
+  submittedAt: String!
+  conditionsMet: Boolean!
+  visitorName: String!
+  visitorPhone: String!
+  visitorGovernmentId: String!
+  signature: Boolean!
+}
+
+enum ConsultantType {
+  CONTRACTOR
+  SCHOOL
+  BUS
+  DRIVER
+  SCHOOL
+  BUS
+  MONITOR
+  SUBSTITUTE
+  TEACHER
+  CONSULTANT
+  CCA
+  INSTRUCTOR
+}
+
+type ConsultantSubmission @model {
+  id: ID!
+  submittedAt: String!
+  temperature: Int!
+  conditionsMet: Boolean!
+  consultantId: ID!
+  consultantName: String!
+  consultantType: ConsultantType!
+  consultantPhone: String!
+  signature: Boolean!
+}
+
+# Now need to get the person type models to link it all up I think
+type Student @model {
+  id: ID!
+  firstName: String!
+  lastName: String!
+  phone: String!
+  email: String!
+  division: Division!
+  familyId: ID!
+  parents: [Parent] @connection
+  fatherPhone: String!
+  motherPhone: String!
+  fatherEmail: String!
+  motherEmail: String!
+  createdAt: String!
+  updatedAt: String!
+  submissions: [StudentSubmission] @connection
+}
+
+type Parent @model {
+  id: ID!
+  firstName: String!
+  lastName: String!
+  phone: String!
+  email: String!
+  familyId: ID!
+  students: [Student] @connection
+  createdAt: String!
+  updatedAt: String!
+}
+
+type Employee @model {
+  id: ID!
+  firstName: String!
+  lastName: String!
+  phone: String!
+  email: String!
+  division: Division!
+  familyId: ID!
+  students: [Student] @connection
+  createdAt: String!
+  updatedAt: String!
+  submissions: [EmployeeSubmission] @connection
+}
+
+type Visitor @model {
+  id: ID!
+  firstName: String!
+  lastName: String!
+  phone: String!
+  governmentId: String!
+  createdAt: String!
+  updatedAt: String!
+  submissions: [VisitorSubmission] @connection
+}
+
+type Consultant @model {
+  id: ID!
+  firstName: String!
+  lastName: String!
+  type: ConsultantType!
+  phone: String!
+  createdAt: String!
+  updatedAt: String!
+  submissions: [ConsultantSubmission] @connection
+}
+
+# Q: How to have an array of multiple types? e.g. members: [Student | Parent | Employee]?
+# A: Use Unions or Interfaces for QUERIES! https://docs.aws.amazon.com/appsync/latest/devguide/interfaces-and-unions.html
+# A: Use Enums for MUTATIONS! https://stackoverflow.com/a/61218654
+# A: Or, be redundant and have students: [Student], parents: [Parent], employees: [Employee]
+union FamilyMember = Student | Parent | Employee
+
+type Family @model {
+  id: ID!
+  members: [FamilyMember]
+  createdAt: String!
+  updatedAt: String!
+  studentSubmissions: [StudentSubmission] @connection
+  employeeSubmissions: [EmployeeSubmission] @connection
+}
+
+type Family @model {
+  id: ID!
+  students: [Student] @connection
+  parents: [Parent] @connection
+  employees: [Employee] @connection # This may be empty for many families
+  createdAt: String!
+  updatedAt: String!
+  studentSubmissions: [StudentSubmission] @connection
+  employeeSubmissions: [EmployeeSubmission] @connection
+}
