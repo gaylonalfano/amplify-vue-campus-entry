@@ -1,21 +1,22 @@
 <template>
   <Navbar />
-  <div class="md:flex md:justify-start p-6 mx-auto">
+  <div class="p-6 mx-auto md:flex md:justify-start">
     <HealthFormBaseLayout>
       <template v-slot:temperature>
         <div>
           <label
             for="temperature"
-            class="block text-sm font-medium text-lg text-gray-700"
+            class="block text-sm text-lg font-medium text-gray-700"
             >1. Student's temperature at home this morning
             <span class="text-red-500">*</span></label
           >
-          <div class="mt-1 w-1/2">
+          <div class="w-1/2 mt-1">
             <input
+              v-model="temperature"
               type="text"
               name="temperature"
               id="temperature"
-              class="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
+              class="block w-full border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
               placeholder=""
             />
           </div>
@@ -27,7 +28,7 @@
           <div class="mb-2">
             <label
               for="conditions"
-              class="block text-sm font-medium text-lg text-gray-700"
+              class="block text-sm text-lg font-medium text-gray-700"
               >2. Are all of the following true?
               <span class="text-red-500">*</span></label
             >
@@ -65,36 +66,40 @@
               </li>
               <li class="mt-1 text-sm text-gray-500">
                 f) Student and cohabitants have
-                <span class="text-green-600 font-medium">GREEN</span> Shanghai
+                <span class="font-medium text-green-600">GREEN</span> Shanghai
                 Health Code for today - Sui Shen Ma
               </li>
             </ul>
           </div>
-          <div class="flex flex-row">
+          <div id="conditions-radiobutton" class="flex flex-row">
             <div class="flex mr-4">
               <input
+                v-model="conditionsMet"
                 id="conditions_met"
                 name="conditions_met"
+                value="true"
                 type="radio"
-                class="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300"
+                class="w-4 h-4 text-blue-600 border-gray-300 focus:ring-blue-500"
               />
               <label
                 for="conditions_met"
-                class="ml-3 block text-sm font-medium text-gray-700"
+                class="block ml-3 text-sm font-medium text-gray-700"
               >
                 Yes
               </label>
             </div>
             <div class="flex">
               <input
+                v-model="conditionsMet"
                 id="conditions_not_met"
                 name="conditions_not_met"
+                value="false"
                 type="radio"
-                class="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300"
+                class="w-4 h-4 text-blue-600 border-gray-300 focus:ring-blue-500"
               />
               <label
                 for="conditions_not_met"
-                class="ml-3 block text-sm font-medium text-gray-700"
+                class="block ml-3 text-sm font-medium text-gray-700"
               >
                 No
               </label>
@@ -107,19 +112,22 @@
         <div>
           <label
             for="student"
-            class="block text-sm font-medium text-lg text-gray-700"
+            class="block text-sm text-lg font-medium text-gray-700"
             >3. Please select your student
             <span class="text-red-500">*</span></label
           >
           <select
+            v-model="student"
             id="student"
             name="student"
-            class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+            class="block w-full py-2 pl-3 pr-10 mt-1 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
           >
+            <option selected disabled value="">Please select one</option>
             <option>Adrian Alfano</option>
-            <option selected>12345 - Aaron Alfano</option>
+            <option>12345 - Aaron Alfano</option>
             <option>FirstName LastName StudentNumber</option>
           </select>
+          <span>Selected: {{ student }}</span>
         </div>
       </template>
 
@@ -127,15 +135,16 @@
         <div>
           <label
             for="parent_name"
-            class="block text-sm font-medium text-lg text-gray-700"
+            class="block text-sm text-lg font-medium text-gray-700"
             >4. Parent Name <span class="text-red-500">*</span></label
           >
-          <div class="mt-1 w-1/2">
+          <div class="w-1/2 mt-1">
             <input
+              v-model="parentName"
               type="text"
               name="parent_name"
               id="parent_name"
-              class="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
+              class="block w-full border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
               placeholder=""
             />
           </div>
@@ -146,15 +155,16 @@
         <div>
           <label
             for="parent_phone"
-            class="block text-sm font-medium text-lg text-gray-700"
+            class="block text-sm text-lg font-medium text-gray-700"
             >5. Parent Phone Number <span class="text-red-500">*</span></label
           >
-          <div class="mt-1 w-1/2">
+          <div class="w-1/2 mt-1">
             <input
+              v-model="parentPhone"
               type="text"
               name="parent_phone"
               id="parent_phone"
-              class="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
+              class="block w-full border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
               placeholder=""
             />
           </div>
@@ -165,7 +175,7 @@
         <div>
           <label
             for="kindly_reminder"
-            class="block text-sm font-medium text-lg text-gray-700"
+            class="block text-sm text-lg font-medium text-gray-700"
             >6. Kindly Reminder <span class="text-red-500">*</span></label
           >
           <p class="mt-1 text-sm text-gray-500">
@@ -199,23 +209,52 @@
               Parent Signature
             </label>
             <div
-              class="mt-1 h-20 border-2 border-gray-300 border-dashed rounded-md"
+              class="h-20 mt-1 border-2 border-gray-300 border-dashed rounded-md"
             ></div>
           </div>
         </div>
       </template>
     </HealthFormBaseLayout>
   </div>
+  <!-- <h1>conditionsMet: {{ typeof conditionsMet }}</h1> -->
+  <!-- <h1>conditionsMetComputed: {{ typeof conditionsMetComputed }}</h1> -->
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, ref, computed } from "vue";
 import Navbar from "@/components/Navbar.vue";
 import HealthFormBaseLayout from "@/components/HealthFormBaseLayout.vue";
 
 export default defineComponent({
   name: "StudentForm",
-  components: { Navbar, HealthFormBaseLayout }
+  components: { Navbar, HealthFormBaseLayout },
+  setup() {
+    // Computed props for my form inputs
+    const temperature = ref<string>("");
+    // Q: How to capture fieldset radio button selections?
+    // A: In Vue we you v-model="picked" for ALL button options and
+    // it will be updated with corresponding value= value (eg value="true")
+    // NOTE The model has 'meetsCriteria' and type BOOLEAN
+    const conditionsMet = ref<string>("");
+    // Q: How to return boolean from radio selection?
+    // A: You can't. Have to compute it separately
+    const conditionsMetComputed = computed(() => {
+      return conditionsMet.value == "true" ? true : false;
+    }); // {{ typeof conditionsMetComputed }} is BOOLEAN
+    // NOTE for <select> elements we add <select v-model="student">
+    const student = ref<string>("");
+    const parentName = ref<string>("");
+    const parentPhone = ref<string>(""); // In AWS this is string but E.164 format I believe
+
+    return {
+      temperature,
+      conditionsMet,
+      conditionsMetComputed,
+      student,
+      parentName,
+      parentPhone
+    };
+  }
 });
 </script>
 
