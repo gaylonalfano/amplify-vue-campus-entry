@@ -206,7 +206,7 @@ type Submission @model {
   submittedForId: ID! # If an Employee, Visitor, Consultant then would match submittedById
 }
 
-# What about just making the FormSubmissions as their own models?
+# ====== What about just making the FormSubmissions as their own models?
 enum Division {
   EC
   ES
@@ -243,6 +243,7 @@ type VisitorSubmission @model {
   id: ID!
   submittedAt: String!
   conditionsMet: Boolean!
+  visitorId: ID! @connection
   visitorName: String!
   visitorPhone: String!
   visitorGovernmentId: String!
@@ -269,7 +270,7 @@ type ConsultantSubmission @model {
   submittedAt: String!
   temperature: Int!
   conditionsMet: Boolean!
-  consultantId: ID!
+  consultantId: ID! @connection
   consultantName: String!
   consultantType: ConsultantType!
   consultantPhone: String!
@@ -284,7 +285,7 @@ type Student @model {
   phone: String!
   email: String!
   division: Division!
-  familyId: ID!
+  familyId: ID! @connection
   parents: [Parent] @connection
   fatherPhone: String!
   motherPhone: String!
@@ -342,7 +343,7 @@ type Consultant @model {
   updatedAt: String!
   submissions: [ConsultantSubmission] @connection
 }
-
+# TODO Create Submission Models, add relationships to all models
 # Q: How to have an array of multiple types? e.g. members: [Student | Parent | Employee]?
 # A: Use Unions or Interfaces for QUERIES! https://docs.aws.amazon.com/appsync/latest/devguide/interfaces-and-unions.html
 # A: Use Enums for MUTATIONS! https://stackoverflow.com/a/61218654
