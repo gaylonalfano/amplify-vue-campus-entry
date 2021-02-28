@@ -369,3 +369,255 @@ type Family @model {
   studentSubmissions: [StudentSubmission] @connection
   employeeSubmissions: [EmployeeSubmission] @connection
 }
+
+# ==== Trying for a TWO/THREE model approach with some Enums =====
+enum Group {
+  STUDENT
+  EMPLOYEE
+  VISITOR
+  CONSULTANT
+}
+
+enum Division {
+  EC
+  ES
+  MS
+  HS
+  ALLSCHOOL
+}
+
+enum ConsultantType {
+  CONTRACTOR
+  SCHOOLBUSDRIVER
+  SCHOOLBUSMONITOR
+  SUBSTITUTETEACHER
+  CONSULTANT
+  CCAINSTRUCTOR
+}
+
+# Generic Person model that captures ALL types. Result is lots of optional, null fields and values
+type Person
+  @model
+  @auth(rules: [{ allow: public }])
+  @key(name: "byFamily", fields: ["familyID"]) {
+  id: ID!
+  firstName: String!
+  lastName: String!
+  phone: String!
+  email: String!
+  group: Group!
+  division: Division
+  familyId: String
+  studentId: String
+  fatherPhone: String
+  motherPhone: String
+  fatherEmail: String
+  motherEmail: String
+  governmentId: String
+  createdAt: String!
+  updatedAt: String!
+  submissions: [Submission] @connection(keyName: "byPerson", fields: ["id"])
+}
+
+# General purpose Submission
+type Submission
+  @model
+  @auth(rules: [{ allow: public }])
+  @key(name: "byPerson", fields: ["personID"]) {
+  id: ID!
+  submittedAt: String!
+  temperature: Float!
+  conditionsMet: Boolean!
+  signature: Boolean!
+  personID: ID! # Q: Do I need to duplicate all the info fields? I think it may be better duplicate...
+  group: Group!
+  division: Division!
+  firstName: String!
+  lastName: String!
+  phone: String!
+  parentName: String
+  parentPhone: String
+}
+
+type Family
+  @model
+  @auth(rules: [{ allow: public }])
+  @key(name: "byPerson", fields: ["personID"]) {
+  id: ID!
+  members: [Person] @connection(keyName: "byPerson", fields: ["id"])
+  submissions: [Submission] @connection(keyName: "byPerson", fields: ["id"])
+}
+
+# ==== What if Person was only Auth Users and students were just a subfield array?
+enum Group {
+  PARENT
+  EMPLOYEE
+  VISITOR
+  CONSULTANT
+}
+
+enum Division {
+  EC
+  ES
+  MS
+  HS
+  ALLSCHOOL
+}
+
+enum ConsultantType {
+  CONTRACTOR
+  SCHOOLBUSDRIVER
+  SCHOOLBUSMONITOR
+  SUBSTITUTETEACHER
+  CONSULTANT
+  CCAINSTRUCTOR
+}
+
+# Generic Person model that captures ALL types. Result is lots of optional, null fields and values
+type Person
+  @model
+  @auth(rules: [{ allow: public }])
+  @key(name: "byFamily", fields: ["familyID"]) {
+  id: ID!
+  firstName: String!
+  lastName: String!
+  phone: String!
+  email: String!
+  group: Group!
+  division: Division
+  familyId: String
+  students: [Person] # Nah... not good.
+  fatherPhone: String
+  motherPhone: String
+  fatherEmail: String
+  motherEmail: String
+  governmentId: String
+  createdAt: String!
+  updatedAt: String!
+  submissions: [Submission] @connection(keyName: "byPerson", fields: ["id"])
+}
+
+# General purpose Submission
+type Submission
+  @model
+  @auth(rules: [{ allow: public }])
+  @key(name: "byPerson", fields: ["personID"]) {
+  id: ID!
+  submittedAt: String!
+  temperature: Float!
+  conditionsMet: Boolean!
+  signature: Boolean!
+  personID: ID! # Q: Do I need to duplicate all the info fields? I think it may be better duplicate...
+  group: Group!
+  division: Division!
+  firstName: String!
+  lastName: String!
+  phone: String!
+  parentName: String
+  parentPhone: String
+}
+
+type Family
+  @model
+  @auth(rules: [{ allow: public }])
+  @key(name: "byPerson", fields: ["personID"]) {
+  id: ID!
+  members: [Person] @connection(keyName: "byPerson", fields: ["id"])
+  submissions: [Submission] @connection(keyName: "byPerson", fields: ["id"])
+}
+
+# ==== Let's go for FAMILY as the top and Person belongs to Family
+# NOTE The distinction is to make the connection/link between parent and student
+# on the Submission, instead of trying to link on the Person.
+type Family
+  @model
+  @auth(rules: [{ allow: public }])
+  @key(name: "byPerson", fields: ["personID"]) {
+  id: ID!
+  members: [Person] @connection(keyName: "byPerson", fields: ["id"])
+  submissions: [Submission] @connection(keyName: "byPerson", fields: ["id"])
+}
+
+enum SubmissionType {
+  # PARENT  # Could save the student submissions the parent's Person submissions if I wanted
+  STUDENT
+  EMPLOYEE
+  VISITOR
+  CONSULTANT
+}
+
+enum Division {
+  EC
+  ES
+  MS
+  HS
+  ALLSCHOOL
+}
+
+enum ConsultantType {
+  CONTRACTOR
+  SCHOOLBUSDRIVER
+  SCHOOLBUSMONITOR
+  SUBSTITUTETEACHER
+  CONSULTANT
+  CCAINSTRUCTOR
+}
+
+# Q: What to do about non-family accounts (consultants, visitors, etc.)?
+# A: I think I'll only create the Person accounts and then leave familyID empty.
+enum FamilyMemberType {
+  PARENT
+  CHILD
+  # GUARDIAN
+  # GRANDPARENT
+  # AYI
+}
+
+# Generic Person model that captures ALL types. Result is lots of optional, null fields and values
+type Person
+  @model
+  @auth(rules: [{ allow: public }])
+  @key(name: "byFamily", fields: ["familyID"]) {
+  id: ID!
+  firstName: String!
+  lastName: String!
+  phone: String!
+  email: String!
+  submissionType: SubmissionType! # EMPLOYEE for myself
+  isAuthenticatedUser: Boolean! # Students are not authenticated users
+  division: Division
+  familyId: String # Not all Persons belong to school Families
+  familyMemberType: FamilyMemberType # PARENT for myself
+  fatherPhone: String
+  motherPhone: String
+  fatherEmail: String
+  motherEmail: String
+  consultantType: ConsultantType
+  governmentId: String
+  createdAt: String!
+  updatedAt: String!
+  submissions: [Submission] @connection(keyName: "byPerson", fields: ["id"])
+}
+
+# General purpose Submission
+type Submission
+  @model
+  @auth(rules: [{ allow: public }])
+  @key(name: "byPerson", fields: ["personID"]) {
+  id: ID!
+  submissionType: SubmissionType!
+  submittedAt: String!
+  temperature: Float!
+  conditionsMet: Boolean!
+  signature: Boolean!
+  division: Division
+  personID: ID! # Q: Do I need to duplicate all the info fields? I think it may be better duplicate...
+  firstName: String!
+  lastName: String!
+  phone: String!
+  familyID: ID # If submissionType == STUDENT|PARENT else null
+  parentID: ID # This links to Parent's Person record
+  parentName: String
+  parentPhone: String
+  consultantType: ConsultantType
+}
