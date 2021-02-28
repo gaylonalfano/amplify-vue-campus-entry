@@ -44,7 +44,7 @@ export const schema = {
                     "name": "contentChinese",
                     "isArray": false,
                     "type": "String",
-                    "isRequired": false,
+                    "isRequired": true,
                     "attributes": []
                 },
                 "submissionID": {
@@ -119,7 +119,7 @@ export const schema = {
                     "name": "temperature",
                     "isArray": false,
                     "type": "Float",
-                    "isRequired": true,
+                    "isRequired": false,
                     "attributes": []
                 },
                 "conditionsMet": {
@@ -390,35 +390,35 @@ export const schema = {
                     "type": {
                         "enum": "Division"
                     },
-                    "isRequired": true,
+                    "isRequired": false,
                     "attributes": []
                 },
                 "fatherPhone": {
                     "name": "fatherPhone",
                     "isArray": false,
                     "type": "String",
-                    "isRequired": true,
+                    "isRequired": false,
                     "attributes": []
                 },
                 "motherPhone": {
                     "name": "motherPhone",
                     "isArray": false,
                     "type": "String",
-                    "isRequired": true,
+                    "isRequired": false,
                     "attributes": []
                 },
                 "fatherEmail": {
                     "name": "fatherEmail",
                     "isArray": false,
                     "type": "String",
-                    "isRequired": true,
+                    "isRequired": false,
                     "attributes": []
                 },
                 "motherEmail": {
                     "name": "motherEmail",
                     "isArray": false,
                     "type": "String",
-                    "isRequired": true,
+                    "isRequired": false,
                     "attributes": []
                 },
                 "createdAt": {
@@ -584,5 +584,5 @@ export const schema = {
         }
     },
     "nonModels": {},
-    "version": "77e7da5ef1b209024b871d28ced34e43"
+    "version": "15b6160a3ada6d14add2448b5684048b"
 };

@@ -46,7 +46,7 @@ export declare class Question {
   readonly titleEnglish: string;
   readonly titleChinese: string;
   readonly contentEnglish: string;
-  readonly contentChinese?: string;
+  readonly contentChinese: string;
   readonly submissionID?: string;
   constructor(init: ModelInit<Question>);
   static copyOf(source: Question, mutator: (draft: MutableModel<Question>) => MutableModel<Question> | void): Question;
@@ -56,7 +56,7 @@ export declare class Submission {
   readonly id: string;
   readonly submissionType: SubmissionType | keyof typeof SubmissionType;
   readonly submittedAt: string;
-  readonly temperature: number;
+  readonly temperature?: number;
   readonly conditionsMet: boolean;
   readonly signature: boolean;
   readonly division?: Division | keyof typeof Division;
@@ -90,11 +90,11 @@ export declare class Person {
   readonly lastName: string;
   readonly phone?: string;
   readonly email?: string;
-  readonly division: Division | keyof typeof Division;
-  readonly fatherPhone: string;
-  readonly motherPhone: string;
-  readonly fatherEmail: string;
-  readonly motherEmail: string;
+  readonly division?: Division | keyof typeof Division;
+  readonly fatherPhone?: string;
+  readonly motherPhone?: string;
+  readonly fatherEmail?: string;
+  readonly motherEmail?: string;
   readonly createdAt: string;
   readonly updatedAt: string;
   readonly submissionType: SubmissionType | keyof typeof SubmissionType;

@@ -13,7 +13,7 @@ type Question @model @auth(rules: [{allow: public}]) @key(name: "bySubmission", 
   titleEnglish: String!
   titleChinese: String!
   contentEnglish: String!
-  contentChinese: String
+  contentChinese: String!
   submissionID: ID
 }
 
@@ -21,7 +21,7 @@ type Submission @model @auth(rules: [{allow: public}]) @key(name: "byPerson", fi
   id: ID!
   submissionType: SubmissionType!
   submittedAt: String!
-  temperature: Float!
+  temperature: Float
   conditionsMet: Boolean!
   signature: Boolean!
   division: Division
@@ -63,11 +63,11 @@ type Person @model @auth(rules: [{allow: public}]) @key(name: "byFamily", fields
   lastName: String!
   phone: String
   email: String
-  division: Division!
-  fatherPhone: String!
-  motherPhone: String!
-  fatherEmail: String!
-  motherEmail: String!
+  division: Division
+  fatherPhone: String
+  motherPhone: String
+  fatherEmail: String
+  motherEmail: String
   createdAt: String!
   updatedAt: String!
   submissionType: SubmissionType!
