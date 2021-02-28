@@ -2,6 +2,22 @@
 import { initSchema } from '@aws-amplify/datastore';
 import { schema } from './schema';
 
+const QuestionType = {
+  "ID": "ID",
+  "TEXT": "TEXT",
+  "BOOLEAN": "BOOLEAN",
+  "SINGLESELECT": "SINGLESELECT",
+  "MULTISELECT": "MULTISELECT",
+  "SIGNATURE": "SIGNATURE"
+};
+
+const SubmissionType = {
+  "STUDENT": "STUDENT",
+  "EMPLOYEE": "EMPLOYEE",
+  "VISITOR": "VISITOR",
+  "CONSULTANT": "CONSULTANT"
+};
+
 const Division = {
   "EC": "EC",
   "ES": "ES",
@@ -19,21 +35,21 @@ const ConsultantType = {
   "CCAINSTRUCTOR": "CCAINSTRUCTOR"
 };
 
-const { EmployeeSubmission, Family, Student, ParentStudent, Parent, EmployeeStudent, Employee, StudentSubmission, Consultant, ConsultantSubmission, Visitor, VisitorSubmission } = initSchema(schema);
+const FamilyMemberType = {
+  "PARENT": "PARENT",
+  "CHILD": "CHILD"
+};
+
+const { Question, Submission, Family, Person } = initSchema(schema);
 
 export {
-  EmployeeSubmission,
+  Question,
+  Submission,
   Family,
-  Student,
-  ParentStudent,
-  Parent,
-  EmployeeStudent,
-  Employee,
-  StudentSubmission,
-  Consultant,
-  ConsultantSubmission,
-  Visitor,
-  VisitorSubmission,
+  Person,
+  QuestionType,
+  SubmissionType,
   Division,
-  ConsultantType
+  ConsultantType,
+  FamilyMemberType
 };

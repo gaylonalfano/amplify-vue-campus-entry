@@ -1,73 +1,63 @@
-type EmployeeSubmission @model @auth(rules: [{allow: public}]) @key(name: "byEmployee", fields: ["employeeID"]) {
+enum QuestionType {
+  ID
+  TEXT
+  BOOLEAN
+  SINGLESELECT
+  MULTISELECT
+  SIGNATURE
+}
+
+type Question @model @auth(rules: [{allow: public}]) @key(name: "bySubmission", fields: ["submissionID"]) {
   id: ID!
+  questionType: QuestionType!
+  titleEnglish: String!
+  titleChinese: String!
+  contentEnglish: String!
+  contentChinese: String
+  submissionID: ID
+}
+
+type Submission @model @auth(rules: [{allow: public}]) @key(name: "byPerson", fields: ["personID"]) @key(name: "byFamily", fields: ["familyID"]) {
+  id: ID!
+  submissionType: SubmissionType!
   submittedAt: String!
   temperature: Float!
   conditionsMet: Boolean!
-  employeeName: String!
-  division: Division!
-  employeePhone: String!
   signature: Boolean!
-  employeeID: ID!
+  division: Division
+  firstName: String!
+  lastName: String!
+  phone: String!
+  parentID: ID
+  parentName: String
+  parentPhone: String
+  personID: ID!
+  familyID: ID
+  consultantType: ConsultantType
+  questions: [Question] @connection(keyName: "bySubmission", fields: ["id"])
+}
+
+enum FamilyMemberType {
+  PARENT
+  CHILD
+}
+
+enum SubmissionType {
+  STUDENT
+  EMPLOYEE
+  VISITOR
+  CONSULTANT
 }
 
 type Family @model @auth(rules: [{allow: public}]) {
   id: ID!
-  students: [Student] @connection(keyName: "byFamily", fields: ["id"])
-  parents: [Parent] @connection(keyName: "byFamily", fields: ["id"])
-  employees: [Employee] @connection(keyName: "byFamily", fields: ["id"])
   createdAt: String!
   updatedAt: String!
+  members: [Person] @connection(keyName: "byFamily", fields: ["id"])
+  submissions: [Submission] @connection(keyName: "byFamily", fields: ["id"])
 }
 
-type Consultant @model @auth(rules: [{allow: public}]) {
-  id: ID!
-  firstName: String!
-  lastName: String!
-  type: ConsultantType!
-  phone: String!
-  createdAt: String!
-  updatedAt: String!
-  consultantSubmissions: [ConsultantSubmission] @connection(keyName: "byConsultant", fields: ["id"])
-}
-
-type Visitor @model @auth(rules: [{allow: public}]) {
-  id: ID!
-  firstName: String!
-  lastName: String!
-  phone: String!
-  governmentId: String!
-  createdAt: String!
-  updatedAt: String!
-  visitorSubmissions: [VisitorSubmission] @connection(keyName: "byVisitor", fields: ["id"])
-}
-
-type Employee @model @auth(rules: [{allow: public}]) @key(name: "byFamily", fields: ["familyID"]) {
-  id: ID!
-  firstName: String!
-  lastName: String!
-  phone: String!
-  email: String!
-  division: Division!
-  createdAt: String!
-  updatedAt: String!
-  familyID: ID!
-  employeeSubmissions: [EmployeeSubmission] @connection(keyName: "byEmployee", fields: ["id"])
-  employeeStudents: [EmployeeStudent] @connection(keyName: "byEmployee", fields: ["id"])
-}
-
-type Parent @model @auth(rules: [{allow: public}]) @key(name: "byFamily", fields: ["familyID"]) {
-  id: ID!
-  firstName: String!
-  lastName: String!
-  phone: String!
-  email: String!
-  createdAt: String!
-  updatedAt: String!
-  familyID: ID!
-  parentStudents: [ParentStudent] @connection(keyName: "byParent", fields: ["id"])
-}
-
-type Student @model @auth(rules: [{allow: public}]) @key(name: "byFamily", fields: ["familyID"]) {
+type Person @model @auth(rules: [{allow: public}]) @key(name: "byFamily", fields: ["familyID"]) {
   id: ID!
   firstName: String!
   lastName: String!
@@ -80,10 +70,13 @@ type Student @model @auth(rules: [{allow: public}]) @key(name: "byFamily", field
   motherEmail: String!
   createdAt: String!
   updatedAt: String!
-  familyID: ID!
-  parents: [ParentStudent] @connection(keyName: "byStudent", fields: ["id"])
-  employees: [EmployeeStudent] @connection(keyName: "byStudent", fields: ["id"])
-  studentSubmissions: [StudentSubmission] @connection(keyName: "byStudent", fields: ["id"])
+  submissionType: SubmissionType!
+  isAuthenticatedUser: Boolean!
+  familyMemberType: FamilyMemberType
+  familyID: ID
+  consultantType: ConsultantType
+  governmentID: String
+  submissions: [Submission] @connection(keyName: "byPerson", fields: ["id"])
 }
 
 enum ConsultantType {
@@ -101,56 +94,5 @@ enum Division {
   MS
   HS
   ALLSCHOOL
-}
-
-type StudentSubmission @model @auth(rules: [{allow: public}]) @key(name: "byStudent", fields: ["studentID"]) {
-  id: ID!
-  submittedAt: String!
-  temperature: Float!
-  conditionsMet: Boolean!
-  studentName: String!
-  division: Division!
-  parentName: String!
-  parentPhone: String!
-  studentID: ID!
-}
-
-type VisitorSubmission @model @auth(rules: [{allow: public}]) @key(name: "byVisitor", fields: ["visitorID"]) {
-  id: ID!
-  submittedAt: String!
-  conditionsMet: Boolean!
-  visitorName: String!
-  visitorPhone: String!
-  visitorGovernmentId: String!
-  signature: Boolean!
-  visitorID: ID!
-}
-
-type ConsultantSubmission @model @auth(rules: [{allow: public}]) @key(name: "byConsultant", fields: ["consultantID"]) {
-  id: ID!
-  submittedAt: String!
-  temperature: Float!
-  conditionsMet: Boolean!
-  consultantName: String!
-  consultantType: ConsultantType!
-  consultantPhone: String!
-  signature: Boolean!
-  consultantID: ID!
-}
-
-type ParentStudent @model(queries: null) @key(name: "byParent", fields: ["parentID", "studentID"]) @key(name: "byStudent", fields: ["studentID", "parentID"]) @auth(rules: [{allow: public}, {allow: public}]) {
-  id: ID!
-  parentID: ID!
-  studentID: ID!
-  parent: Parent! @connection(fields: ["parentID"])
-  student: Student! @connection(fields: ["studentID"])
-}
-
-type EmployeeStudent @model(queries: null) @key(name: "byEmployee", fields: ["employeeID", "studentID"]) @key(name: "byStudent", fields: ["studentID", "employeeID"]) @auth(rules: [{allow: public}, {allow: public}]) {
-  id: ID!
-  employeeID: ID!
-  studentID: ID!
-  employee: Employee! @connection(fields: ["employeeID"])
-  student: Student! @connection(fields: ["studentID"])
 }
  

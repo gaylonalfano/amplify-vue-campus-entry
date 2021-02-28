@@ -2,18 +2,16 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const getEmployeeSubmission = /* GraphQL */ `
-  query GetEmployeeSubmission($id: ID!) {
-    getEmployeeSubmission(id: $id) {
+export const getQuestion = /* GraphQL */ `
+  query GetQuestion($id: ID!) {
+    getQuestion(id: $id) {
       id
-      submittedAt
-      temperature
-      conditionsMet
-      employeeName
-      division
-      employeePhone
-      signature
-      employeeID
+      questionType
+      titleEnglish
+      titleChinese
+      contentEnglish
+      contentChinese
+      submissionID
       _version
       _deleted
       _lastChangedAt
@@ -22,27 +20,21 @@ export const getEmployeeSubmission = /* GraphQL */ `
     }
   }
 `;
-export const listEmployeeSubmissions = /* GraphQL */ `
-  query ListEmployeeSubmissions(
-    $filter: ModelEmployeeSubmissionFilterInput
+export const listQuestions = /* GraphQL */ `
+  query ListQuestions(
+    $filter: ModelQuestionFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    listEmployeeSubmissions(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
+    listQuestions(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
-        submittedAt
-        temperature
-        conditionsMet
-        employeeName
-        division
-        employeePhone
-        signature
-        employeeID
+        questionType
+        titleEnglish
+        titleChinese
+        contentEnglish
+        contentChinese
+        submissionID
         _version
         _deleted
         _lastChangedAt
@@ -54,14 +46,14 @@ export const listEmployeeSubmissions = /* GraphQL */ `
     }
   }
 `;
-export const syncEmployeeSubmissions = /* GraphQL */ `
-  query SyncEmployeeSubmissions(
-    $filter: ModelEmployeeSubmissionFilterInput
+export const syncQuestions = /* GraphQL */ `
+  query SyncQuestions(
+    $filter: ModelQuestionFilterInput
     $limit: Int
     $nextToken: String
     $lastSync: AWSTimestamp
   ) {
-    syncEmployeeSubmissions(
+    syncQuestions(
       filter: $filter
       limit: $limit
       nextToken: $nextToken
@@ -69,19 +61,174 @@ export const syncEmployeeSubmissions = /* GraphQL */ `
     ) {
       items {
         id
-        submittedAt
-        temperature
-        conditionsMet
-        employeeName
-        division
-        employeePhone
-        signature
-        employeeID
+        questionType
+        titleEnglish
+        titleChinese
+        contentEnglish
+        contentChinese
+        submissionID
         _version
         _deleted
         _lastChangedAt
         createdAt
         updatedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const getSubmission = /* GraphQL */ `
+  query GetSubmission($id: ID!) {
+    getSubmission(id: $id) {
+      id
+      submissionType
+      submittedAt
+      temperature
+      conditionsMet
+      signature
+      division
+      firstName
+      lastName
+      phone
+      parentID
+      parentName
+      parentPhone
+      personID
+      familyID
+      consultantType
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      questions {
+        items {
+          id
+          questionType
+          titleEnglish
+          titleChinese
+          contentEnglish
+          contentChinese
+          submissionID
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        nextToken
+        startedAt
+      }
+    }
+  }
+`;
+export const listSubmissions = /* GraphQL */ `
+  query ListSubmissions(
+    $filter: ModelSubmissionFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listSubmissions(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        submissionType
+        submittedAt
+        temperature
+        conditionsMet
+        signature
+        division
+        firstName
+        lastName
+        phone
+        parentID
+        parentName
+        parentPhone
+        personID
+        familyID
+        consultantType
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        questions {
+          items {
+            id
+            questionType
+            titleEnglish
+            titleChinese
+            contentEnglish
+            contentChinese
+            submissionID
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+          }
+          nextToken
+          startedAt
+        }
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const syncSubmissions = /* GraphQL */ `
+  query SyncSubmissions(
+    $filter: ModelSubmissionFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncSubmissions(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        submissionType
+        submittedAt
+        temperature
+        conditionsMet
+        signature
+        division
+        firstName
+        lastName
+        phone
+        parentID
+        parentName
+        parentPhone
+        personID
+        familyID
+        consultantType
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        questions {
+          items {
+            id
+            questionType
+            titleEnglish
+            titleChinese
+            contentEnglish
+            contentChinese
+            submissionID
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+          }
+          nextToken
+          startedAt
+        }
       }
       nextToken
       startedAt
@@ -97,76 +244,38 @@ export const getFamily = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
-      employees {
+      submissions {
         items {
           id
-          firstName
-          lastName
-          phone
-          email
+          submissionType
+          submittedAt
+          temperature
+          conditionsMet
+          signature
           division
-          createdAt
-          updatedAt
-          familyID
-          _version
-          _deleted
-          _lastChangedAt
-          employeeSubmissions {
-            items {
-              id
-              submittedAt
-              temperature
-              conditionsMet
-              employeeName
-              division
-              employeePhone
-              signature
-              employeeID
-              _version
-              _deleted
-              _lastChangedAt
-              createdAt
-              updatedAt
-            }
-            nextToken
-            startedAt
-          }
-          employeeStudents {
-            items {
-              id
-              employeeID
-              studentID
-              _version
-              _deleted
-              _lastChangedAt
-              createdAt
-              updatedAt
-            }
-            nextToken
-            startedAt
-          }
-        }
-        nextToken
-        startedAt
-      }
-      parents {
-        items {
-          id
           firstName
           lastName
           phone
-          email
-          createdAt
-          updatedAt
+          parentID
+          parentName
+          parentPhone
+          personID
           familyID
+          consultantType
           _version
           _deleted
           _lastChangedAt
-          parentStudents {
+          createdAt
+          updatedAt
+          questions {
             items {
               id
-              parentID
-              studentID
+              questionType
+              titleEnglish
+              titleChinese
+              contentEnglish
+              contentChinese
+              submissionID
               _version
               _deleted
               _lastChangedAt
@@ -180,7 +289,7 @@ export const getFamily = /* GraphQL */ `
         nextToken
         startedAt
       }
-      students {
+      members {
         items {
           id
           firstName
@@ -194,49 +303,33 @@ export const getFamily = /* GraphQL */ `
           motherEmail
           createdAt
           updatedAt
+          submissionType
+          isAuthenticatedUser
+          familyMemberType
           familyID
+          consultantType
+          governmentID
           _version
           _deleted
           _lastChangedAt
-          studentSubmissions {
+          submissions {
             items {
               id
+              submissionType
               submittedAt
               temperature
               conditionsMet
-              studentName
+              signature
               division
+              firstName
+              lastName
+              phone
+              parentID
               parentName
               parentPhone
-              studentID
-              _version
-              _deleted
-              _lastChangedAt
-              createdAt
-              updatedAt
-            }
-            nextToken
-            startedAt
-          }
-          parents {
-            items {
-              id
-              parentID
-              studentID
-              _version
-              _deleted
-              _lastChangedAt
-              createdAt
-              updatedAt
-            }
-            nextToken
-            startedAt
-          }
-          employees {
-            items {
-              id
-              employeeID
-              studentID
+              personID
+              familyID
+              consultantType
               _version
               _deleted
               _lastChangedAt
@@ -267,46 +360,30 @@ export const listFamilys = /* GraphQL */ `
         _version
         _deleted
         _lastChangedAt
-        employees {
+        submissions {
           items {
             id
-            firstName
-            lastName
-            phone
-            email
+            submissionType
+            submittedAt
+            temperature
+            conditionsMet
+            signature
             division
-            createdAt
-            updatedAt
-            familyID
-            _version
-            _deleted
-            _lastChangedAt
-            employeeSubmissions {
-              nextToken
-              startedAt
-            }
-            employeeStudents {
-              nextToken
-              startedAt
-            }
-          }
-          nextToken
-          startedAt
-        }
-        parents {
-          items {
-            id
             firstName
             lastName
             phone
-            email
-            createdAt
-            updatedAt
+            parentID
+            parentName
+            parentPhone
+            personID
             familyID
+            consultantType
             _version
             _deleted
             _lastChangedAt
-            parentStudents {
+            createdAt
+            updatedAt
+            questions {
               nextToken
               startedAt
             }
@@ -314,7 +391,7 @@ export const listFamilys = /* GraphQL */ `
           nextToken
           startedAt
         }
-        students {
+        members {
           items {
             id
             firstName
@@ -328,19 +405,16 @@ export const listFamilys = /* GraphQL */ `
             motherEmail
             createdAt
             updatedAt
+            submissionType
+            isAuthenticatedUser
+            familyMemberType
             familyID
+            consultantType
+            governmentID
             _version
             _deleted
             _lastChangedAt
-            studentSubmissions {
-              nextToken
-              startedAt
-            }
-            parents {
-              nextToken
-              startedAt
-            }
-            employees {
+            submissions {
               nextToken
               startedAt
             }
@@ -374,998 +448,63 @@ export const syncFamilies = /* GraphQL */ `
         _version
         _deleted
         _lastChangedAt
-        employees {
+        submissions {
           items {
             id
-            firstName
-            lastName
-            phone
-            email
-            division
-            createdAt
-            updatedAt
-            familyID
-            _version
-            _deleted
-            _lastChangedAt
-            employeeSubmissions {
-              nextToken
-              startedAt
-            }
-            employeeStudents {
-              nextToken
-              startedAt
-            }
-          }
-          nextToken
-          startedAt
-        }
-        parents {
-          items {
-            id
-            firstName
-            lastName
-            phone
-            email
-            createdAt
-            updatedAt
-            familyID
-            _version
-            _deleted
-            _lastChangedAt
-            parentStudents {
-              nextToken
-              startedAt
-            }
-          }
-          nextToken
-          startedAt
-        }
-        students {
-          items {
-            id
-            firstName
-            lastName
-            phone
-            email
-            division
-            fatherPhone
-            motherPhone
-            fatherEmail
-            motherEmail
-            createdAt
-            updatedAt
-            familyID
-            _version
-            _deleted
-            _lastChangedAt
-            studentSubmissions {
-              nextToken
-              startedAt
-            }
-            parents {
-              nextToken
-              startedAt
-            }
-            employees {
-              nextToken
-              startedAt
-            }
-          }
-          nextToken
-          startedAt
-        }
-      }
-      nextToken
-      startedAt
-    }
-  }
-`;
-export const getConsultant = /* GraphQL */ `
-  query GetConsultant($id: ID!) {
-    getConsultant(id: $id) {
-      id
-      firstName
-      lastName
-      type
-      phone
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-      consultantSubmissions {
-        items {
-          id
-          submittedAt
-          temperature
-          conditionsMet
-          consultantName
-          consultantType
-          consultantPhone
-          signature
-          consultantID
-          _version
-          _deleted
-          _lastChangedAt
-          createdAt
-          updatedAt
-        }
-        nextToken
-        startedAt
-      }
-    }
-  }
-`;
-export const listConsultants = /* GraphQL */ `
-  query ListConsultants(
-    $filter: ModelConsultantFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listConsultants(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        firstName
-        lastName
-        type
-        phone
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-        consultantSubmissions {
-          items {
-            id
+            submissionType
             submittedAt
             temperature
             conditionsMet
-            consultantName
-            consultantType
-            consultantPhone
             signature
-            consultantID
-            _version
-            _deleted
-            _lastChangedAt
-            createdAt
-            updatedAt
-          }
-          nextToken
-          startedAt
-        }
-      }
-      nextToken
-      startedAt
-    }
-  }
-`;
-export const syncConsultants = /* GraphQL */ `
-  query SyncConsultants(
-    $filter: ModelConsultantFilterInput
-    $limit: Int
-    $nextToken: String
-    $lastSync: AWSTimestamp
-  ) {
-    syncConsultants(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
-      items {
-        id
-        firstName
-        lastName
-        type
-        phone
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-        consultantSubmissions {
-          items {
-            id
-            submittedAt
-            temperature
-            conditionsMet
-            consultantName
-            consultantType
-            consultantPhone
-            signature
-            consultantID
-            _version
-            _deleted
-            _lastChangedAt
-            createdAt
-            updatedAt
-          }
-          nextToken
-          startedAt
-        }
-      }
-      nextToken
-      startedAt
-    }
-  }
-`;
-export const getVisitor = /* GraphQL */ `
-  query GetVisitor($id: ID!) {
-    getVisitor(id: $id) {
-      id
-      firstName
-      lastName
-      phone
-      governmentId
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-      visitorSubmissions {
-        items {
-          id
-          submittedAt
-          conditionsMet
-          visitorName
-          visitorPhone
-          visitorGovernmentId
-          signature
-          visitorID
-          _version
-          _deleted
-          _lastChangedAt
-          createdAt
-          updatedAt
-        }
-        nextToken
-        startedAt
-      }
-    }
-  }
-`;
-export const listVisitors = /* GraphQL */ `
-  query ListVisitors(
-    $filter: ModelVisitorFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listVisitors(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        firstName
-        lastName
-        phone
-        governmentId
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-        visitorSubmissions {
-          items {
-            id
-            submittedAt
-            conditionsMet
-            visitorName
-            visitorPhone
-            visitorGovernmentId
-            signature
-            visitorID
-            _version
-            _deleted
-            _lastChangedAt
-            createdAt
-            updatedAt
-          }
-          nextToken
-          startedAt
-        }
-      }
-      nextToken
-      startedAt
-    }
-  }
-`;
-export const syncVisitors = /* GraphQL */ `
-  query SyncVisitors(
-    $filter: ModelVisitorFilterInput
-    $limit: Int
-    $nextToken: String
-    $lastSync: AWSTimestamp
-  ) {
-    syncVisitors(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
-      items {
-        id
-        firstName
-        lastName
-        phone
-        governmentId
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-        visitorSubmissions {
-          items {
-            id
-            submittedAt
-            conditionsMet
-            visitorName
-            visitorPhone
-            visitorGovernmentId
-            signature
-            visitorID
-            _version
-            _deleted
-            _lastChangedAt
-            createdAt
-            updatedAt
-          }
-          nextToken
-          startedAt
-        }
-      }
-      nextToken
-      startedAt
-    }
-  }
-`;
-export const listEmployees = /* GraphQL */ `
-  query ListEmployees(
-    $filter: ModelEmployeeFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listEmployees(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        firstName
-        lastName
-        phone
-        email
-        division
-        createdAt
-        updatedAt
-        familyID
-        _version
-        _deleted
-        _lastChangedAt
-        employeeSubmissions {
-          items {
-            id
-            submittedAt
-            temperature
-            conditionsMet
-            employeeName
             division
-            employeePhone
-            signature
-            employeeID
-            _version
-            _deleted
-            _lastChangedAt
-            createdAt
-            updatedAt
-          }
-          nextToken
-          startedAt
-        }
-        employeeStudents {
-          items {
-            id
-            employeeID
-            studentID
-            _version
-            _deleted
-            _lastChangedAt
-            createdAt
-            updatedAt
-            employee {
-              id
-              firstName
-              lastName
-              phone
-              email
-              division
-              createdAt
-              updatedAt
-              familyID
-              _version
-              _deleted
-              _lastChangedAt
-            }
-            student {
-              id
-              firstName
-              lastName
-              phone
-              email
-              division
-              fatherPhone
-              motherPhone
-              fatherEmail
-              motherEmail
-              createdAt
-              updatedAt
-              familyID
-              _version
-              _deleted
-              _lastChangedAt
-            }
-          }
-          nextToken
-          startedAt
-        }
-      }
-      nextToken
-      startedAt
-    }
-  }
-`;
-export const getEmployee = /* GraphQL */ `
-  query GetEmployee($id: ID!) {
-    getEmployee(id: $id) {
-      id
-      firstName
-      lastName
-      phone
-      email
-      division
-      createdAt
-      updatedAt
-      familyID
-      _version
-      _deleted
-      _lastChangedAt
-      employeeSubmissions {
-        items {
-          id
-          submittedAt
-          temperature
-          conditionsMet
-          employeeName
-          division
-          employeePhone
-          signature
-          employeeID
-          _version
-          _deleted
-          _lastChangedAt
-          createdAt
-          updatedAt
-        }
-        nextToken
-        startedAt
-      }
-      employeeStudents {
-        items {
-          id
-          employeeID
-          studentID
-          _version
-          _deleted
-          _lastChangedAt
-          createdAt
-          updatedAt
-          employee {
-            id
             firstName
             lastName
             phone
-            email
-            division
-            createdAt
-            updatedAt
-            familyID
-            _version
-            _deleted
-            _lastChangedAt
-            employeeSubmissions {
-              nextToken
-              startedAt
-            }
-            employeeStudents {
-              nextToken
-              startedAt
-            }
-          }
-          student {
-            id
-            firstName
-            lastName
-            phone
-            email
-            division
-            fatherPhone
-            motherPhone
-            fatherEmail
-            motherEmail
-            createdAt
-            updatedAt
-            familyID
-            _version
-            _deleted
-            _lastChangedAt
-            studentSubmissions {
-              nextToken
-              startedAt
-            }
-            parents {
-              nextToken
-              startedAt
-            }
-            employees {
-              nextToken
-              startedAt
-            }
-          }
-        }
-        nextToken
-        startedAt
-      }
-    }
-  }
-`;
-export const syncEmployees = /* GraphQL */ `
-  query SyncEmployees(
-    $filter: ModelEmployeeFilterInput
-    $limit: Int
-    $nextToken: String
-    $lastSync: AWSTimestamp
-  ) {
-    syncEmployees(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
-      items {
-        id
-        firstName
-        lastName
-        phone
-        email
-        division
-        createdAt
-        updatedAt
-        familyID
-        _version
-        _deleted
-        _lastChangedAt
-        employeeSubmissions {
-          items {
-            id
-            submittedAt
-            temperature
-            conditionsMet
-            employeeName
-            division
-            employeePhone
-            signature
-            employeeID
-            _version
-            _deleted
-            _lastChangedAt
-            createdAt
-            updatedAt
-          }
-          nextToken
-          startedAt
-        }
-        employeeStudents {
-          items {
-            id
-            employeeID
-            studentID
-            _version
-            _deleted
-            _lastChangedAt
-            createdAt
-            updatedAt
-            employee {
-              id
-              firstName
-              lastName
-              phone
-              email
-              division
-              createdAt
-              updatedAt
-              familyID
-              _version
-              _deleted
-              _lastChangedAt
-            }
-            student {
-              id
-              firstName
-              lastName
-              phone
-              email
-              division
-              fatherPhone
-              motherPhone
-              fatherEmail
-              motherEmail
-              createdAt
-              updatedAt
-              familyID
-              _version
-              _deleted
-              _lastChangedAt
-            }
-          }
-          nextToken
-          startedAt
-        }
-      }
-      nextToken
-      startedAt
-    }
-  }
-`;
-export const listParents = /* GraphQL */ `
-  query ListParents(
-    $filter: ModelParentFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listParents(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        firstName
-        lastName
-        phone
-        email
-        createdAt
-        updatedAt
-        familyID
-        _version
-        _deleted
-        _lastChangedAt
-        parentStudents {
-          items {
-            id
             parentID
-            studentID
-            _version
-            _deleted
-            _lastChangedAt
-            createdAt
-            updatedAt
-            parent {
-              id
-              firstName
-              lastName
-              phone
-              email
-              createdAt
-              updatedAt
-              familyID
-              _version
-              _deleted
-              _lastChangedAt
-            }
-            student {
-              id
-              firstName
-              lastName
-              phone
-              email
-              division
-              fatherPhone
-              motherPhone
-              fatherEmail
-              motherEmail
-              createdAt
-              updatedAt
-              familyID
-              _version
-              _deleted
-              _lastChangedAt
-            }
-          }
-          nextToken
-          startedAt
-        }
-      }
-      nextToken
-      startedAt
-    }
-  }
-`;
-export const getParent = /* GraphQL */ `
-  query GetParent($id: ID!) {
-    getParent(id: $id) {
-      id
-      firstName
-      lastName
-      phone
-      email
-      createdAt
-      updatedAt
-      familyID
-      _version
-      _deleted
-      _lastChangedAt
-      parentStudents {
-        items {
-          id
-          parentID
-          studentID
-          _version
-          _deleted
-          _lastChangedAt
-          createdAt
-          updatedAt
-          parent {
-            id
-            firstName
-            lastName
-            phone
-            email
-            createdAt
-            updatedAt
-            familyID
-            _version
-            _deleted
-            _lastChangedAt
-            parentStudents {
-              nextToken
-              startedAt
-            }
-          }
-          student {
-            id
-            firstName
-            lastName
-            phone
-            email
-            division
-            fatherPhone
-            motherPhone
-            fatherEmail
-            motherEmail
-            createdAt
-            updatedAt
-            familyID
-            _version
-            _deleted
-            _lastChangedAt
-            studentSubmissions {
-              nextToken
-              startedAt
-            }
-            parents {
-              nextToken
-              startedAt
-            }
-            employees {
-              nextToken
-              startedAt
-            }
-          }
-        }
-        nextToken
-        startedAt
-      }
-    }
-  }
-`;
-export const syncParents = /* GraphQL */ `
-  query SyncParents(
-    $filter: ModelParentFilterInput
-    $limit: Int
-    $nextToken: String
-    $lastSync: AWSTimestamp
-  ) {
-    syncParents(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
-      items {
-        id
-        firstName
-        lastName
-        phone
-        email
-        createdAt
-        updatedAt
-        familyID
-        _version
-        _deleted
-        _lastChangedAt
-        parentStudents {
-          items {
-            id
-            parentID
-            studentID
-            _version
-            _deleted
-            _lastChangedAt
-            createdAt
-            updatedAt
-            parent {
-              id
-              firstName
-              lastName
-              phone
-              email
-              createdAt
-              updatedAt
-              familyID
-              _version
-              _deleted
-              _lastChangedAt
-            }
-            student {
-              id
-              firstName
-              lastName
-              phone
-              email
-              division
-              fatherPhone
-              motherPhone
-              fatherEmail
-              motherEmail
-              createdAt
-              updatedAt
-              familyID
-              _version
-              _deleted
-              _lastChangedAt
-            }
-          }
-          nextToken
-          startedAt
-        }
-      }
-      nextToken
-      startedAt
-    }
-  }
-`;
-export const listStudents = /* GraphQL */ `
-  query ListStudents(
-    $filter: ModelStudentFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listStudents(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        firstName
-        lastName
-        phone
-        email
-        division
-        fatherPhone
-        motherPhone
-        fatherEmail
-        motherEmail
-        createdAt
-        updatedAt
-        familyID
-        _version
-        _deleted
-        _lastChangedAt
-        studentSubmissions {
-          items {
-            id
-            submittedAt
-            temperature
-            conditionsMet
-            studentName
-            division
             parentName
             parentPhone
-            studentID
+            personID
+            familyID
+            consultantType
             _version
             _deleted
             _lastChangedAt
             createdAt
             updatedAt
-          }
-          nextToken
-          startedAt
-        }
-        parents {
-          items {
-            id
-            parentID
-            studentID
-            _version
-            _deleted
-            _lastChangedAt
-            createdAt
-            updatedAt
-            parent {
-              id
-              firstName
-              lastName
-              phone
-              email
-              createdAt
-              updatedAt
-              familyID
-              _version
-              _deleted
-              _lastChangedAt
-            }
-            student {
-              id
-              firstName
-              lastName
-              phone
-              email
-              division
-              fatherPhone
-              motherPhone
-              fatherEmail
-              motherEmail
-              createdAt
-              updatedAt
-              familyID
-              _version
-              _deleted
-              _lastChangedAt
+            questions {
+              nextToken
+              startedAt
             }
           }
           nextToken
           startedAt
         }
-        employees {
+        members {
           items {
             id
-            employeeID
-            studentID
+            firstName
+            lastName
+            phone
+            email
+            division
+            fatherPhone
+            motherPhone
+            fatherEmail
+            motherEmail
+            createdAt
+            updatedAt
+            submissionType
+            isAuthenticatedUser
+            familyMemberType
+            familyID
+            consultantType
+            governmentID
             _version
             _deleted
             _lastChangedAt
-            createdAt
-            updatedAt
-            employee {
-              id
-              firstName
-              lastName
-              phone
-              email
-              division
-              createdAt
-              updatedAt
-              familyID
-              _version
-              _deleted
-              _lastChangedAt
-            }
-            student {
-              id
-              firstName
-              lastName
-              phone
-              email
-              division
-              fatherPhone
-              motherPhone
-              fatherEmail
-              motherEmail
-              createdAt
-              updatedAt
-              familyID
-              _version
-              _deleted
-              _lastChangedAt
+            submissions {
+              nextToken
+              startedAt
             }
           }
           nextToken
@@ -1377,9 +516,9 @@ export const listStudents = /* GraphQL */ `
     }
   }
 `;
-export const getStudent = /* GraphQL */ `
-  query GetStudent($id: ID!) {
-    getStudent(id: $id) {
+export const getPerson = /* GraphQL */ `
+  query GetPerson($id: ID!) {
+    getPerson(id: $id) {
       id
       firstName
       lastName
@@ -1392,152 +531,55 @@ export const getStudent = /* GraphQL */ `
       motherEmail
       createdAt
       updatedAt
+      submissionType
+      isAuthenticatedUser
+      familyMemberType
       familyID
+      consultantType
+      governmentID
       _version
       _deleted
       _lastChangedAt
-      studentSubmissions {
+      submissions {
         items {
           id
+          submissionType
           submittedAt
           temperature
           conditionsMet
-          studentName
+          signature
           division
+          firstName
+          lastName
+          phone
+          parentID
           parentName
           parentPhone
-          studentID
+          personID
+          familyID
+          consultantType
           _version
           _deleted
           _lastChangedAt
           createdAt
           updatedAt
-        }
-        nextToken
-        startedAt
-      }
-      parents {
-        items {
-          id
-          parentID
-          studentID
-          _version
-          _deleted
-          _lastChangedAt
-          createdAt
-          updatedAt
-          parent {
-            id
-            firstName
-            lastName
-            phone
-            email
-            createdAt
-            updatedAt
-            familyID
-            _version
-            _deleted
-            _lastChangedAt
-            parentStudents {
-              nextToken
-              startedAt
+          questions {
+            items {
+              id
+              questionType
+              titleEnglish
+              titleChinese
+              contentEnglish
+              contentChinese
+              submissionID
+              _version
+              _deleted
+              _lastChangedAt
+              createdAt
+              updatedAt
             }
-          }
-          student {
-            id
-            firstName
-            lastName
-            phone
-            email
-            division
-            fatherPhone
-            motherPhone
-            fatherEmail
-            motherEmail
-            createdAt
-            updatedAt
-            familyID
-            _version
-            _deleted
-            _lastChangedAt
-            studentSubmissions {
-              nextToken
-              startedAt
-            }
-            parents {
-              nextToken
-              startedAt
-            }
-            employees {
-              nextToken
-              startedAt
-            }
-          }
-        }
-        nextToken
-        startedAt
-      }
-      employees {
-        items {
-          id
-          employeeID
-          studentID
-          _version
-          _deleted
-          _lastChangedAt
-          createdAt
-          updatedAt
-          employee {
-            id
-            firstName
-            lastName
-            phone
-            email
-            division
-            createdAt
-            updatedAt
-            familyID
-            _version
-            _deleted
-            _lastChangedAt
-            employeeSubmissions {
-              nextToken
-              startedAt
-            }
-            employeeStudents {
-              nextToken
-              startedAt
-            }
-          }
-          student {
-            id
-            firstName
-            lastName
-            phone
-            email
-            division
-            fatherPhone
-            motherPhone
-            fatherEmail
-            motherEmail
-            createdAt
-            updatedAt
-            familyID
-            _version
-            _deleted
-            _lastChangedAt
-            studentSubmissions {
-              nextToken
-              startedAt
-            }
-            parents {
-              nextToken
-              startedAt
-            }
-            employees {
-              nextToken
-              startedAt
-            }
+            nextToken
+            startedAt
           }
         }
         nextToken
@@ -1546,14 +588,80 @@ export const getStudent = /* GraphQL */ `
     }
   }
 `;
-export const syncStudents = /* GraphQL */ `
-  query SyncStudents(
-    $filter: ModelStudentFilterInput
+export const listPersons = /* GraphQL */ `
+  query ListPersons(
+    $filter: ModelPersonFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listPersons(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        firstName
+        lastName
+        phone
+        email
+        division
+        fatherPhone
+        motherPhone
+        fatherEmail
+        motherEmail
+        createdAt
+        updatedAt
+        submissionType
+        isAuthenticatedUser
+        familyMemberType
+        familyID
+        consultantType
+        governmentID
+        _version
+        _deleted
+        _lastChangedAt
+        submissions {
+          items {
+            id
+            submissionType
+            submittedAt
+            temperature
+            conditionsMet
+            signature
+            division
+            firstName
+            lastName
+            phone
+            parentID
+            parentName
+            parentPhone
+            personID
+            familyID
+            consultantType
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+            questions {
+              nextToken
+              startedAt
+            }
+          }
+          nextToken
+          startedAt
+        }
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const syncPeople = /* GraphQL */ `
+  query SyncPeople(
+    $filter: ModelPersonFilterInput
     $limit: Int
     $nextToken: String
     $lastSync: AWSTimestamp
   ) {
-    syncStudents(
+    syncPeople(
       filter: $filter
       limit: $limit
       nextToken: $nextToken
@@ -1572,638 +680,45 @@ export const syncStudents = /* GraphQL */ `
         motherEmail
         createdAt
         updatedAt
+        submissionType
+        isAuthenticatedUser
+        familyMemberType
         familyID
+        consultantType
+        governmentID
         _version
         _deleted
         _lastChangedAt
-        studentSubmissions {
+        submissions {
           items {
             id
+            submissionType
             submittedAt
             temperature
             conditionsMet
-            studentName
+            signature
             division
+            firstName
+            lastName
+            phone
+            parentID
             parentName
             parentPhone
-            studentID
+            personID
+            familyID
+            consultantType
             _version
             _deleted
             _lastChangedAt
             createdAt
             updatedAt
-          }
-          nextToken
-          startedAt
-        }
-        parents {
-          items {
-            id
-            parentID
-            studentID
-            _version
-            _deleted
-            _lastChangedAt
-            createdAt
-            updatedAt
-            parent {
-              id
-              firstName
-              lastName
-              phone
-              email
-              createdAt
-              updatedAt
-              familyID
-              _version
-              _deleted
-              _lastChangedAt
-            }
-            student {
-              id
-              firstName
-              lastName
-              phone
-              email
-              division
-              fatherPhone
-              motherPhone
-              fatherEmail
-              motherEmail
-              createdAt
-              updatedAt
-              familyID
-              _version
-              _deleted
-              _lastChangedAt
+            questions {
+              nextToken
+              startedAt
             }
           }
           nextToken
           startedAt
-        }
-        employees {
-          items {
-            id
-            employeeID
-            studentID
-            _version
-            _deleted
-            _lastChangedAt
-            createdAt
-            updatedAt
-            employee {
-              id
-              firstName
-              lastName
-              phone
-              email
-              division
-              createdAt
-              updatedAt
-              familyID
-              _version
-              _deleted
-              _lastChangedAt
-            }
-            student {
-              id
-              firstName
-              lastName
-              phone
-              email
-              division
-              fatherPhone
-              motherPhone
-              fatherEmail
-              motherEmail
-              createdAt
-              updatedAt
-              familyID
-              _version
-              _deleted
-              _lastChangedAt
-            }
-          }
-          nextToken
-          startedAt
-        }
-      }
-      nextToken
-      startedAt
-    }
-  }
-`;
-export const getStudentSubmission = /* GraphQL */ `
-  query GetStudentSubmission($id: ID!) {
-    getStudentSubmission(id: $id) {
-      id
-      submittedAt
-      temperature
-      conditionsMet
-      studentName
-      division
-      parentName
-      parentPhone
-      studentID
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const listStudentSubmissions = /* GraphQL */ `
-  query ListStudentSubmissions(
-    $filter: ModelStudentSubmissionFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listStudentSubmissions(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
-      items {
-        id
-        submittedAt
-        temperature
-        conditionsMet
-        studentName
-        division
-        parentName
-        parentPhone
-        studentID
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-      }
-      nextToken
-      startedAt
-    }
-  }
-`;
-export const syncStudentSubmissions = /* GraphQL */ `
-  query SyncStudentSubmissions(
-    $filter: ModelStudentSubmissionFilterInput
-    $limit: Int
-    $nextToken: String
-    $lastSync: AWSTimestamp
-  ) {
-    syncStudentSubmissions(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
-      items {
-        id
-        submittedAt
-        temperature
-        conditionsMet
-        studentName
-        division
-        parentName
-        parentPhone
-        studentID
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-      }
-      nextToken
-      startedAt
-    }
-  }
-`;
-export const getVisitorSubmission = /* GraphQL */ `
-  query GetVisitorSubmission($id: ID!) {
-    getVisitorSubmission(id: $id) {
-      id
-      submittedAt
-      conditionsMet
-      visitorName
-      visitorPhone
-      visitorGovernmentId
-      signature
-      visitorID
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const listVisitorSubmissions = /* GraphQL */ `
-  query ListVisitorSubmissions(
-    $filter: ModelVisitorSubmissionFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listVisitorSubmissions(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
-      items {
-        id
-        submittedAt
-        conditionsMet
-        visitorName
-        visitorPhone
-        visitorGovernmentId
-        signature
-        visitorID
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-      }
-      nextToken
-      startedAt
-    }
-  }
-`;
-export const syncVisitorSubmissions = /* GraphQL */ `
-  query SyncVisitorSubmissions(
-    $filter: ModelVisitorSubmissionFilterInput
-    $limit: Int
-    $nextToken: String
-    $lastSync: AWSTimestamp
-  ) {
-    syncVisitorSubmissions(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
-      items {
-        id
-        submittedAt
-        conditionsMet
-        visitorName
-        visitorPhone
-        visitorGovernmentId
-        signature
-        visitorID
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-      }
-      nextToken
-      startedAt
-    }
-  }
-`;
-export const getConsultantSubmission = /* GraphQL */ `
-  query GetConsultantSubmission($id: ID!) {
-    getConsultantSubmission(id: $id) {
-      id
-      submittedAt
-      temperature
-      conditionsMet
-      consultantName
-      consultantType
-      consultantPhone
-      signature
-      consultantID
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const listConsultantSubmissions = /* GraphQL */ `
-  query ListConsultantSubmissions(
-    $filter: ModelConsultantSubmissionFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listConsultantSubmissions(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
-      items {
-        id
-        submittedAt
-        temperature
-        conditionsMet
-        consultantName
-        consultantType
-        consultantPhone
-        signature
-        consultantID
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-      }
-      nextToken
-      startedAt
-    }
-  }
-`;
-export const syncConsultantSubmissions = /* GraphQL */ `
-  query SyncConsultantSubmissions(
-    $filter: ModelConsultantSubmissionFilterInput
-    $limit: Int
-    $nextToken: String
-    $lastSync: AWSTimestamp
-  ) {
-    syncConsultantSubmissions(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
-      items {
-        id
-        submittedAt
-        temperature
-        conditionsMet
-        consultantName
-        consultantType
-        consultantPhone
-        signature
-        consultantID
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-      }
-      nextToken
-      startedAt
-    }
-  }
-`;
-export const syncParentStudents = /* GraphQL */ `
-  query SyncParentStudents(
-    $filter: ModelParentStudentFilterInput
-    $limit: Int
-    $nextToken: String
-    $lastSync: AWSTimestamp
-  ) {
-    syncParentStudents(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
-      items {
-        id
-        parentID
-        studentID
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-        parent {
-          id
-          firstName
-          lastName
-          phone
-          email
-          createdAt
-          updatedAt
-          familyID
-          _version
-          _deleted
-          _lastChangedAt
-          parentStudents {
-            items {
-              id
-              parentID
-              studentID
-              _version
-              _deleted
-              _lastChangedAt
-              createdAt
-              updatedAt
-            }
-            nextToken
-            startedAt
-          }
-        }
-        student {
-          id
-          firstName
-          lastName
-          phone
-          email
-          division
-          fatherPhone
-          motherPhone
-          fatherEmail
-          motherEmail
-          createdAt
-          updatedAt
-          familyID
-          _version
-          _deleted
-          _lastChangedAt
-          studentSubmissions {
-            items {
-              id
-              submittedAt
-              temperature
-              conditionsMet
-              studentName
-              division
-              parentName
-              parentPhone
-              studentID
-              _version
-              _deleted
-              _lastChangedAt
-              createdAt
-              updatedAt
-            }
-            nextToken
-            startedAt
-          }
-          parents {
-            items {
-              id
-              parentID
-              studentID
-              _version
-              _deleted
-              _lastChangedAt
-              createdAt
-              updatedAt
-            }
-            nextToken
-            startedAt
-          }
-          employees {
-            items {
-              id
-              employeeID
-              studentID
-              _version
-              _deleted
-              _lastChangedAt
-              createdAt
-              updatedAt
-            }
-            nextToken
-            startedAt
-          }
-        }
-      }
-      nextToken
-      startedAt
-    }
-  }
-`;
-export const syncEmployeeStudents = /* GraphQL */ `
-  query SyncEmployeeStudents(
-    $filter: ModelEmployeeStudentFilterInput
-    $limit: Int
-    $nextToken: String
-    $lastSync: AWSTimestamp
-  ) {
-    syncEmployeeStudents(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
-      items {
-        id
-        employeeID
-        studentID
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-        employee {
-          id
-          firstName
-          lastName
-          phone
-          email
-          division
-          createdAt
-          updatedAt
-          familyID
-          _version
-          _deleted
-          _lastChangedAt
-          employeeSubmissions {
-            items {
-              id
-              submittedAt
-              temperature
-              conditionsMet
-              employeeName
-              division
-              employeePhone
-              signature
-              employeeID
-              _version
-              _deleted
-              _lastChangedAt
-              createdAt
-              updatedAt
-            }
-            nextToken
-            startedAt
-          }
-          employeeStudents {
-            items {
-              id
-              employeeID
-              studentID
-              _version
-              _deleted
-              _lastChangedAt
-              createdAt
-              updatedAt
-            }
-            nextToken
-            startedAt
-          }
-        }
-        student {
-          id
-          firstName
-          lastName
-          phone
-          email
-          division
-          fatherPhone
-          motherPhone
-          fatherEmail
-          motherEmail
-          createdAt
-          updatedAt
-          familyID
-          _version
-          _deleted
-          _lastChangedAt
-          studentSubmissions {
-            items {
-              id
-              submittedAt
-              temperature
-              conditionsMet
-              studentName
-              division
-              parentName
-              parentPhone
-              studentID
-              _version
-              _deleted
-              _lastChangedAt
-              createdAt
-              updatedAt
-            }
-            nextToken
-            startedAt
-          }
-          parents {
-            items {
-              id
-              parentID
-              studentID
-              _version
-              _deleted
-              _lastChangedAt
-              createdAt
-              updatedAt
-            }
-            nextToken
-            startedAt
-          }
-          employees {
-            items {
-              id
-              employeeID
-              studentID
-              _version
-              _deleted
-              _lastChangedAt
-              createdAt
-              updatedAt
-            }
-            nextToken
-            startedAt
-          }
         }
       }
       nextToken
