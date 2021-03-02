@@ -17,6 +17,7 @@ import EmployeeForm from "@/views/EmployeeForm.vue";
 import ConsultantForm from "@/views/ConsultantForm.vue";
 import VisitorForm from "@/views/ConsultantForm.vue";
 import QrCode from "@/views/QrCode.vue";
+import Admin from "@/views/Admin.vue";
 
 async function requireNoAuth(
   to: RouteLocationNormalized,
@@ -107,6 +108,12 @@ const routes: Array<RouteRecordRaw> = [
     path: "/qrcode",
     name: "QrCode",
     component: QrCode,
+    beforeEnter: requireAuth
+  },
+  {
+    path: "/admin",
+    name: "Admin",
+    component: Admin,
     beforeEnter: requireAuth
   }
 ];
