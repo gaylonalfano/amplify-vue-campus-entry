@@ -4,18 +4,18 @@
     <div
       :class="isOpen ? 'block' : 'hidden'"
       @click="isOpen = false"
-      class="fixed z-20 inset-0 bg-black opacity-50 transition-opacity lg:hidden"
+      class="fixed inset-0 z-20 bg-black opacity-50 transition-opacity lg:hidden"
     ></div>
     <!-- End Backdrop -->
 
     <div
       :class="isOpen ? 'translate-x-0 ease-out' : '-translate-x-full ease-in'"
-      class="fixed z-30 inset-y-0 left-0 w-64 transition duration-300 transform bg-gray-900 overflow-y-auto lg:translate-x-0 lg:static lg:inset-0"
+      class="fixed inset-y-0 left-0 z-30 w-64 overflow-y-auto bg-gray-900 transition duration-300 transform lg:translate-x-0 lg:static lg:inset-0"
     >
       <div class="flex items-center justify-center mt-8">
         <div class="flex items-center">
           <svg
-            class="h-12 w-12"
+            class="w-12 h-12"
             viewBox="0 0 512 512"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
@@ -34,7 +34,7 @@
             />
           </svg>
 
-          <span class="text-white text-2xl mx-2 font-semibold"
+          <span class="mx-2 text-2xl font-semibold text-white"
             >V-Dashboard</span
           >
         </div>
@@ -42,12 +42,12 @@
 
       <nav class="mt-10">
         <router-link
-          class="flex items-center duration-200 mt-4 py-2 px-6 border-l-4"
+          class="flex items-center px-6 py-2 mt-4 border-l-4 duration-200"
           :class="[$route.name === 'Dashboard' ? activeClass : inactiveClass]"
           to="/admin/dashboard"
         >
           <svg
-            class="h-5 w-5"
+            class="w-5 h-5"
             viewBox="0 0 20 20"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
@@ -66,12 +66,14 @@
         </router-link>
 
         <router-link
-          class="flex items-center duration-200 mt-4 py-2 px-6 border-l-4"
-          :class="[$route.name === 'UIElements' ? activeClass : inactiveClass]"
+          class="flex items-center px-6 py-2 mt-4 border-l-4 duration-200"
+          :class="[
+            $route.name === 'SubmissionManagement' ? activeClass : inactiveClass
+          ]"
           to="/admin/submission-management"
         >
           <svg
-            class="h-5 w-5"
+            class="w-5 h-5"
             viewBox="0 0 20 20"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
@@ -98,39 +100,34 @@
         </router-link>
 
         <router-link
-          class="flex items-center duration-200 mt-4 py-2 px-6 border-l-4"
-          :class="[$route.name === 'Tables' ? activeClass : inactiveClass]"
+          class="flex items-center px-6 py-2 mt-4 border-l-4 duration-200"
+          :class="[
+            $route.name === 'UserManagement' ? activeClass : inactiveClass
+          ]"
           to="/admin/user-management"
         >
           <svg
-            class="h-5 w-5"
+            class="w-5 h-5"
+            fill="currentColor"
             viewBox="0 0 20 20"
-            fill="none"
             xmlns="http://www.w3.org/2000/svg"
           >
             <path
-              d="M7 3C6.44772 3 6 3.44772 6 4C6 4.55228 6.44772 5 7 5H13C13.5523 5 14 4.55228 14 4C14 3.44772 13.5523 3 13 3H7Z"
-              fill="currentColor"
-            />
-            <path
-              d="M4 7C4 6.44772 4.44772 6 5 6H15C15.5523 6 16 6.44772 16 7C16 7.55228 15.5523 8 15 8H5C4.44772 8 4 7.55228 4 7Z"
-              fill="currentColor"
-            />
-            <path
-              d="M2 11C2 9.89543 2.89543 9 4 9H16C17.1046 9 18 9.89543 18 11V15C18 16.1046 17.1046 17 16 17H4C2.89543 17 2 16.1046 2 15V11Z"
-              fill="currentColor"
-            />
+              d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z"
+            ></path>
           </svg>
 
           <span class="mx-4">Users</span>
         </router-link>
 
         <router-link
-          class="flex items-center duration-200 mt-4 py-2 px-6 border-l-4"
-          :class="[$route.name === 'Forms' ? activeClass : inactiveClass]"
+          class="flex items-center px-6 py-2 mt-4 border-l-4 duration-200"
+          :class="[
+            $route.name === 'FormManagement' ? activeClass : inactiveClass
+          ]"
           to="/admin/form-management"
         >
-          <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
             <path
               d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z"
             />
@@ -145,44 +142,11 @@
         </router-link>
 
         <router-link
-          class="flex items-center duration-200 mt-4 py-2 px-6 border-l-4"
-          :class="[$route.name === 'Cards' ? activeClass : inactiveClass]"
-          to="/cards"
-        >
-          <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
-            <path
-              d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z"
-            />
-            <path
-              fill-rule="evenodd"
-              d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"
-              clip-rule="evenodd"
-            />
-          </svg>
-
-          <span class="mx-4">Cards</span>
-        </router-link>
-
-        <router-link
-          class="flex items-center duration-200 mt-4 py-2 px-6 border-l-4"
-          :class="[$route.name === 'Modal' ? activeClass : inactiveClass]"
-          to="/modal"
-        >
-          <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
-            <path
-              d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"
-            />
-          </svg>
-
-          <span class="mx-4">Modal</span>
-        </router-link>
-
-        <router-link
-          class="flex items-center duration-200 mt-4 py-2 px-6 border-l-4"
+          class="flex items-center px-6 py-2 mt-4 border-l-4 duration-200"
           :class="[$route.name === 'Blank' ? activeClass : inactiveClass]"
-          to="/blank"
+          to="/admin/blank"
         >
-          <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
             <path
               d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"
             />
@@ -203,10 +167,10 @@ export default defineComponent({
   setup() {
     const { isOpen } = useSidebar(); // with import { useSidebar }
     // const { state } = useSidebar(); // with import useSidebar BROKE
-    const activeClass = ref(
+    const activeClass = ref<string>(
       "bg-gray-600 bg-opacity-25 text-gray-100 border-gray-100"
     );
-    const inactiveClass = ref(
+    const inactiveClass = ref<string>(
       "border-gray-900 text-gray-500 hover:bg-gray-600 hover:bg-opacity-25 hover:text-gray-100"
     );
     return {

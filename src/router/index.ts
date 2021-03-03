@@ -17,7 +17,7 @@ import EmployeeForm from "@/views/EmployeeForm.vue";
 import ConsultantForm from "@/views/ConsultantForm.vue";
 import VisitorForm from "@/views/ConsultantForm.vue";
 import QrCode from "@/views/QrCode.vue";
-import Dashboard from "@/views/Dashboard.vue";
+import AdminDashboard from "@/views/AdminDashboard.vue";
 import Blank from "@/views/Blank.vue";
 import SubmissionManagement from "@/views/SubmissionManagement.vue";
 import UserManagement from "@/views/UserManagement.vue";
@@ -124,8 +124,8 @@ const routes: Array<RouteRecordRaw> = [
   },
   {
     path: "/admin/dashboard",
-    name: "Dashboard",
-    component: Dashboard,
+    name: "AdminDashboard",
+    component: AdminDashboard,
     beforeEnter: requireAuth
   },
   {
@@ -147,7 +147,7 @@ const routes: Array<RouteRecordRaw> = [
     beforeEnter: requireAuth
   },
   {
-    path: "/blank",
+    path: "/admin/blank",
     name: "Blank",
     component: Blank,
     beforeEnter: requireNoAuth

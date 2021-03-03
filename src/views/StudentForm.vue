@@ -1,7 +1,7 @@
 <template>
   <Navbar />
   <div class="p-6 mx-auto md:flex md:justify-start">
-    <HealthFormBaseLayout>
+    <BaseHealthFormLayout>
       <template v-slot:temperature>
         <div>
           <label
@@ -214,7 +214,7 @@
           </div>
         </div>
       </template>
-    </HealthFormBaseLayout>
+    </BaseHealthFormLayout>
   </div>
   <!-- <h1>conditionsMet: {{ typeof conditionsMet }}</h1> -->
   <!-- <h1>conditionsMetComputed: {{ typeof conditionsMetComputed }}</h1> -->
@@ -223,11 +223,11 @@
 <script lang="ts">
 import { defineComponent, ref, computed } from "vue";
 import Navbar from "@/components/Navbar.vue";
-import HealthFormBaseLayout from "@/components/HealthFormBaseLayout.vue";
+import BaseHealthFormLayout from "@/components/BaseHealthFormLayout.vue";
 
 export default defineComponent({
   name: "StudentForm",
-  components: { Navbar, HealthFormBaseLayout },
+  components: { Navbar, BaseHealthFormLayout },
   setup() {
     // Computed props for my form inputs
     const temperature = ref<string>("");
