@@ -15,10 +15,17 @@ Amplify.Logger.LOG_LEVEL = "DEBUG";
 //   .then(user => logger.debug(user))
 //   .catch(err => logger.debug(err));
 
-createApp(App)
-  .use(store)
-  .use(router)
-  .mount("#app");
+import DashboardLayout from "@/components/DashboardLayout.vue";
+import EmptyLayout from "@/components/EmptyLayout.vue";
+
+const app = createApp(App);
+
+app.component("default-layout", DashboardLayout);
+app.component("empty-layout", EmptyLayout);
+
+app.use(store);
+app.use(router);
+app.mount("#app");
 
 // // === FAILED ATTEMPT: Try to create a Poor Man's Vuex using Provide/Inject
 // // https://stackoverflow.com/questions/60202724/vue-3-composition-api-and-access-to-vue-instance

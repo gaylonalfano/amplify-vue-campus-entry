@@ -17,7 +17,11 @@ import EmployeeForm from "@/views/EmployeeForm.vue";
 import ConsultantForm from "@/views/ConsultantForm.vue";
 import VisitorForm from "@/views/ConsultantForm.vue";
 import QrCode from "@/views/QrCode.vue";
-import Admin from "@/views/Admin.vue";
+import Dashboard from "@/views/Dashboard.vue";
+import Blank from "@/views/Blank.vue";
+import SubmissionManagement from "@/views/SubmissionManagement.vue";
+import UserManagement from "@/views/UserManagement.vue";
+import FormManagement from "@/views/FormManagement.vue";
 
 async function requireNoAuth(
   to: RouteLocationNormalized,
@@ -66,55 +70,87 @@ const routes: Array<RouteRecordRaw> = [
     path: "/",
     name: "Home",
     component: Home,
-    beforeEnter: requireAuth
+    beforeEnter: requireAuth,
+    meta: { layout: "empty" }
   },
   {
     path: "/login",
     name: "Login",
     component: Login,
-    beforeEnter: requireNoAuth
+    beforeEnter: requireNoAuth,
+    meta: { layout: "empty" }
   },
   {
     path: "/signup",
     name: "Signup",
     component: Signup,
-    beforeEnter: requireNoAuth
+    beforeEnter: requireNoAuth,
+    meta: { layout: "empty" }
   },
   {
     path: "/student",
     name: "Student",
     component: StudentForm,
-    beforeEnter: requireAuth
+    beforeEnter: requireAuth,
+    meta: { layout: "empty" }
   },
   {
     path: "/employee",
     name: "Employee",
     component: EmployeeForm,
-    beforeEnter: requireAuth
+    beforeEnter: requireAuth,
+    meta: { layout: "empty" }
   },
   {
     path: "/consultant",
     name: "Consultant",
     component: ConsultantForm,
-    beforeEnter: requireAuth
+    beforeEnter: requireAuth,
+    meta: { layout: "empty" }
   },
   {
     path: "/visitor",
     name: "Visitor",
     component: VisitorForm,
-    beforeEnter: requireAuth
+    beforeEnter: requireAuth,
+    meta: { layout: "empty" }
   },
   {
     path: "/qrcode",
     name: "QrCode",
     component: QrCode,
+    beforeEnter: requireAuth,
+    meta: { layout: "empty" }
+  },
+  {
+    path: "/admin/dashboard",
+    name: "Dashboard",
+    component: Dashboard,
     beforeEnter: requireAuth
   },
   {
-    path: "/admin",
-    name: "Admin",
-    component: Admin,
+    path: "/admin/submission-management",
+    name: "SubmissionManagement",
+    component: SubmissionManagement,
     beforeEnter: requireAuth
+  },
+  {
+    path: "/admin/user-management",
+    name: "UserManagement",
+    component: UserManagement,
+    beforeEnter: requireAuth
+  },
+  {
+    path: "/admin/form-management",
+    name: "FormManagement",
+    component: FormManagement,
+    beforeEnter: requireAuth
+  },
+  {
+    path: "/blank",
+    name: "Blank",
+    component: Blank,
+    beforeEnter: requireNoAuth
   }
 ];
 
