@@ -14,7 +14,6 @@ export const createQuestion = /* GraphQL */ `
       titleChinese
       contentEnglish
       contentChinese
-      submissionID
       _version
       _deleted
       _lastChangedAt
@@ -35,7 +34,6 @@ export const updateQuestion = /* GraphQL */ `
       titleChinese
       contentEnglish
       contentChinese
-      submissionID
       _version
       _deleted
       _lastChangedAt
@@ -56,7 +54,6 @@ export const deleteQuestion = /* GraphQL */ `
       titleChinese
       contentEnglish
       contentChinese
-      submissionID
       _version
       _deleted
       _lastChangedAt
@@ -92,24 +89,6 @@ export const createSubmission = /* GraphQL */ `
       _lastChangedAt
       createdAt
       updatedAt
-      questions {
-        items {
-          id
-          questionType
-          titleEnglish
-          titleChinese
-          contentEnglish
-          contentChinese
-          submissionID
-          _version
-          _deleted
-          _lastChangedAt
-          createdAt
-          updatedAt
-        }
-        nextToken
-        startedAt
-      }
     }
   }
 `;
@@ -140,24 +119,6 @@ export const updateSubmission = /* GraphQL */ `
       _lastChangedAt
       createdAt
       updatedAt
-      questions {
-        items {
-          id
-          questionType
-          titleEnglish
-          titleChinese
-          contentEnglish
-          contentChinese
-          submissionID
-          _version
-          _deleted
-          _lastChangedAt
-          createdAt
-          updatedAt
-        }
-        nextToken
-        startedAt
-      }
     }
   }
 `;
@@ -188,24 +149,6 @@ export const deleteSubmission = /* GraphQL */ `
       _lastChangedAt
       createdAt
       updatedAt
-      questions {
-        items {
-          id
-          questionType
-          titleEnglish
-          titleChinese
-          contentEnglish
-          contentChinese
-          submissionID
-          _version
-          _deleted
-          _lastChangedAt
-          createdAt
-          updatedAt
-        }
-        nextToken
-        startedAt
-      }
     }
   }
 `;
@@ -244,24 +187,6 @@ export const createFamily = /* GraphQL */ `
           _lastChangedAt
           createdAt
           updatedAt
-          questions {
-            items {
-              id
-              questionType
-              titleEnglish
-              titleChinese
-              contentEnglish
-              contentChinese
-              submissionID
-              _version
-              _deleted
-              _lastChangedAt
-              createdAt
-              updatedAt
-            }
-            nextToken
-            startedAt
-          }
         }
         nextToken
         startedAt
@@ -358,24 +283,6 @@ export const updateFamily = /* GraphQL */ `
           _lastChangedAt
           createdAt
           updatedAt
-          questions {
-            items {
-              id
-              questionType
-              titleEnglish
-              titleChinese
-              contentEnglish
-              contentChinese
-              submissionID
-              _version
-              _deleted
-              _lastChangedAt
-              createdAt
-              updatedAt
-            }
-            nextToken
-            startedAt
-          }
         }
         nextToken
         startedAt
@@ -472,24 +379,6 @@ export const deleteFamily = /* GraphQL */ `
           _lastChangedAt
           createdAt
           updatedAt
-          questions {
-            items {
-              id
-              questionType
-              titleEnglish
-              titleChinese
-              contentEnglish
-              contentChinese
-              submissionID
-              _version
-              _deleted
-              _lastChangedAt
-              createdAt
-              updatedAt
-            }
-            nextToken
-            startedAt
-          }
         }
         nextToken
         startedAt
@@ -601,24 +490,6 @@ export const createPerson = /* GraphQL */ `
           _lastChangedAt
           createdAt
           updatedAt
-          questions {
-            items {
-              id
-              questionType
-              titleEnglish
-              titleChinese
-              contentEnglish
-              contentChinese
-              submissionID
-              _version
-              _deleted
-              _lastChangedAt
-              createdAt
-              updatedAt
-            }
-            nextToken
-            startedAt
-          }
         }
         nextToken
         startedAt
@@ -676,24 +547,6 @@ export const updatePerson = /* GraphQL */ `
           _lastChangedAt
           createdAt
           updatedAt
-          questions {
-            items {
-              id
-              questionType
-              titleEnglish
-              titleChinese
-              contentEnglish
-              contentChinese
-              submissionID
-              _version
-              _deleted
-              _lastChangedAt
-              createdAt
-              updatedAt
-            }
-            nextToken
-            startedAt
-          }
         }
         nextToken
         startedAt
@@ -751,24 +604,6 @@ export const deletePerson = /* GraphQL */ `
           _lastChangedAt
           createdAt
           updatedAt
-          questions {
-            items {
-              id
-              questionType
-              titleEnglish
-              titleChinese
-              contentEnglish
-              contentChinese
-              submissionID
-              _version
-              _deleted
-              _lastChangedAt
-              createdAt
-              updatedAt
-            }
-            nextToken
-            startedAt
-          }
         }
         nextToken
         startedAt

@@ -11,7 +11,6 @@ export const getQuestion = /* GraphQL */ `
       titleChinese
       contentEnglish
       contentChinese
-      submissionID
       _version
       _deleted
       _lastChangedAt
@@ -34,7 +33,6 @@ export const listQuestions = /* GraphQL */ `
         titleChinese
         contentEnglish
         contentChinese
-        submissionID
         _version
         _deleted
         _lastChangedAt
@@ -66,7 +64,6 @@ export const syncQuestions = /* GraphQL */ `
         titleChinese
         contentEnglish
         contentChinese
-        submissionID
         _version
         _deleted
         _lastChangedAt
@@ -102,24 +99,6 @@ export const getSubmission = /* GraphQL */ `
       _lastChangedAt
       createdAt
       updatedAt
-      questions {
-        items {
-          id
-          questionType
-          titleEnglish
-          titleChinese
-          contentEnglish
-          contentChinese
-          submissionID
-          _version
-          _deleted
-          _lastChangedAt
-          createdAt
-          updatedAt
-        }
-        nextToken
-        startedAt
-      }
     }
   }
 `;
@@ -152,24 +131,6 @@ export const listSubmissions = /* GraphQL */ `
         _lastChangedAt
         createdAt
         updatedAt
-        questions {
-          items {
-            id
-            questionType
-            titleEnglish
-            titleChinese
-            contentEnglish
-            contentChinese
-            submissionID
-            _version
-            _deleted
-            _lastChangedAt
-            createdAt
-            updatedAt
-          }
-          nextToken
-          startedAt
-        }
       }
       nextToken
       startedAt
@@ -211,24 +172,6 @@ export const syncSubmissions = /* GraphQL */ `
         _lastChangedAt
         createdAt
         updatedAt
-        questions {
-          items {
-            id
-            questionType
-            titleEnglish
-            titleChinese
-            contentEnglish
-            contentChinese
-            submissionID
-            _version
-            _deleted
-            _lastChangedAt
-            createdAt
-            updatedAt
-          }
-          nextToken
-          startedAt
-        }
       }
       nextToken
       startedAt
@@ -267,24 +210,6 @@ export const getFamily = /* GraphQL */ `
           _lastChangedAt
           createdAt
           updatedAt
-          questions {
-            items {
-              id
-              questionType
-              titleEnglish
-              titleChinese
-              contentEnglish
-              contentChinese
-              submissionID
-              _version
-              _deleted
-              _lastChangedAt
-              createdAt
-              updatedAt
-            }
-            nextToken
-            startedAt
-          }
         }
         nextToken
         startedAt
@@ -383,10 +308,6 @@ export const listFamilys = /* GraphQL */ `
             _lastChangedAt
             createdAt
             updatedAt
-            questions {
-              nextToken
-              startedAt
-            }
           }
           nextToken
           startedAt
@@ -471,10 +392,6 @@ export const syncFamilies = /* GraphQL */ `
             _lastChangedAt
             createdAt
             updatedAt
-            questions {
-              nextToken
-              startedAt
-            }
           }
           nextToken
           startedAt
@@ -563,24 +480,6 @@ export const getPerson = /* GraphQL */ `
           _lastChangedAt
           createdAt
           updatedAt
-          questions {
-            items {
-              id
-              questionType
-              titleEnglish
-              titleChinese
-              contentEnglish
-              contentChinese
-              submissionID
-              _version
-              _deleted
-              _lastChangedAt
-              createdAt
-              updatedAt
-            }
-            nextToken
-            startedAt
-          }
         }
         nextToken
         startedAt
@@ -640,10 +539,6 @@ export const listPersons = /* GraphQL */ `
             _lastChangedAt
             createdAt
             updatedAt
-            questions {
-              nextToken
-              startedAt
-            }
           }
           nextToken
           startedAt
@@ -712,10 +607,6 @@ export const syncPeople = /* GraphQL */ `
             _lastChangedAt
             createdAt
             updatedAt
-            questions {
-              nextToken
-              startedAt
-            }
           }
           nextToken
           startedAt
