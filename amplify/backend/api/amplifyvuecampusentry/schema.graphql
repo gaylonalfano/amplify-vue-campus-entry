@@ -7,14 +7,13 @@ enum QuestionType {
   SIGNATURE
 }
 
-type Question @model @auth(rules: [{allow: public}]) @key(name: "bySubmission", fields: ["submissionID"]) {
+type Question @model @auth(rules: [{allow: public}]) {
   id: ID!
   questionType: QuestionType!
   titleEnglish: String!
   titleChinese: String!
-  contentEnglish: String!
-  contentChinese: String!
-  submissionID: ID
+  contentEnglish: String
+  contentChinese: String
 }
 
 type Submission @model @auth(rules: [{allow: public}]) @key(name: "byPerson", fields: ["personID"]) @key(name: "byFamily", fields: ["familyID"]) {
@@ -34,7 +33,6 @@ type Submission @model @auth(rules: [{allow: public}]) @key(name: "byPerson", fi
   personID: ID!
   familyID: ID
   consultantType: ConsultantType
-  questions: [Question] @connection(keyName: "bySubmission", fields: ["id"])
 }
 
 enum FamilyMemberType {
@@ -95,4 +93,4 @@ enum Division {
   HS
   ALLSCHOOL
 }
- 
+  

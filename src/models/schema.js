@@ -37,20 +37,13 @@ export const schema = {
                     "name": "contentEnglish",
                     "isArray": false,
                     "type": "String",
-                    "isRequired": true,
+                    "isRequired": false,
                     "attributes": []
                 },
                 "contentChinese": {
                     "name": "contentChinese",
                     "isArray": false,
                     "type": "String",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "submissionID": {
-                    "name": "submissionID",
-                    "isArray": false,
-                    "type": "ID",
                     "isRequired": false,
                     "attributes": []
                 }
@@ -61,15 +54,6 @@ export const schema = {
                 {
                     "type": "model",
                     "properties": {}
-                },
-                {
-                    "type": "key",
-                    "properties": {
-                        "name": "bySubmission",
-                        "fields": [
-                            "submissionID"
-                        ]
-                    }
                 },
                 {
                     "type": "auth",
@@ -209,20 +193,6 @@ export const schema = {
                     },
                     "isRequired": false,
                     "attributes": []
-                },
-                "questions": {
-                    "name": "questions",
-                    "isArray": true,
-                    "type": {
-                        "model": "Question"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "isArrayNullable": true,
-                    "association": {
-                        "connectionType": "HAS_MANY",
-                        "associatedWith": "submissionID"
-                    }
                 }
             },
             "syncable": true,
@@ -584,5 +554,5 @@ export const schema = {
         }
     },
     "nonModels": {},
-    "version": "15b6160a3ada6d14add2448b5684048b"
+    "version": "443793abd53af1c70ba39142a9ffeb0e"
 };

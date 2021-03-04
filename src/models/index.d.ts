@@ -45,9 +45,8 @@ export declare class Question {
   readonly questionType: QuestionType | keyof typeof QuestionType;
   readonly titleEnglish: string;
   readonly titleChinese: string;
-  readonly contentEnglish: string;
-  readonly contentChinese: string;
-  readonly submissionID?: string;
+  readonly contentEnglish?: string;
+  readonly contentChinese?: string;
   constructor(init: ModelInit<Question>);
   static copyOf(source: Question, mutator: (draft: MutableModel<Question>) => MutableModel<Question> | void): Question;
 }
@@ -69,7 +68,6 @@ export declare class Submission {
   readonly personID: string;
   readonly familyID?: string;
   readonly consultantType?: ConsultantType | keyof typeof ConsultantType;
-  readonly questions?: (Question | null)[];
   constructor(init: ModelInit<Submission>);
   static copyOf(source: Submission, mutator: (draft: MutableModel<Submission>) => MutableModel<Submission> | void): Submission;
 }
