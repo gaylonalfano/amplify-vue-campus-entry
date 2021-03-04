@@ -94,11 +94,13 @@
             class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-600 hover:text-white"
             >Products</a
           >
-          <router-link
-            to="/"
-            class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-600 hover:text-white"
-            >Log out</router-link
+          <!-- Make the span like a link button -->
+          <span
+            @click="logout"
+            class="cursor-pointer block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-600 hover:text-white"
           >
+            Log out
+          </span>
         </div>
       </div>
     </div>
@@ -107,14 +109,34 @@
 
 <script lang="ts">
 import { defineComponent, ref } from "vue";
+import { useStore } from "vuex";
+import { useRouter } from "vue-router";
 import { useSidebar } from "@/composables/useSidebar";
+
 export default defineComponent({
-  setup(props, context) {
-    const dropdownOpen = ref(false);
+  name: "Header",
+  setup() {
+    const store = useStore();
+    const router = useRouter();
+    const dropdownOpen = ref<boolean>(false);
     const { isOpen } = useSidebar();
+
+    async function logout() {
+      console.log(
+        "Logging out: store.state.auth.user: ",
+        store.state.auth.user
+      ); // Works! Proxy {id, username}
+      await store.dispatch("auth/logout");
+      // Reroute back to /login
+      // Q: Reroute back to /login or will Route Guard do this?
+      // A: Need to reroute. Logout will leave user on Home page
+      router.push({ name: "Login" });
+    }
+
     return {
       isOpen,
-      dropdownOpen
+      dropdownOpen,
+      logout
     };
   }
 });
