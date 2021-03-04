@@ -186,7 +186,7 @@ export default defineComponent({
     const store = useStore();
     // Q: How do I access store state user? My auth/login action should setUser()
     const user = ref(null); // undefined
-    const userComputedStateUser = computed(() => store.state.user); // undefined
+    // const userComputedStateUser = computed(() => store.state.user); // undefined
     const userComputedStateAuthUser = computed(() => store.state.auth.user); // Works! Proxy {id, username}
     //const userComputedGetter = computed(() => store.getters.user(store.state)); // Error: getters.user isn't a func
     const userComputedGetter = computed(() => store.getters["auth/user"]); // Works! Proxy {id, username}
@@ -205,7 +205,7 @@ export default defineComponent({
         console.log("store.state.user: ", store.state.user); // undefined
         console.log("store.state.auth.user: ", store.state.auth.user); // Works! Proxy {id, username}
         console.log("userRef", user.value); // undefined
-        console.log("userComputedStateUser: ", userComputedStateUser.value); // undefined
+        // console.log("userComputedStateUser: ", userComputedStateUser.value); // undefined
         console.log(
           "userComputedStateAuthUser: ",
           userComputedStateAuthUser.value
@@ -213,8 +213,37 @@ export default defineComponent({
         console.log("userComputedGetter: ", userComputedGetter.value); // Works! Proxy {id, username, ...}
         // const authUserInfo = await Auth.currentUserInfo(); // Works! {id, username, ...}
         // console.log("authUserInfo: ", authUserInfo); // Works. See above
-        // Reroute to Home/Entrance
-        router.push({ name: "Home" });
+
+        // Okay, we have the Auth user. Let's get their group info so we can either
+        // direct to home or /admin/dashboard
+        // const groupInfo = await Auth.currentAuthenticatedUser();
+        // console.log("groupInfo", groupInfo); // works. CognitoUser (same as state.auth.user I think...)
+
+        // const groups =
+        //   groupInfo.signInUserSession.accessToken.payload["cognito:groups"];
+        // console.log("groups", groups); // works. ["admin"]
+
+        // Q: Can I get the groups info from my user ref rather than calling Auth again?
+        // A: Nope! user.value doesn't have the accessToken property, UNLESS...
+        // A: YES! If I use currentAuthenticatedUser() INSTEAD of currentUserInfo()
+        // console.log(user.value);
+        // const userGroupsRef =
+        //   user.value.signInUserSession.accessToken.payload["cognito:groups"];
+        // console.log("userGroupsRef", userGroupsRef); // Vetur 2531 possibly null error
+        const userGroups =
+          store.state.auth.user.signInUserSession.accessToken.payload[
+            "cognito:groups"
+          ];
+        console.log("userGroups", userGroups); // Works! Proxy {0: "admin"}
+        console.log(userGroups[0]); // admin
+        console.log(userGroups.includes("admin")); // true
+
+        // Reroute to Home/Entrance if NOT admin group
+        if (!userGroups.includes("admin")) {
+          router.push({ name: "Home" });
+        } else {
+          router.push({ name: "AdminDashboard" });
+        }
       } catch (err) {
         console.log(err);
         error.value = err;

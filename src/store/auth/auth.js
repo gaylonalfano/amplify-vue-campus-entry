@@ -37,7 +37,11 @@ export const auth = {
           password
         });
         // If signIn() doesn't fail, we want to get the user info as well
-        const userInfo = await Auth.currentUserInfo();
+        // const userInfo = await Auth.currentUserInfo();
+        // UPDATE: Let's also get the user's current session accessToken info for groups
+        // Q: Can I just use currentAuthenticatedUser() instead of currentUserInfo()?
+        // A: YES! This provides more info and session info on the object!
+        const userInfo = await Auth.currentAuthenticatedUser();
         // Now let's use/commit() our setUser() mutation to set our user
         commit("setUser", userInfo);
         // NOTE Erik likes to return a Promise here so that other components that are listening
@@ -96,7 +100,9 @@ export const auth = {
   async authAction({ commit }) {
     // This runs whenever the app loads essentially so it sort of initializes
     // the user state I believe.
-    const userInfo = await Auth.currentUserInfo();
+    // const userInfo = await Auth.currentUserInfo();
+    // UPDATE Swapping in currentAuthenticatedUser() to access session info and user groups
+    const userInfo = await Auth.currentAuthenticatedUser();
     // Let's now commit our setUser mutation
     commit("setUser", userInfo);
   },
