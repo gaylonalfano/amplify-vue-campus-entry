@@ -230,7 +230,7 @@ interface User {
   role: string;
 }
 export default defineComponent({
-  name: "Dashboard",
+  name: "AdminDashboard",
   setup() {
     const testUser: User = {
       name: "John Doe",

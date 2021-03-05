@@ -55,7 +55,7 @@
         aria-modal="true"
         aria-labelledby="modal-headline"
       >
-        <form action="#">
+        <form @submit.prevent="handleCreate">
           <div class="shadow sm:rounded-md sm:overflow-hidden">
             <div class="px-4 py-6 bg-white space-y-6 sm:p-6">
               <!-- Title -->
@@ -179,6 +179,7 @@
 
 <script lang="ts">
 import { defineComponent, ref } from "vue";
+import { API, graphqlOperation } from "aws-amplify";
 
 interface User {
   username: string;
@@ -188,10 +189,33 @@ interface User {
 }
 
 export default defineComponent({
-  name: "CreateUserModal",
+  name: "CreateUserModalForm",
   setup() {
     const open = ref<boolean>(false);
 
+    //     // Q: How to get refs working with API Types?
+    //     //const allFamilies = ref(null);
+    //     //const allFamilies = ref<GraphQLResult<object> | null>(null);
+    //     // const allFamilies = ref<GraphQLResult<API.Family> | null>(null);
+    //     async function queryListFamilies() {
+    //       // const families = await API.graphql({ query: queries.listFamilys });
+    //       // allFamilies.value = (await API.graphql({
+    //       //   query: queries.listFamilys
+    //       // })) as Promise<ListFamilysQuery>;
+    //       // console.log(allFamilies.value);
+    //
+    //       // Using the more verbose approach
+    //       // const families = await API.graphql({ query: queries.listFamilys })
+    //
+    //       // Use helper instead
+    //       const families = await API.graphql(graphqlOperation(queries.listFamilys));
+    //       console.log(families);
+    //     }
+    //
+    //     // Let's pull in all people on page load.
+    //     watchEffect(async () => {
+    //       await queryListFamilies();
+    //     });
     //const user = ref<User>({
     //  username: "",
     //  email: "",

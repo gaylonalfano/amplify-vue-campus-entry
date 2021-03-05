@@ -2,7 +2,7 @@
   <div>
     <h3 class="text-3xl font-semibold text-gray-700">User Management</h3>
     <div>
-      <CreateUserModal />
+      <CreateUserModalForm />
     </div>
 
     <!-- List Users Table -->
@@ -107,7 +107,7 @@
 
 <script lang="ts">
 import { defineComponent, ref } from "vue";
-import CreateUserModal from "@/components/admin/CreateUserModal.vue";
+import CreateUserModalForm from "@/components/admin/CreateUserModalForm.vue";
 
 interface User {
   name: string;
@@ -120,7 +120,7 @@ interface User {
 
 export default defineComponent({
   name: "UserManagement",
-  components: { CreateUserModal },
+  components: { CreateUserModalForm },
   setup() {
     const testUser: User = {
       name: "John Doe",
