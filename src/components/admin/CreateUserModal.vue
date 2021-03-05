@@ -95,7 +95,7 @@
                     type="text"
                     name="last_name"
                     id="last_name"
-                    autocomplete="family-name"
+                    autocomplete="last_name"
                     class="block w-full px-3 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                   />
                 </div>
@@ -123,9 +123,9 @@
                   >
                   <input
                     type="text"
-                    name="last_name"
-                    id="last_name"
-                    autocomplete="family-name"
+                    name="phone_number"
+                    id="phone_number"
+                    autocomplete="phone_number"
                     class="block w-full px-3 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                   />
                 </div>
@@ -170,9 +170,9 @@
           </div>
         </form>
       </div>
-      <div v-if="error">
-        <h3 class="text-sm font-medium text-red-800">{{ error }}</h3>
-      </div>
+      <!-- <div v-if="error"> -->
+      <!--   <h3 class="text-sm font-medium text-red-800">{{ error }}</h3> -->
+      <!-- </div> -->
     </div>
   </div>
 </template>

@@ -12,16 +12,16 @@ import Login from "@/views/Login.vue";
 import Signup from "@/views/Signup.vue";
 // import Store from "@/views/Store.vue";
 // import Entrance from "@/views/Entrance.vue";
-import StudentForm from "@/views/StudentForm.vue";
-import EmployeeForm from "@/views/EmployeeForm.vue";
-import ConsultantForm from "@/views/ConsultantForm.vue";
-import VisitorForm from "@/views/ConsultantForm.vue";
-import QrCode from "@/views/QrCode.vue";
-import AdminDashboard from "@/views/AdminDashboard.vue";
-import Blank from "@/views/Blank.vue";
-import SubmissionManagement from "@/views/SubmissionManagement.vue";
-import UserManagement from "@/views/UserManagement.vue";
-import FormManagement from "@/views/FormManagement.vue";
+import StudentForm from "@/views/forms/StudentForm.vue";
+import EmployeeForm from "@/views/forms/EmployeeForm.vue";
+import ConsultantForm from "@/views/forms/ConsultantForm.vue";
+import VisitorForm from "@/views/forms/ConsultantForm.vue";
+import QrCode from "@/views/forms/QrCode.vue";
+import AdminDashboard from "@/views/admin/AdminDashboard.vue";
+import Blank from "@/views/admin/Blank.vue";
+import SubmissionManagement from "@/views/admin/SubmissionManagement.vue";
+import UserManagement from "@/views/admin/UserManagement.vue";
+import FormManagement from "@/views/admin/FormManagement.vue";
 
 async function requireNoAuth(
   to: RouteLocationNormalized,
@@ -62,6 +62,40 @@ async function requireAuth(
   } else {
     // Need to invoke next() to move forward
     next();
+  }
+}
+
+// Create a Route Guard for ADMIN Cognito User Group
+async function requireAdmin(
+  to: RouteLocationNormalized,
+  from: RouteLocationNormalized,
+  next: NavigationGuardNext
+) {
+  // Grab current authenticated user's session accessToken info for groups
+  const currentUser = await Auth.currentUserInfo();
+  console.log("RouterGuard:requireAdmin:currentUser: ", currentUser);
+
+  // Unauthenticated
+  if (!currentUser) {
+    // Unauthenticated (user is null) so send back to Login page
+    next({ name: "Login" });
+  }
+
+  // Authenticated but not sure if Authorized for /admin
+  if (currentUser) {
+    const currentAuthUser = await Auth.currentAuthenticatedUser();
+    const userGroups =
+      currentAuthUser.signInUserSession.accessToken.payload["cognito:groups"];
+    // console.log("userGroups", userGroups);
+    // console.log(userGroups[0]);
+    // console.log(userGroups.includes("admin")); // true
+    if (userGroups && userGroups.includes("admin")) {
+      // Authenticated + Authorized (admin)
+      next();
+    } else {
+      // Authenticated only (not admin)
+      next({ name: "Home" });
+    }
   }
 }
 
@@ -123,28 +157,28 @@ const routes: Array<RouteRecordRaw> = [
     meta: { layout: "empty" }
   },
   {
-    path: "/admin/dashboard",
+    path: "/admin",
     name: "AdminDashboard",
     component: AdminDashboard,
-    beforeEnter: requireAuth
+    beforeEnter: requireAdmin
   },
   {
     path: "/admin/submission-management",
     name: "SubmissionManagement",
     component: SubmissionManagement,
-    beforeEnter: requireAuth
+    beforeEnter: requireAdmin
   },
   {
     path: "/admin/user-management",
     name: "UserManagement",
     component: UserManagement,
-    beforeEnter: requireAuth
+    beforeEnter: requireAdmin
   },
   {
     path: "/admin/form-management",
     name: "FormManagement",
     component: FormManagement,
-    beforeEnter: requireAuth
+    beforeEnter: requireAdmin
   },
   {
     path: "/admin/blank",
@@ -152,6 +186,11 @@ const routes: Array<RouteRecordRaw> = [
     component: Blank,
     beforeEnter: requireNoAuth
   }
+  //{
+  //  path: "*",
+  //  name: "404",
+  //  component: FourZeroFour
+  //}
 ];
 
 const router = createRouter({

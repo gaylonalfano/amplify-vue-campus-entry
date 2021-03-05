@@ -120,8 +120,7 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, ref, computed } from "vue";
-import { Auth } from "aws-amplify";
+import { defineComponent, ref } from "vue";
 import { useRouter } from "vue-router";
 import { useStore } from "vuex";
 // import useLogin from "@/composables/useLogin";
@@ -187,9 +186,9 @@ export default defineComponent({
     // Q: How do I access store state user? My auth/login action should setUser()
     const user = ref(null); // undefined
     // const userComputedStateUser = computed(() => store.state.user); // undefined
-    const userComputedStateAuthUser = computed(() => store.state.auth.user); // Works! Proxy {id, username}
-    //const userComputedGetter = computed(() => store.getters.user(store.state)); // Error: getters.user isn't a func
-    const userComputedGetter = computed(() => store.getters["auth/user"]); // Works! Proxy {id, username}
+    // const userComputedStateAuthUser = computed(() => store.state.auth.user); // Works! Proxy {id, username}
+    // const userComputedGetter = computed(() => store.getters.user(store.state)); // Error: getters.user isn't a func
+    // const userComputedGetter = computed(() => store.getters["auth/user"]); // Works! Proxy {id, username}
 
     // Use computed() to access state or getters
     // Use regular functions for actions and mutations
@@ -202,15 +201,15 @@ export default defineComponent({
         });
         // Check to see if user has been updated in store
         user.value = store.state.auth.user; // state.user is undefined. state.auth.user works Proxy { id, username}
-        console.log("store.state.user: ", store.state.user); // undefined
+        //console.log("store.state.user: ", store.state.user); // undefined
         console.log("store.state.auth.user: ", store.state.auth.user); // Works! Proxy {id, username}
-        console.log("userRef", user.value); // undefined
+        // console.log("userRef", user.value); // undefined or works if set above
         // console.log("userComputedStateUser: ", userComputedStateUser.value); // undefined
-        console.log(
-          "userComputedStateAuthUser: ",
-          userComputedStateAuthUser.value
-        ); // WORKS! Proxy {id, username, ...}
-        console.log("userComputedGetter: ", userComputedGetter.value); // Works! Proxy {id, username, ...}
+        //console.log(
+        //  "userComputedStateAuthUser: ",
+        //  userComputedStateAuthUser.value
+        //); // WORKS! Proxy {id, username, ...}
+        //console.log("userComputedGetter: ", userComputedGetter.value); // Works! Proxy {id, username, ...}
         // const authUserInfo = await Auth.currentUserInfo(); // Works! {id, username, ...}
         // console.log("authUserInfo: ", authUserInfo); // Works. See above
 
@@ -234,14 +233,15 @@ export default defineComponent({
           store.state.auth.user.signInUserSession.accessToken.payload[
             "cognito:groups"
           ];
-        console.log("userGroups", userGroups); // Works! Proxy {0: "admin"}
-        console.log(userGroups[0]); // admin
-        console.log(userGroups.includes("admin")); // true
+        // console.log("userGroups", userGroups); // Works! Proxy {0: "admin"}
+        // console.log(userGroups[0]); // admin
+        // console.log(userGroups.includes("admin")); // true
 
         // Reroute to Home/Entrance if NOT admin group
-        if (!userGroups.includes("admin")) {
+        if (userGroups == undefined) {
+          // User doesn't have a auth group.
           router.push({ name: "Home" });
-        } else {
+        } else if (userGroups.includes("admin")) {
           router.push({ name: "AdminDashboard" });
         }
       } catch (err) {

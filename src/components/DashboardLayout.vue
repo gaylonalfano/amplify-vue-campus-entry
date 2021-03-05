@@ -16,8 +16,8 @@
 
 <script lang="ts">
 import { defineComponent, ref } from "vue";
-import Sidebar from "@/components/Sidebar.vue";
-import Header from "@/components/Header.vue";
+import Sidebar from "@/components/admin/Sidebar.vue";
+import Header from "@/components/admin/Header.vue";
 export default defineComponent({
   components: {
     Header,

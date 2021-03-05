@@ -1,16 +1,16 @@
 <template>
   <div>
-    <h3 class="text-gray-700 text-3xl font-medium">Dashboard</h3>
+    <h3 class="text-3xl font-medium text-gray-700">Dashboard</h3>
 
     <div class="mt-4">
       <div class="flex flex-wrap -mx-6">
         <div class="w-full px-6 sm:w-1/2 xl:w-1/3">
           <div
-            class="flex items-center px-5 py-6 shadow-sm rounded-md bg-white"
+            class="flex items-center px-5 py-6 bg-white shadow-sm rounded-md"
           >
-            <div class="p-3 rounded-full bg-indigo-600 bg-opacity-75">
+            <div class="p-3 bg-indigo-600 rounded-full bg-opacity-75">
               <svg
-                class="h-8 w-8 text-white"
+                class="w-8 h-8 text-white"
                 viewBox="0 0 28 30"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
@@ -49,13 +49,13 @@
           </div>
         </div>
 
-        <div class="w-full mt-6 px-6 sm:w-1/2 xl:w-1/3 sm:mt-0">
+        <div class="w-full px-6 mt-6 sm:w-1/2 xl:w-1/3 sm:mt-0">
           <div
-            class="flex items-center px-5 py-6 shadow-sm rounded-md bg-white"
+            class="flex items-center px-5 py-6 bg-white shadow-sm rounded-md"
           >
-            <div class="p-3 rounded-full bg-orange-600 bg-opacity-75">
+            <div class="p-3 bg-orange-600 rounded-full bg-opacity-75">
               <svg
-                class="h-8 w-8 text-white"
+                class="w-8 h-8 text-white"
                 viewBox="0 0 28 28"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
@@ -82,13 +82,13 @@
           </div>
         </div>
 
-        <div class="w-full mt-6 px-6 sm:w-1/2 xl:w-1/3 xl:mt-0">
+        <div class="w-full px-6 mt-6 sm:w-1/2 xl:w-1/3 xl:mt-0">
           <div
-            class="flex items-center px-5 py-6 shadow-sm rounded-md bg-white"
+            class="flex items-center px-5 py-6 bg-white shadow-sm rounded-md"
           >
-            <div class="p-3 rounded-full bg-pink-600 bg-opacity-75">
+            <div class="p-3 bg-pink-600 rounded-full bg-opacity-75">
               <svg
-                class="h-8 w-8 text-white"
+                class="w-8 h-8 text-white"
                 viewBox="0 0 28 28"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
@@ -120,30 +120,30 @@
     <div class="mt-8"></div>
 
     <div class="flex flex-col mt-8">
-      <div class="-my-2 py-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
+      <div class="py-2 -my-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
         <div
-          class="align-middle inline-block min-w-full shadow overflow-hidden sm:rounded-lg border-b border-gray-200"
+          class="inline-block min-w-full overflow-hidden align-middle border-b border-gray-200 shadow sm:rounded-lg"
         >
           <table class="min-w-full">
             <thead>
               <tr>
                 <th
-                  class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider"
+                  class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50 leading-4"
                 >
                   Name
                 </th>
                 <th
-                  class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider"
+                  class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50 leading-4"
                 >
                   Title
                 </th>
                 <th
-                  class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider"
+                  class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50 leading-4"
                 >
                   Status
                 </th>
                 <th
-                  class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider"
+                  class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50 leading-4"
                 >
                   Role
                 </th>
@@ -154,22 +154,22 @@
             <tbody class="bg-white">
               <tr v-for="(u, index) in users" :key="index">
                 <td
-                  class="px-6 py-4 whitespace-nowrap border-b border-gray-200"
+                  class="px-6 py-4 border-b border-gray-200 whitespace-nowrap"
                 >
                   <div class="flex items-center">
-                    <div class="flex-shrink-0 h-10 w-10">
+                    <div class="flex-shrink-0 w-10 h-10">
                       <img
-                        class="h-10 w-10 rounded-full"
+                        class="w-10 h-10 rounded-full"
                         src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
                         alt=""
                       />
                     </div>
 
                     <div class="ml-4">
-                      <div class="text-sm leading-5 font-medium text-gray-900">
+                      <div class="text-sm font-medium text-gray-900 leading-5">
                         {{ u.name }}
                       </div>
-                      <div class="text-sm leading-5 text-gray-500">
+                      <div class="text-sm text-gray-500 leading-5">
                         {{ u.email }}
                       </div>
                     </div>
@@ -177,33 +177,33 @@
                 </td>
 
                 <td
-                  class="px-6 py-4 whitespace-nowrap border-b border-gray-200"
+                  class="px-6 py-4 border-b border-gray-200 whitespace-nowrap"
                 >
-                  <div class="text-sm leading-5 text-gray-900">
+                  <div class="text-sm text-gray-900 leading-5">
                     {{ u.title }}
                   </div>
-                  <div class="text-sm leading-5 text-gray-500">
+                  <div class="text-sm text-gray-500 leading-5">
                     {{ u.title2 }}
                   </div>
                 </td>
 
                 <td
-                  class="px-6 py-4 whitespace-nowrap border-b border-gray-200"
+                  class="px-6 py-4 border-b border-gray-200 whitespace-nowrap"
                 >
                   <span
-                    class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800"
+                    class="inline-flex px-2 text-xs font-semibold text-green-800 bg-green-100 rounded-full leading-5"
                     >{{ u.status }}</span
                   >
                 </td>
 
                 <td
-                  class="px-6 py-4 whitespace-nowrap border-b border-gray-200 text-sm leading-5 text-gray-500"
+                  class="px-6 py-4 text-sm text-gray-500 border-b border-gray-200 whitespace-nowrap leading-5"
                 >
                   {{ u.role }}
                 </td>
 
                 <td
-                  class="px-6 py-4 whitespace-nowrap text-right border-b border-gray-200 text-sm leading-5 font-medium"
+                  class="px-6 py-4 text-sm font-medium text-right border-b border-gray-200 whitespace-nowrap leading-5"
                 >
                   <a href="#" class="text-indigo-600 hover:text-indigo-900"
                     >Edit</a
@@ -219,12 +219,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, watchEffect } from "vue";
-import CreatePersonForm from "@/components/CreatePersonForm.vue";
-import { API, graphqlOperation } from "aws-amplify";
-import * as queries from "@/graphql/queries";
-import * as mutations from "@/graphql/queries";
-import * as subscriptions from "@/graphql/queries";
+import { defineComponent, ref } from "vue";
 
 interface User {
   name: string;
@@ -251,38 +246,6 @@ export default defineComponent({
     };
   }
 });
-
-// export default defineComponent({
-//   name: "Admin",
-//   components: { CreatePersonForm },
-//   setup() {
-//     // Q: How to get refs working with API Types?
-//     //const allFamilies = ref(null);
-//     //const allFamilies = ref<GraphQLResult<object> | null>(null);
-//     // const allFamilies = ref<GraphQLResult<API.Family> | null>(null);
-//     async function queryListFamilies() {
-//       // const families = await API.graphql({ query: queries.listFamilys });
-//       // allFamilies.value = (await API.graphql({
-//       //   query: queries.listFamilys
-//       // })) as Promise<ListFamilysQuery>;
-//       // console.log(allFamilies.value);
-//
-//       // Using the more verbose approach
-//       // const families = await API.graphql({ query: queries.listFamilys })
-//
-//       // Use helper instead
-//       const families = await API.graphql(graphqlOperation(queries.listFamilys));
-//       console.log(families);
-//     }
-//
-//     // Let's pull in all people on page load.
-//     watchEffect(async () => {
-//       await queryListFamilies();
-//     });
-//
-//     return { queryListFamilies };
-//   }
-// });
 </script>
 
 <style></style>
