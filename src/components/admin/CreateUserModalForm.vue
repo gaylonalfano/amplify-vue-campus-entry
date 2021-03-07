@@ -55,16 +55,16 @@
         aria-modal="true"
         aria-labelledby="modal-headline"
       >
-        <form @submit.prevent="handleCreate">
+        <form @submit.prevent="createStudent">
           <div class="shadow sm:rounded-md sm:overflow-hidden">
             <div class="px-4 py-6 bg-white space-y-6 sm:p-6">
               <!-- Title -->
               <div>
                 <h3 class="text-lg font-medium text-gray-900 leading-6">
-                  Personal Information
+                  Student Information
                 </h3>
                 <p class="mt-1 text-sm text-gray-500">
-                  Use a permanent address where you can recieve mail.
+                  Enter the basic user information
                 </p>
               </div>
 
@@ -77,6 +77,7 @@
                     >First name</label
                   >
                   <input
+                    v-model="firstName"
                     type="text"
                     name="first_name"
                     id="first_name"
@@ -92,6 +93,7 @@
                     >Last name</label
                   >
                   <input
+                    v-model="lastName"
                     type="text"
                     name="last_name"
                     id="last_name"
@@ -107,6 +109,7 @@
                     >Email address</label
                   >
                   <input
+                    v-model="email"
                     type="text"
                     name="email_address"
                     id="email_address"
@@ -122,6 +125,7 @@
                     >Phone number</label
                   >
                   <input
+                    v-model="phone"
                     type="text"
                     name="phone_number"
                     id="phone_number"
@@ -132,17 +136,18 @@
 
                 <div class="col-span-6 sm:col-span-3">
                   <label
-                    for="country"
+                    for="division"
                     class="block text-sm font-medium text-gray-700"
                     >Division</label
                   >
                   <select
-                    id="country"
-                    name="country"
-                    autocomplete="country"
+                    v-model="division"
+                    id="division"
+                    name="divsion"
+                    autocomplete="division"
                     class="block w-full px-3 py-2 mt-1 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                   >
-                    <option disabled>Please select</option>
+                    <option disabled selected>Please select</option>
                     <option>Early Childhood</option>
                     <option>Elementrary School</option>
                     <option>Middle School</option>
@@ -156,7 +161,7 @@
             <div class="flex justify-end px-4 py-3 bg-gray-50 sm:px-6">
               <button
                 @click="open = false"
-                class="px-4 mr-2 py-2 text-sm font-medium text-indigo-500 bg-transparent border-transparent rounded-md hover:bg-gray-100 hover:text-indigo-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                class="px-4 py-2 mr-2 text-sm font-medium text-indigo-500 bg-transparent border-transparent rounded-md hover:bg-gray-100 hover:text-indigo-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
               >
                 Cancel
               </button>
@@ -180,6 +185,17 @@
 <script lang="ts">
 import { defineComponent, ref } from "vue";
 import { API, graphqlOperation } from "aws-amplify";
+import * as queries from "@/graphql/queries";
+import * as mutations from "@/graphql/mutations";
+import * as subscriptions from "@/graphql/subscriptions";
+import { DataStore } from "@aws-amplify/datastore";
+import {
+  Person
+  // Division,
+  // ConsultantType,
+  // FamilyMemberType,
+  // SubmissionType
+} from "@/models";
 
 interface User {
   username: string;
@@ -192,59 +208,109 @@ export default defineComponent({
   name: "CreateUserModalForm",
   setup() {
     const open = ref<boolean>(false);
+    const error = ref<string | null>(null);
 
-    //     // Q: How to get refs working with API Types?
-    //     //const allFamilies = ref(null);
-    //     //const allFamilies = ref<GraphQLResult<object> | null>(null);
-    //     // const allFamilies = ref<GraphQLResult<API.Family> | null>(null);
-    //     async function queryListFamilies() {
-    //       // const families = await API.graphql({ query: queries.listFamilys });
-    //       // allFamilies.value = (await API.graphql({
-    //       //   query: queries.listFamilys
-    //       // })) as Promise<ListFamilysQuery>;
-    //       // console.log(allFamilies.value);
-    //
-    //       // Using the more verbose approach
-    //       // const families = await API.graphql({ query: queries.listFamilys })
-    //
-    //       // Use helper instead
-    //       const families = await API.graphql(graphqlOperation(queries.listFamilys));
-    //       console.log(families);
-    //     }
-    //
-    //     // Let's pull in all people on page load.
-    //     watchEffect(async () => {
-    //       await queryListFamilies();
-    //     });
+    // Default example for dashboard
     //const user = ref<User>({
     //  username: "",
     //  email: "",
     //  password: "",
     //  confirm: ""
     //});
-    const username = ref<string>("");
+
+    // const user = ref<User>({
+    //   username: username.value,
+    //   email: email.value,
+    //   password: password.value,
+    //   confirmPassword: confirmPassword.value
+    // });
+
+    // const register = () => {
+    //   const data = JSON.parse(JSON.stringify(user.value));
+    //   console.log("Registered: ", data);
+    // };
+
+    // ==== Create a student Person record
+    const firstName = ref<string>("");
+    const lastName = ref<string>("");
+    const phone = ref<string>("");
     const email = ref<string>("");
-    const password = ref<string>("");
-    const confirmPassword = ref<string>("");
+    const division = ref<string>("");
+    const submissionType = ref<string>("");
+    const isAuthenticatedUser = ref<boolean>(false);
+    const familyID = ref<string>("");
+    //const familyMemberType = ref<string>("");
+    const submissions: Record<string, any>[] = [];
 
-    const user = ref<User>({
-      username: username.value,
-      email: email.value,
-      password: password.value,
-      confirmPassword: confirmPassword.value
-    });
+    async function createStudent() {
+      console.log("Clicked");
+      // Q: How to add a Type to the ref?
+      // const studentDetails = {
+      //   firstName: firstName.value,
+      //   lastName: lastName.value,
+      //   phone: phone.value,
+      //   email: email.value,
+      //   division: division.value,
+      //   submissionType: "STUDENT",
+      //   isAuthenticatedUser: false,
+      //   familyID: "testfamilyID",
+      //   familyMemberType: "CHILD",
+      //   submissions: submissions
+      // };
 
-    const register = () => {
-      const data = JSON.parse(JSON.stringify(user.value));
-      console.log("Registered: ", data);
-    };
+      // console.log("studentDetails: ", studentDetails);
+      // try {
+      //   const response = await API.graphql(
+      //     graphqlOperation(mutations.createPerson, {
+      //       input: studentDetails
+      //     })
+      //   );
+      //   console.log("createStudent:response: ", response);
+      //   error.value = null;
+      //   //return newStudent;
+      // } catch (err) {
+      //   console.log(err.message);
+      //   error.value = err.message;
+      //   console.log(error.value);
+      // }
+
+      await DataStore.save(
+        new Person({
+          firstName: "Lorem ipsum dolor sit amet",
+          lastName: "Lorem ipsum dolor sit amet",
+          phone: "Lorem ipsum dolor sit amet",
+          email: "Lorem ipsum dolor sit amet",
+          division: "EC", // Division.EC,
+          fatherPhone: "Lorem ipsum dolor sit amet",
+          motherPhone: "Lorem ipsum dolor sit amet",
+          fatherEmail: "Lorem ipsum dolor sit amet",
+          motherEmail: "Lorem ipsum dolor sit amet",
+          createdAt: "Lorem ipsum dolor sit amet",
+          updatedAt: "Lorem ipsum dolor sit amet",
+          submissionType: "STUDENT", // SubmissionType.STUDENT,
+          isAuthenticatedUser: true,
+          familyMemberType: "CHILD", // FamilyMemberType.PARENT,
+          familyID: "a3f4095e-39de-43d2-baf4-f8c16f0f6f4d",
+          consultantType: "", // ConsultantType.CONTRACTOR,
+          governmentID: "Lorem ipsum dolor sit amet",
+          submissions: []
+        })
+      );
+    }
 
     return {
       open,
-      username,
+      firstName,
+      lastName,
+      phone,
       email,
-      password,
-      confirmPassword
+      division,
+      submissionType,
+      isAuthenticatedUser,
+      familyID,
+      submissions,
+      // studentDetails,
+      createStudent
     };
   }
 });
